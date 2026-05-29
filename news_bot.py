@@ -15,7 +15,7 @@ client = genai.Client(api_key=GEMINI_KEY)
 def fetch_news(query, max_results=3):
     """DDG 뉴스 검색 + Jina Reader 본문 추출"""
     with DDGS() as ddgs:
-        news = list(ddgs.news(query, max_results=max_results))
+        news = list(ddgs.news(keywords=query, max_results=max_results))
     contents = []
     for item in news:
         url = item.get("url")
