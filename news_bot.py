@@ -10,12 +10,71 @@ from ddgs import DDGS
 from google import genai
 
 # --- 환경 변수 ---
-GEMINI_KEY = os.environ["GEMINI_API_KEY"]
+GEMINI_KEYS = [os.environ["GEMINI_API_KEY"]]
+
+# 서브 API 키 자동 등록 (GEMINI_API_KEY_2, GEMINI_API_KEY_3 ...)
+for i in range(2, 10):
+    key = os.environ.get(f"GEMINI_API_KEY_{i}")
+    if key:
+        GEMINI_KEYS.append(key)
+
 TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 
-client = genai.Client(api_key=GEMINI_KEY)
+# 현재 사용 중인 키 인덱스
+current_key_idx = 0
+client = genai.Client(api_key=GEMINI_KEYS[current_key_idx])
 
+def switch_to_next_key():
+    """API 키를 다음 것으로 전환"""
+    global current_key_idx, client
+    if current_key_idx + 1 < len(GEMINI_KEYS):
+        current_key_idx += 1
+        client = genai.Client(api_key=GEMINI_KEYS[current_key_idx])
+        print(f"Switched to API key #{current_key_idx + 1}")
+        return True
+    return False
+
+def call_gemini_with_retry(prompt, max_retries=3):
+    """
+    Gemini API 호출 + 429 오류 대응 + 키 전환
+    """
+    global current_key_idx, client
+    last_error = None
+
+    for attempt in range(max_retries):
+        try:
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=prompt
+            )
+            return response.text.strip()
+        except Exception as e:
+            last_error = str(e)
+            print(f"Gemini call failed: {last_error}")
+
+            # 429 오류 (리소스 소진) 이거나 할당량 관련 오류
+            if "429" in last_error or "RESOURCE_EXHAUSTED" in last_error or "quota" in last_error.lower():
+                # 1) 서브 키로 전환 시도
+                if switch_to_next_key():
+                    print("Retrying with new key immediately...")
+                    time.sleep(1)
+                    continue
+                # 2) 전환 실패 시 60초 대기 후 재시도
+                else:
+                    if attempt < max_retries - 1:
+                        print(f"All keys exhausted. Waiting 60 seconds... (attempt {attempt+1}/{max_retries})")
+                        time.sleep(60)
+                    continue
+            # 다른 오류는 바로 재시도
+            else:
+                if attempt < max_retries - 1:
+                    print(f"Retrying... (attempt {attempt+1}/{max_retries})")
+                    time.sleep(5)
+                    continue
+    raise Exception(f"Gemini call failed after {max_retries} attempts: {last_error}")
+
+# --- 유틸리티 함수들 (날씨, 지표, 수집 등) ---
 def get_date_and_weather():
     today = datetime.now().strftime("%Y년 %m월 %d일")
     weather_info = "서울 날씨 정보를 가져올 수 없습니다."
@@ -38,7 +97,6 @@ def get_date_and_weather():
     return f"📅 {today}\n{weather_info}"
 
 def get_market_indicators():
-    # (이전과 동일)
     try:
         kospi = yf.Ticker("^KS11")
         kospi_hist = kospi.history(period="2d")
@@ -105,8 +163,7 @@ def translate_titles(articles):
         "다른 설명은 일절 추가하지 마세요.\n\n" + "\n".join(original_titles)
     )
     try:
-        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
-        translated = response.text.strip().split('\n')
+        translated = call_gemini_with_retry(prompt).split('\n')
         for idx, i in enumerate(eng_indices):
             if idx < len(translated) and translated[idx].strip():
                 articles[i]['translated_title'] = translated[idx].strip()
@@ -143,45 +200,41 @@ def analyze_category(cat_name, articles):
 기사 목록:
 {titles_text}"""
 
-    for attempt in range(3):
-        try:
-            response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
-            text = response.text.strip()
-            if text.startswith("```"):
-                text = text.split("```")[1].strip()
-                if text.startswith("json"):
-                    text = text[4:].strip()
-            data = json.loads(text)
+    try:
+        text = call_gemini_with_retry(prompt)
+        if text.startswith("```"):
+            text = text.split("```")[1].strip()
+            if text.startswith("json"):
+                text = text[4:].strip()
+        data = json.loads(text)
 
-            result_str = ""
-            used_ids = set()
-            for topic in data:
-                topic_title = topic.get("topic", "기타")
-                ids = [i for i in topic.get("article_ids", []) if 1 <= i <= len(articles)]
-                if not ids:
-                    continue
-                result_str += f"📌 {topic_title}\n"
-                for i in ids:
-                    a = articles[i-1]
-                    result_str += f"- {a.get('translated_title', a['title'])}: {a['url']}\n"
-                result_str += "\n"
-                used_ids.update(ids)
+        result_str = ""
+        used_ids = set()
+        for topic in data:
+            topic_title = topic.get("topic", "기타")
+            ids = [i for i in topic.get("article_ids", []) if 1 <= i <= len(articles)]
+            if not ids:
+                continue
+            result_str += f"📌 {topic_title}\n"
+            for i in ids:
+                a = articles[i-1]
+                result_str += f"- {a.get('translated_title', a['title'])}: {a['url']}\n"
+            result_str += "\n"
+            used_ids.update(ids)
 
-            unused = [a for i, a in enumerate(articles) if (i+1) not in used_ids]
-            if unused:
-                result_str += "📌 기타 주요 뉴스\n"
-                for a in unused[:10]:
-                    result_str += f"- {a.get('translated_title', a['title'])}: {a['url']}\n"
-                result_str += "\n"
-            return result_str
-        except Exception as e:
-            if attempt < 2:
-                time.sleep(2)
-            else:
-                fallback = f"📌 {cat_name} (분석 실패 - 전체 기사)\n"
-                for a in articles:
-                    fallback += f"- {a.get('translated_title', a['title'])}: {a['url']}\n"
-                return fallback + "\n"
+        unused = [a for i, a in enumerate(articles) if (i+1) not in used_ids]
+        if unused:
+            result_str += "📌 기타 주요 뉴스\n"
+            for a in unused[:10]:
+                result_str += f"- {a.get('translated_title', a['title'])}: {a['url']}\n"
+            result_str += "\n"
+        return result_str
+    except Exception as e:
+        print(f"Analyze error for {cat_name}: {e}")
+        fallback = f"📌 {cat_name} (분석 실패 - 전체 기사)\n"
+        for a in articles:
+            fallback += f"- {a.get('translated_title', a['title'])}: {a['url']}\n"
+        return fallback + "\n"
 
 def send_telegram(text):
     max_len = 3500
@@ -203,10 +256,9 @@ if __name__ == "__main__":
     else:
         default_timelimit = 'd'
 
-    # 매우 단순화된 키워드: "증시", "정치", "세계", "속보" 등 기본 단어만 사용
     categories = [
         ("🇰🇷 정치/시사", "정치", "kr-kr", False),
-        ("🇰🇷 한국 증시/경제", "증시", "kr-kr", True),  # DDGS + Google
+        ("🇰🇷 한국 증시/경제", "증시", "kr-kr", True),
         ("🇺🇸 미국 주식", "stock market", "us-en", False),
         ("🌍 국제 뉴스", "world", "us-en", False),
         ("🚨 국내 돌발", "사건사고", "kr-kr", False),
@@ -219,14 +271,12 @@ if __name__ == "__main__":
     for cat_name, query, region, use_google in categories:
         print(f"Fetching {cat_name} ('{query}')...")
         articles = []
-        # 1) DDGS
         try:
             ddg_articles = fetch_news_ddg(query, max_results=50, region=region, timelimit=default_timelimit)
             articles.extend(ddg_articles)
             print(f"  DDG: {len(ddg_articles)} fetched")
         except Exception as e:
             print(f"  DDG error: {e}")
-        # 2) Google News RSS (증시 카테고리만)
         if use_google:
             try:
                 google_articles = fetch_news_google("증시", max_results=30)
@@ -244,7 +294,6 @@ if __name__ == "__main__":
         print(f"  {cat_name}: total unique {len(unique)}")
         time.sleep(1)
 
-    # 번역 및 분석
     all_articles = []
     for arts in cat_articles.values():
         all_articles.extend(arts)
