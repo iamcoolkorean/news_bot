@@ -12,114 +12,156 @@ TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 # Gemini 초기화
 client = genai.Client(api_key=GEMINI_KEY)
 
-def fetch_news(query, max_results, region='kr-kr'):
-    """
-    DDG 뉴스 검색 + Jina Reader 본문 추출
-    region: 'kr-kr' (한국), 'us-en' (미국/국제)
-    """
+def fetch_news(query, max_results, region='kr-kr', timelimit='d'):
+    """DDG 뉴스 검색 (제목과 URL만 수집, 본문은 무시)"""
     with DDGS() as ddgs:
-        news = list(ddgs.news(query=query, max_results=max_results, region=region))
-    contents = []
+        news = list(ddgs.news(
+            query=query,
+            max_results=max_results,
+            region=region,
+            timelimit=timelimit
+        ))
+    articles = []
     for item in news:
         url = item.get("url")
         if not url:
             continue
-        # Jina Reader로 본문 일부 추출 (실패해도 기사 제목/URL은 저장)
-        try:
-            resp = requests.get(f"https://r.jina.ai/{url}", timeout=15)
-            content = resp.text[:2000]
-        except:
-            content = ""
-        contents.append({
+        articles.append({
             "title": item.get("title", "제목 없음"),
-            "url": url,
-            "content": content
+            "url": url
         })
-    return contents
+    return articles
 
-def summarize_category(category, articles, max_retries=2):
+def create_topic_report(all_articles):
     """
-    카테고리별 뉴스 요약 시도. 실패하면 제목 리스트만 반환.
-    항상 (text_summary_or_titles, links_list) 튜플을 반환.
+    전체 기사 제목을 번호와 함께 Gemini에 보내서 5개 주요 토픽으로 분류.
+    반환된 기사 번호를 바탕으로 제목과 링크를 조립해 리포트 생성.
     """
-    links = [f"- {a['title']}: {a['url']}" for a in articles]
+    if not all_articles:
+        return "📰 오늘 수집된 뉴스가 없습니다."
 
-    if not articles:
-        return f"📌 {category}\n오늘 주요 뉴스가 없습니다.\n", []
+    # 번호를 붙인 제목 목록 만들기
+    titles = []
+    for i, a in enumerate(all_articles):
+        titles.append(f"{i+1}. {a['title']}")
 
-    prompt = f"{category} 뉴스 요약:\n"
-    for i, a in enumerate(articles):
-        prompt += f"{i+1}. 제목: {a['title']}\n내용: {a['content']}\n\n"
-    prompt += "\n위 각 기사를 **한 문장**으로 요약해주세요."
+    title_list = "\n".join(titles)
 
+    prompt = f"""다음은 오늘 수집한 뉴스 기사의 제목 목록입니다 (번호와 함께 제공).
+이 기사들을 분석하여 **가장 두드러진 주요 주제(토픽) 5개**를 찾아주세요.
+각 토픽에는 해당하는 기사의 **번호들만** 아래 형식으로 정리해주세요.
+
+📌 [토픽 제목]
+[1,3,7,15,22]  ← 예시
+
+**중요**:
+- 각 기사는 반드시 하나의 토픽에만 포함되어야 합니다 (중복 불가).
+- 모든 기사를 빠짐없이 처리하고, 어디에도 속하지 않는 기사는 '기타' 토픽에 넣어도 됩니다.
+- 한 토픽에 너무 많은 기사가 몰리면 중요도 순으로 최대 7개까지 선택하세요.
+- 번호 목록 외에 다른 설명은 일절 쓰지 마세요.
+
+기사 목록:
+{title_list}
+"""
+    max_retries = 2
+    raw_result = None
     for attempt in range(max_retries + 1):
         try:
             response = client.models.generate_content(
                 model="gemini-2.5-flash",
                 contents=prompt
             )
-            summary_text = f"📌 {category}\n{response.text}\n"
-            return summary_text, links
+            raw_result = response.text
+            break
         except Exception as e:
             if attempt < max_retries:
-                print(f"{category} retry {attempt+1}/{max_retries} due to error: {e}")
+                print(f"Topic extraction retry {attempt+1}/{max_retries}: {e}")
                 time.sleep(3)
             else:
-                # 요약 실패 시 제목과 링크만 제공
-                fallback = f"📌 {category}\n요약을 생성하지 못했지만, 주요 기사 제목과 링크입니다.\n"
-                return fallback, links
+                # 실패 시 전체 기사 제목+링크 단순 나열
+                fallback = "📰 오늘의 뉴스 (토픽 분류 실패)\n\n"
+                for a in all_articles:
+                    fallback += f"- {a['title']}: {a['url']}\n"
+                return fallback
+
+    # Gemini 응답 파싱 (토픽 제목과 번호 리스트 추출)
+    report = "📰 오늘의 뉴스 토픽 요약\n\n"
+    try:
+        # 응답을 줄 단위로 파싱
+        lines = [l.strip() for l in raw_result.split('\n') if l.strip()]
+        current_topic = None
+        for line in lines:
+            if line.startswith('📌'):
+                current_topic = line.replace('📌 ', '').strip()
+                report += f"📌 {current_topic}\n"
+            elif line.startswith('[') and line.endswith(']'):
+                # 번호 리스트 파싱
+                numbers = [int(x.strip()) for x in line[1:-1].split(',')]
+                for num in numbers:
+                    if 1 <= num <= len(all_articles):
+                        a = all_articles[num-1]
+                        report += f"- {a['title']}: {a['url']}\n"
+                report += "\n"
+    except Exception as e:
+        # 파싱 실패 시 원시 응답을 그대로 전송
+        report = raw_result
+
+    return report
 
 def send_telegram(text):
-    """텔레그램 메시지 전송"""
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": text[:4000]}
-    resp = requests.post(url, json=payload, timeout=10)
-    if resp.status_code == 200:
-        print("Telegram message sent successfully.")
+    """텔레그램 메시지 전송 (길면 분할)"""
+    max_len = 3500
+    if len(text) <= max_len:
+        chunks = [text]
     else:
-        print(f"Telegram send failed: {resp.text}")
+        chunks = [text[i:i+max_len] for i in range(0, len(text), max_len)]
+
+    for idx, chunk in enumerate(chunks):
+        if len(chunks) > 1:
+            chunk = f"[{idx+1}/{len(chunks)}]\n{chunk}"
+        url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+        payload = {"chat_id": TELEGRAM_CHAT_ID, "text": chunk}
+        resp = requests.post(url, json=payload, timeout=10)
+        if resp.status_code != 200:
+            print(f"Telegram send failed: {resp.text}")
+        else:
+            print(f"Chunk {idx+1}/{len(chunks)} sent.")
+    print("Telegram message(s) sent successfully.")
 
 # ===== 메인 =====
 if __name__ == "__main__":
-    # 카테고리 정의: (이름, 검색어, 개수, region)
+    # 카테고리 정의: (표시명, 검색어, 최대 기사 수, 지역)
+    # 전체 약 50개 수집을 위해 각 카테고리당 13개씩 (총 52)
+    PER_CATEGORY = 13
+
     categories = [
-        ("정치", "정치", 5, "kr-kr"),
-        ("사회", "사회", 5, "kr-kr"),
-        ("증권/경제", "증권 경제", 10, "kr-kr"),
-        ("국제", "world news", 5, "us-en")
+        ("정치/시사", "정치 OR 국회 OR 대통령 OR 외교 OR 시사", PER_CATEGORY, "kr-kr"),
+        ("한국 증시/경제", "코스피 OR 코스닥 OR 증권 OR 주식 OR 경제 OR 금리 OR AI 주식 OR 인공지능 주식 OR AI 반도체 OR AI 관련주 OR 삼성전자 OR SK하이닉스", PER_CATEGORY, "kr-kr"),
+        ("미국 주식", "S&P 500 OR NASDAQ OR Dow Jones OR Fed OR earnings OR stock market OR AI stock OR artificial intelligence stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", PER_CATEGORY, "us-en"),
+        ("국제 뉴스", "world news OR geopolitics OR IMF OR UN OR summit", PER_CATEGORY, "us-en")
     ]
 
-    seen_urls = set()  # 중복 방지용 URL 저장소
-    final_report = "📰 오늘의 뉴스 요약\n\n"
+    all_articles = []
+    seen_urls = set()
 
     for cat_name, query, count, region in categories:
-        print(f"Fetching {cat_name}...")
+        print(f"Fetching {cat_name} (max {count})...")
         try:
-            articles = fetch_news(query, max_results=count, region=region)
-
-            # 중복 URL 제거
-            unique_articles = []
+            articles = fetch_news(query, max_results=count, region=region, timelimit='d')
+            # 중복 제거
             for a in articles:
                 if a['url'] not in seen_urls:
                     seen_urls.add(a['url'])
-                    unique_articles.append(a)
-            print(f"{cat_name} unique articles count: {len(unique_articles)}")
-
-            summary, links = summarize_category(cat_name, unique_articles)
-            final_report += summary
-            if links:
-                final_report += "🔗 관련 기사:\n" + "\n".join(links) + "\n"
-            final_report += "\n"
+                    all_articles.append(a)
+            print(f"{cat_name}: {len(articles)} fetched, total unique: {len(all_articles)}")
         except Exception as e:
-            final_report += f"📌 {cat_name}\n뉴스 수집 중 오류: {e}\n\n"
-        time.sleep(2)  # 요청 간격 유지
+            print(f"{cat_name} fetch error: {e}")
+        time.sleep(2)  # 요청 간격
 
-    # 텔레그램 메시지가 너무 길면 나눠서 보내기 (간단히 3500자씩 자르기)
-    if len(final_report) > 3500:
-        chunks = [final_report[i:i+3500] for i in range(0, len(final_report), 3500)]
-        for idx, chunk in enumerate(chunks):
-            send_telegram(f"[{idx+1}/{len(chunks)}]\n{chunk}")
-    else:
-        send_telegram(final_report)
+    # 토픽 분류 리포트 생성
+    report = create_topic_report(all_articles)
+    print("Report generated. Length:", len(report))
 
+    # 텔레그램 전송
+    send_telegram(report)
     print("Script finished.")
