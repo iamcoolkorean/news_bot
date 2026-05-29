@@ -5,21 +5,21 @@ from datetime import datetime
 from ddgs import DDGS
 from google import genai
 
-# --- 환경 변수 ---
 GEMINI_KEY = os.environ["GEMINI_API_KEY"]
 TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 
-# Gemini 초기화
 client = genai.Client(api_key=GEMINI_KEY)
 
 def get_date_and_weather():
-    """오늘 날짜와 서울 날씨를 문자열로 반환"""
     today = datetime.now().strftime("%Y년 %m월 %d일")
     weather_info = "서울 날씨 정보를 가져올 수 없습니다."
     try:
-        # wttr.in: 간단한 날씨 API (형식: "Weather: 맑음, +22°C")
-        resp = requests.get("https://wttr.in/Seoul?format=%C+%t", timeout=5)
+        # wttr.in 형식: %C(날씨), %t(현재온도), %l(최저), %h(최고), %p(강수량), %m(습도)
+        resp = requests.get(
+            "https://wttr.in/Seoul?format=%C+|+현재+%t+|+최저+%l+|+최고+%h+|+강수+%p+|+습도+%m",
+            timeout=5
+        )
         if resp.status_code == 200:
             weather_info = f"서울 날씨: {resp.text.strip()}"
     except:
@@ -27,49 +27,32 @@ def get_date_and_weather():
     return f"📅 {today}\n{weather_info}"
 
 def fetch_news(query, max_results, region='kr-kr', timelimit='d'):
-    """DDG 뉴스 검색 (제목과 URL만 수집, 본문은 무시)"""
     with DDGS() as ddgs:
-        news = list(ddgs.news(
-            query=query,
-            max_results=max_results,
-            region=region,
-            timelimit=timelimit
-        ))
+        news = list(ddgs.news(query=query, max_results=max_results, region=region, timelimit=timelimit))
     articles = []
     for item in news:
         url = item.get("url")
         if not url:
             continue
-        articles.append({
-            "title": item.get("title", "제목 없음"),
-            "url": url
-        })
+        articles.append({"title": item.get("title", "제목 없음"), "url": url})
     return articles
 
 def create_topic_report(all_articles):
-    """전체 기사 제목을 Gemini에 보내서 5개 주요 토픽으로 분류한 후 리포트 생성"""
     if not all_articles:
         return "📰 오늘 수집된 뉴스가 없습니다."
 
-    # 번호를 붙인 제목 목록 생성
-    titles = []
-    for i, a in enumerate(all_articles):
-        titles.append(f"{i+1}. {a['title']}")
-
+    titles = [f"{i+1}. {a['title']}" for i, a in enumerate(all_articles)]
     title_list = "\n".join(titles)
 
-    prompt = f"""다음은 오늘 수집한 뉴스 기사의 제목 목록입니다 (번호와 함께 제공).
-이 기사들을 분석하여 **가장 두드러진 주요 주제(토픽) 5개**를 찾아주세요.
-각 토픽에는 해당하는 기사의 **번호들만** 아래 형식으로 정리해주세요.
+    prompt = f"""다음은 오늘 수집한 뉴스 제목 목록입니다. 주요 주제 5개를 찾아주세요.
+각 토픽에는 해당 기사의 번호만 아래 형식으로 적어주세요.
 
 📌 [토픽 제목]
-[1,3,7,15,22]  ← 예시
+[1,3,7,15,22]
 
-**중요**:
-- 각 기사는 반드시 하나의 토픽에만 포함되어야 합니다 (중복 불가).
-- 모든 기사를 빠짐없이 처리하고, 어디에도 속하지 않는 기사는 '기타' 토픽에 넣어도 됩니다.
-- 한 토픽에 너무 많은 기사가 몰리면 중요도 순으로 최대 7개까지 선택하세요.
-- 번호 목록 외에 다른 설명은 일절 쓰지 마세요.
+- 모든 기사는 하나의 토픽에만 포함 (중복 불가)
+- 최대 7개까지만 선택
+- 설명 없이 번호 목록만 출력
 
 기사 목록:
 {title_list}
@@ -78,15 +61,12 @@ def create_topic_report(all_articles):
     raw_result = None
     for attempt in range(max_retries + 1):
         try:
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt
-            )
+            response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
             raw_result = response.text
             break
         except Exception as e:
             if attempt < max_retries:
-                print(f"Topic extraction retry {attempt+1}/{max_retries}: {e}")
+                print(f"Retry {attempt+1}/{max_retries}: {e}")
                 time.sleep(3)
             else:
                 fallback = "📰 오늘의 뉴스 (토픽 분류 실패)\n\n"
@@ -94,7 +74,6 @@ def create_topic_report(all_articles):
                     fallback += f"- {a['title']}: {a['url']}\n"
                 return fallback
 
-    # Gemini 응답 파싱 (토픽 제목과 번호 리스트 추출)
     report = "📰 오늘의 뉴스 토픽 요약\n\n"
     try:
         lines = [l.strip() for l in raw_result.split('\n') if l.strip()]
@@ -110,39 +89,26 @@ def create_topic_report(all_articles):
                         a = all_articles[num-1]
                         report += f"- {a['title']}: {a['url']}\n"
                 report += "\n"
-    except Exception as e:
-        # 파싱 실패 시 원시 응답을 그대로 전송
+    except:
         report = raw_result
-
     return report
 
 def send_telegram(text):
-    """텔레그램 메시지 전송 (길면 분할)"""
     max_len = 3500
-    if len(text) <= max_len:
-        chunks = [text]
-    else:
-        chunks = [text[i:i+max_len] for i in range(0, len(text), max_len)]
-
+    chunks = [text[i:i+max_len] for i in range(0, len(text), max_len)]
     for idx, chunk in enumerate(chunks):
         if len(chunks) > 1:
             chunk = f"[{idx+1}/{len(chunks)}]\n{chunk}"
         url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
         payload = {"chat_id": TELEGRAM_CHAT_ID, "text": chunk}
-        resp = requests.post(url, json=payload, timeout=10)
-        if resp.status_code != 200:
-            print(f"Telegram send failed: {resp.text}")
-        else:
-            print(f"Chunk {idx+1}/{len(chunks)} sent.")
-    print("Telegram message(s) sent successfully.")
+        requests.post(url, json=payload, timeout=10)
 
-# ===== 메인 =====
 if __name__ == "__main__":
-    # 카테고리별 수집 개수 (미국 주식만 20개로 강화)
+    # 순서 변경: 미국 주식을 가장 먼저! (중복 제거 시 우선권 확보)
     categories = [
+        ("미국 주식", "S&P 500 OR NASDAQ OR Dow Jones OR Fed OR earnings OR stock market OR Wall Street OR AI stock OR artificial intelligence stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 25, "us-en"),
         ("정치/시사", "정치 OR 국회 OR 대통령 OR 외교 OR 시사", 13, "kr-kr"),
-        ("한국 증시/경제", "코스피 OR 코스닥 OR 증권 OR 주식 OR 경제 OR 금리 OR AI 주식 OR 인공지능 주식 OR AI 반도체 OR AI 관련주 OR 삼성전자 OR SK하이닉스", 13, "kr-kr"),
-        ("미국 주식", "S&P 500 OR NASDAQ OR Dow Jones OR Fed OR earnings OR stock market OR AI stock OR artificial intelligence stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 20, "us-en"),
+        ("한국 증시/경제", "코스피 OR 코스닥 OR 증권 OR 주식 OR 경제 OR 금리 OR AI 주식 OR 인공지능 주식 OR AI 반도체 OR 삼성전자 OR SK하이닉스", 13, "kr-kr"),
         ("국제 뉴스", "world news OR geopolitics OR IMF OR UN OR summit", 13, "us-en")
     ]
 
@@ -153,25 +119,19 @@ if __name__ == "__main__":
         print(f"Fetching {cat_name} (max {count})...")
         try:
             articles = fetch_news(query, max_results=count, region=region, timelimit='d')
+            added = 0
             for a in articles:
                 if a['url'] not in seen_urls:
                     seen_urls.add(a['url'])
                     all_articles.append(a)
-            print(f"{cat_name}: {len(articles)} fetched, total unique: {len(all_articles)}")
+                    added += 1
+            print(f"{cat_name}: {len(articles)} fetched, {added} added (total unique: {len(all_articles)})")
         except Exception as e:
-            print(f"{cat_name} fetch error: {e}")
+            print(f"{cat_name} error: {e}")
         time.sleep(2)
 
-    # 날짜 및 날씨
     header = get_date_and_weather()
-
-    # 토픽 리포트 생성
     report = create_topic_report(all_articles)
-    print("Report generated. Length:", len(report))
-
-    # 최종 메시지 조합
     final_message = f"{header}\n\n{report}"
-
-    # 텔레그램 전송
     send_telegram(final_message)
     print("Script finished.")
