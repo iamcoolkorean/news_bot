@@ -2,7 +2,8 @@ import os
 import time
 import json
 import requests
-from datetime import datetime
+import yfinance as yf
+from datetime import datetime, timedelta
 from ddgs import DDGS
 from google import genai
 
@@ -43,6 +44,52 @@ def get_date_and_weather():
         print(f"Weather error: {e}")
     return f"📅 {today}\n{weather_info}"
 
+def get_market_indicators():
+    """주요 금융 지표 (KOSPI, KOSDAQ, USD/KRW) 수집"""
+    try:
+        # KOSPI
+        kospi = yf.Ticker("^KS11")
+        kospi_hist = kospi.history(period="2d")  # 오늘 + 어제
+        if len(kospi_hist) >= 2:
+            prev_close = kospi_hist['Close'].iloc[-2]
+            last_close = kospi_hist['Close'].iloc[-1]
+            kospi_change = ((last_close - prev_close) / prev_close) * 100
+            kospi_str = f"{last_close:,.2f} ({kospi_change:+.2f}%)"
+        elif len(kospi_hist) == 1:
+            last_close = kospi_hist['Close'].iloc[-1]
+            kospi_str = f"{last_close:,.2f}"
+        else:
+            kospi_str = "정보 없음"
+
+        # KOSDAQ
+        kosdaq = yf.Ticker("^KQ11")
+        kosdaq_hist = kosdaq.history(period="2d")
+        if len(kosdaq_hist) >= 2:
+            prev_close = kosdaq_hist['Close'].iloc[-2]
+            last_close = kosdaq_hist['Close'].iloc[-1]
+            kosdaq_change = ((last_close - prev_close) / prev_close) * 100
+            kosdaq_str = f"{last_close:,.2f} ({kosdaq_change:+.2f}%)"
+        elif len(kosdaq_hist) == 1:
+            last_close = kosdaq_hist['Close'].iloc[-1]
+            kosdaq_str = f"{last_close:,.2f}"
+        else:
+            kosdaq_str = "정보 없음"
+
+        # USD/KRW 환율
+        resp = requests.get("https://api.exchangerate-api.com/v4/latest/USD", timeout=5)
+        usd_krw = resp.json()['rates']['KRW']
+        krw_str = f"{usd_krw:,.2f}"
+
+        return (
+            "📊 주요 금융 지표\n"
+            f"- KOSPI: {kospi_str}\n"
+            f"- KOSDAQ: {kosdaq_str}\n"
+            f"- USD/KRW: {krw_str} 원"
+        )
+    except Exception as e:
+        print(f"Market indicators error: {e}")
+        return "📊 주요 금융 지표 정보를 가져올 수 없습니다."
+
 def fetch_news(query, max_results, region='kr-kr', timelimit='d'):
     """DDG 뉴스 검색 (제목과 URL만 수집)"""
     with DDGS() as ddgs:
@@ -64,27 +111,34 @@ def fetch_news(query, max_results, region='kr-kr', timelimit='d'):
     return articles
 
 def analyze_category(category_name, articles):
-    """
-    해당 카테고리의 기사 제목들을 Gemini에게 보내서
-    5개의 중요 주제(토픽)를 추출하고, 각 토픽에 해당하는 기사 번호를 JSON으로 받음.
-    실패 시 전체 기사 리스트를 반환.
-    """
+    """카테고리별 Gemini 토픽 분석 (맞춤형 역할 지시)"""
     if not articles:
         return f"📌 {category_name}\n관련 뉴스가 없습니다.\n"
 
-    # 번호가 붙은 제목 목록 생성
     titles = [f"{i+1}. {a['title']}" for i, a in enumerate(articles)]
     titles_text = "\n".join(titles)
 
-    prompt = f"""당신은 뉴스 분석가입니다. 아래는 '{category_name}' 분야의 오늘 뉴스 기사 제목 목록입니다.
-이 제목들을 분석하여 **가장 많이 언급되었거나 중요한 주제(토픽) 5개**를 찾아주세요.
+    # 카테고리별 역할 및 요구사항 설정
+    if "증시" in category_name or "주식" in category_name:
+        role = "당신은 주식 투자자에게 오늘의 핵심 이슈를 전달하는 애널리스트입니다."
+        requirement = "실제로 주가에 영향을 미칠 만한 구체적인 이벤트(실적, 수급, 공시, 계약, 지수 변동 등)를 5가지 찾아주세요."
+    elif "정치" in category_name:
+        role = "당신은 정치부 기자입니다."
+        requirement = "오늘 정치권에서 가장 중요하게 다뤄진 이슈 5가지를 찾아주세요."
+    else:
+        role = "당신은 뉴스 분석가입니다."
+        requirement = "가장 많이 언급된 중요 주제 5개를 찾아주세요."
+
+    prompt = f"""{role}
+아래는 '{category_name}' 분야의 오늘 뉴스 제목 목록입니다.
+{requirement}
 각 토픽에는 해당하는 기사들의 **번호**를 모두 모아서, 반드시 아래 JSON 형식으로만 답변하세요.
 다른 설명은 절대 쓰지 마세요.
 
 [
   {{
-    "topic": "토픽 제목 (예: 연준 금리 인상)",
-    "article_ids": [1, 3, 5, 12]
+    "topic": "토픽 제목 (구체적으로)",
+    "article_ids": [1, 3, 5]
   }},
   ...
 ]
@@ -100,20 +154,17 @@ def analyze_category(category_name, articles):
                 contents=prompt
             )
             text = response.text.strip()
-            # 코드 블록 제거
             if text.startswith("```"):
                 text = text.split("```")[1].strip()
                 if text.startswith("json"):
                     text = text[4:].strip()
             data = json.loads(text)
 
-            # 토픽별 기사 조립
             result_str = ""
             used_ids = set()
             for topic in data:
                 topic_title = topic.get("topic", "기타")
                 ids = topic.get("article_ids", [])
-                # 유효한 번호만 필터링
                 valid_ids = [i for i in ids if 1 <= i <= len(articles)]
                 if not valid_ids:
                     continue
@@ -124,11 +175,10 @@ def analyze_category(category_name, articles):
                 result_str += "\n"
                 used_ids.update(valid_ids)
 
-            # 어느 토픽에도 포함되지 않은 기사는 '기타'로 추가
             unused = [a for i, a in enumerate(articles) if (i+1) not in used_ids]
             if unused:
                 result_str += "📌 기타 주요 뉴스\n"
-                for a in unused[:10]:  # 너무 많으면 10개만
+                for a in unused[:10]:
                     result_str += f"- {a['title']}: {a['url']}\n"
                 result_str += "\n"
 
@@ -139,8 +189,7 @@ def analyze_category(category_name, articles):
                 print(f"Retry {attempt+1}/{max_retries} for {category_name}: {e}")
                 time.sleep(3)
             else:
-                # 실패 시 전체 리스트 반환
-                fallback = f"📌 {category_name} (토픽 분석 실패 - 전체 기사)\n"
+                fallback = f"📌 {category_name} (분석 실패 - 전체 기사)\n"
                 for a in articles:
                     fallback += f"- {a['title']}: {a['url']}\n"
                 return fallback + "\n"
@@ -167,17 +216,19 @@ def send_telegram(text):
 
 # ===== 메인 실행 =====
 if __name__ == "__main__":
-    # 카테고리 정의: 각 50개씩 수집
+    # 1. 날짜, 날씨, 금융 지표
+    header = get_date_and_weather() + "\n\n" + get_market_indicators() + "\n"
+
+    # 2. 카테고리 정의 (검색어 최적화)
     categories = [
         ("🇺🇸 미국 주식", "S&P 500 OR NASDAQ OR Dow Jones OR Fed OR earnings OR stock market OR Wall Street OR AI stock OR artificial intelligence stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 50, "us-en"),
         ("🇰🇷 정치/시사", "정치 OR 국회 OR 대통령 OR 외교 OR 시사 OR 북한 OR 안보", 50, "kr-kr"),
-        ("🇰🇷 한국 증시/경제", "코스피 OR 코스닥 OR 증권 OR 주식 OR 경제 OR 금리 OR AI 주식 OR 인공지능 주식 OR AI 반도체 OR 삼성전자 OR SK하이닉스", 50, "kr-kr"),
+        ("🇰🇷 한국 증시/경제", "삼성전자 주가 OR SK하이닉스 주가 OR 코스피 상승 OR 코스닥 급등 OR 증시 전망 OR 실적 발표 OR 공시 OR 배당 OR 외국인 순매수 OR 기관 매매 OR AI 반도체 수주 OR HBM OR 반도체 주가", 50, "kr-kr"),
         ("🌍 국제 뉴스", "world news OR geopolitics OR IMF OR UN OR summit OR NATO OR global economy", 50, "us-en"),
         ("🚨 국내 돌발 뉴스", "속보", 3, "kr-kr"),
         ("🚨 해외 돌발 뉴스", "world breaking news", 2, "us-en")
     ]
 
-    # 1단계: 카테고리별 기사 수집 (중복 URL은 카테고리 내에서만 제거)
     cat_articles = {}
     global_seen = set()
 
@@ -185,7 +236,6 @@ if __name__ == "__main__":
         print(f"Fetching {cat_name} (max {count})...")
         try:
             articles = fetch_news(query, max_results=count, region=region, timelimit='d')
-            # 카테고리 내 중복 제거 + 전역 중복 제거
             unique = []
             for a in articles:
                 if a['url'] not in global_seen:
@@ -198,15 +248,13 @@ if __name__ == "__main__":
             cat_articles[cat_name] = []
         time.sleep(2)
 
-    # 2단계: 리포트 생성
-    report = get_date_and_weather() + "\n\n📰 오늘의 뉴스 토픽 브리핑\n"
-
+    # 3. 뉴스 토픽 리포트 생성
+    report = header + "📰 오늘의 뉴스 토픽 브리핑\n"
     for cat_name, articles in cat_articles.items():
         report += f"\n{cat_name}\n"
-        analyzed = analyze_category(cat_name, articles)
-        report += analyzed
+        report += analyze_category(cat_name, articles)
 
-    # 3단계: 전송
+    # 4. 전송
     print(f"Report length: {len(report)}")
     send_telegram(report)
     print("Script finished.")
