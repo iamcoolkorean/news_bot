@@ -4,6 +4,7 @@ import re
 import json
 import requests
 import yfinance as yf
+import feedparser
 from datetime import datetime
 from ddgs import DDGS
 from google import genai
@@ -110,6 +111,23 @@ def fetch_news(query, max_results, region='kr-kr', timelimit='d'):
             "url": url
         })
     return articles
+
+def fetch_google_news(query, max_results=30):
+    """구글 뉴스 RSS에서 한국어 뉴스 수집 (DDGS 보완)"""
+    # URL 인코딩이 필요하지만 query 자체가 간단한 경우 requests가 처리
+    url = f"https://news.google.com/rss/search?q={query}&hl=ko&gl=KR&ceid=KR:ko"
+    try:
+        feed = feedparser.parse(url)
+        articles = []
+        for entry in feed.entries[:max_results]:
+            articles.append({
+                "title": entry.title,
+                "url": entry.link
+            })
+        return articles
+    except Exception as e:
+        print(f"Google News error: {e}")
+        return []
 
 def is_english_title(title):
     """제목이 영어인지 간단히 판별 (한글이 전혀 없으면 영어로 간주)"""
@@ -270,34 +288,49 @@ if __name__ == "__main__":
     # 1. 날짜, 날씨, 금융 지표
     header = get_date_and_weather() + "\n\n" + get_market_indicators() + "\n"
 
-    # 2. 카테고리 정의 (검색어 최적화)
+    # 2. 카테고리 정의 (검색어 최적화 + 구글 뉴스 보완)
+    # 일반 뉴스 카테고리는 DDGS만 사용, 한국 증시는 구글 뉴스 RSS 추가 수집
     categories = [
-        ("🇺🇸 미국 주식", "S&P 500 OR NASDAQ OR Dow Jones OR Fed OR earnings OR stock market OR Wall Street OR AI stock OR artificial intelligence stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 50, "us-en"),
-        ("🇰🇷 정치/시사", "정치 OR 국회 OR 대통령 OR 외교 OR 시사 OR 북한 OR 안보", 50, "kr-kr"),
-        ("🇰🇷 한국 증시/경제", "삼성전자 주가 OR SK하이닉스 주가 OR 코스피 상승 OR 코스닥 급등 OR 증시 전망 OR 실적 발표 OR 공시 OR 배당 OR 외국인 순매수 OR 기관 매매 OR AI 반도체 수주 OR HBM OR 반도체 주가", 50, "kr-kr"),
-        ("🌍 국제 뉴스", "world news OR geopolitics OR IMF OR UN OR summit OR NATO OR global economy", 50, "us-en"),
-        ("🚨 국내 돌발", "사건사고 OR 재난 OR 지진 OR 화재 OR 테러 OR 대규모 정전 OR 전염병 OR 경찰 긴급 OR 소방 당국", 5, "kr-kr"),
-        ("🚨 해외 돌발", "earthquake OR terror attack OR plane crash OR major explosion OR natural disaster OR pandemic OR coup", 5, "us-en")
+        ("🇺🇸 미국 주식", "S&P 500 OR NASDAQ OR Dow Jones OR Fed OR earnings OR stock market OR Wall Street OR AI stock OR artificial intelligence stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 50, "us-en", False),
+        ("🇰🇷 정치/시사", "정치 OR 국회 OR 대통령 OR 외교 OR 시사 OR 북한 OR 안보", 50, "kr-kr", False),
+        ("🇰🇷 한국 증시/경제", "코스피 OR 코스닥 OR 증시 OR 주식 시장 OR 증권 OR 시황 OR 전망 OR 이슈 OR 분석 OR 특징주 OR 실적 OR 공시 OR 외국인 OR 기관 OR AI 반도체 OR HBM OR 삼성전자 OR SK하이닉스", 50, "kr-kr", True),  # 구글 뉴스 보완
+        ("🌍 국제 뉴스", "world news OR geopolitics OR IMF OR UN OR summit OR NATO OR global economy", 50, "us-en", False),
+        ("🚨 국내 돌발", "사건사고 OR 재난 OR 지진 OR 화재 OR 테러 OR 대규모 정전 OR 전염병 OR 경찰 긴급 OR 소방 당국", 5, "kr-kr", False),
+        ("🚨 해외 돌발", "earthquake OR terror attack OR plane crash OR major explosion OR natural disaster OR pandemic OR coup", 5, "us-en", False)
     ]
 
     cat_articles = {}
     global_seen = set()
 
-    for cat_name, query, count, region in categories:
+    for cat_name, query, count, region, use_google in categories:
         print(f"Fetching {cat_name} (max {count})...")
+        articles = []
         try:
-            articles = fetch_news(query, max_results=count, region=region, timelimit='d')
-            unique = []
-            for a in articles:
-                if a['url'] not in global_seen:
-                    global_seen.add(a['url'])
-                    unique.append(a)
-            cat_articles[cat_name] = unique
-            print(f"  {cat_name}: {len(articles)} fetched, {len(unique)} unique (total: {len(global_seen)})")
+            # 1) DDGS 수집
+            ddg_articles = fetch_news(query, max_results=count, region=region, timelimit='d')
+            articles.extend(ddg_articles)
+            print(f"  DDG: {len(ddg_articles)} fetched")
         except Exception as e:
-            print(f"  {cat_name} error: {e}")
-            cat_articles[cat_name] = []
-        time.sleep(2)
+            print(f"  DDG error for {cat_name}: {e}")
+
+        # 2) 구글 뉴스 RSS 보완 (한국 증시/경제 카테고리만)
+        if use_google:
+            try:
+                google_articles = fetch_google_news(query, max_results=30)
+                articles.extend(google_articles)
+                print(f"  Google News: {len(google_articles)} fetched")
+            except Exception as e:
+                print(f"  Google News error: {e}")
+
+        # 중복 제거 (URL 기준)
+        unique = []
+        for a in articles:
+            if a['url'] not in global_seen:
+                global_seen.add(a['url'])
+                unique.append(a)
+        cat_articles[cat_name] = unique
+        print(f"  {cat_name}: total unique {len(unique)} (global total: {len(global_seen)})")
+        time.sleep(2)  # API 호출 간격
 
     # 3. 전체 기사 번역 (영어 → 한국어)
     all_articles = []
