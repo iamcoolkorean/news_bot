@@ -1,17 +1,14 @@
 import os
 import time
-import json
+import re
 import requests
+from collections import Counter
 from datetime import datetime
 from ddgs import DDGS
-from google import genai
 
 # --- 환경 변수 ---
-GEMINI_KEY = os.environ["GEMINI_API_KEY"]
 TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
-
-client = genai.Client(api_key=GEMINI_KEY)
 
 def get_date_and_weather():
     """오늘 날짜와 서울 날씨 (JSON 파싱, 섭씨)"""
@@ -63,88 +60,66 @@ def fetch_news(query, max_results, region='kr-kr', timelimit='d'):
         })
     return articles
 
-def analyze_category(category_name, articles, max_retries=2):
-    """
-    해당 카테고리의 기사 제목을 분석하여,
-    가장 많이 언급된 주요 토픽 3~4개를 추출하고,
-    각 토픽에 해당하는 기사 번호 리스트를 JSON으로 반환.
-    실패 시 전체 기사 리스트를 반환.
-    """
-    if not articles:
-        return f"📌 {category_name}\n관련 뉴스가 없습니다.\n", []
+def extract_keywords_from_titles(titles):
+    """모든 기사 제목에서 핵심 단어(2글자 이상 한글, 영문)를 추출하여 빈도 계산"""
+    stopwords = [
+        '오늘', '뉴스', '기사', '속보', '단독', '이유', '가운데', '관련', '전망', '분석', '확인',
+        'the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been', 'being',
+        'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should',
+        'may', 'might', 'can', 'shall', 'you', 'i', 'he', 'she', 'it', 'we', 'they',
+        'this', 'that', 'these', 'those', 'in', 'on', 'at', 'to', 'for', 'of', 'with',
+        'by', 'from', 'up', 'about', 'into', 'through', 'during', 'before', 'after',
+        'above', 'below', 'between', 'out', 'off', 'over', 'under', 'again', 'further',
+        'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'both',
+        'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not',
+        'only', 'own', 'same', 'so', 'than', 'too', 'very', 'just', 'now'
+    ]
+    words = []
+    for title in titles:
+        clean = re.sub(r'[^a-zA-Z0-9가-힣\s]', ' ', title)
+        tokens = clean.split()
+        for token in tokens:
+            if token.isalpha() and len(token) >= 2:
+                if token.lower() not in stopwords:
+                    words.append(token.lower())
+    return Counter(words)
 
-    # 번호가 붙은 제목 목록 생성
-    titles = [f"{i+1}. {a['title']}" for i, a in enumerate(articles)]
-    titles_text = "\n".join(titles)
+def build_issue_sections(all_articles, top_n=5):
+    """키워드 빈도 기반으로 이슈 섹션 구축 (Gemini 없이 순수 파이썬)"""
+    titles = [a['title'] for a in all_articles]
+    if not titles:
+        return ""
+    
+    keyword_counts = extract_keywords_from_titles(titles)
+    top_keywords = [k for k, v in keyword_counts.most_common(top_n)]
+    
+    sections = []
+    for keyword in top_keywords:
+        matched_articles = [a for a in all_articles if keyword in a['title'].lower()]
+        if not matched_articles:
+            continue
+        
+        section = f"📌 오늘의 핵심 키워드: '{keyword}' (총 {len(matched_articles)}건)\n"
+        for a in matched_articles[:5]:
+            section += f"- {a['title']}: {a['url']}\n"
+        sections.append(section)
+    
+    if not sections:
+        return ""
+    
+    return "🔥 오늘의 주요 이슈 (키워드 빈도 분석)\n\n" + "\n".join(sections)
 
-    prompt = f"""당신은 뉴스 분석가입니다. 아래는 '{category_name}' 분야의 오늘 뉴스 기사 제목 목록입니다.
-이 제목들을 분석하여 **가장 많이 언급된 핵심 주제(토픽) 3~4개**를 추출해주세요.
-각 토픽에 해당하는 기사들의 번호를 모아서, 반드시 아래 JSON 형식으로만 답변하세요.
-다른 설명은 일체 추가하지 마세요.
-
-[
-  {{
-    "topic": "토픽 제목 (예: 연준 금리 인상)",
-    "article_ids": [1, 3, 5, 12]
-  }},
-  ...
-]
-
-기사 목록:
-{titles_text}
-"""
-
-    for attempt in range(max_retries + 1):
-        try:
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt
-            )
-            # 응답 텍스트에서 JSON 배열만 추출
-            text = response.text.strip()
-            # 때때로 코드 블록으로 감싸져 있을 수 있으므로 ```json 제거
-            if text.startswith("```"):
-                text = text.split("```")[1].strip()
-                if text.startswith("json"):
-                    text = text[4:].strip()
-            data = json.loads(text)
-            # JSON 검증 및 토픽별 기사 추출
-            result_str = ""
-            all_used_ids = set()
-            for topic in data:
-                topic_title = topic.get("topic", "기타")
-                ids = topic.get("article_ids", [])
-                # 유효한 ID만 필터링
-                valid_ids = [i for i in ids if 1 <= i <= len(articles)]
-                if not valid_ids:
-                    continue
-                # 중복 포함 방지 (여러 토픽에 같은 기사가 들어갈 수 있지만, 일단 허용)
-                result_str += f"📌 {topic_title}\n"
-                for i in valid_ids:
-                    a = articles[i-1]
-                    result_str += f"- {a['title']}: {a['url']}\n"
-                result_str += "\n"
-                all_used_ids.update(valid_ids)
-
-            # 어느 토픽에도 포함되지 않은 기사가 있다면 '기타'로 추가
-            unused = [a for i, a in enumerate(articles) if (i+1) not in all_used_ids]
-            if unused:
-                result_str += f"📌 기타 주요 뉴스\n"
-                for a in unused:
-                    result_str += f"- {a['title']}: {a['url']}\n"
-                result_str += "\n"
-
-            return result_str
-        except Exception as e:
-            if attempt < max_retries:
-                print(f"Retry {attempt+1}/{max_retries} for {category_name}: {e}")
-                time.sleep(3)
-            else:
-                # 실패 시 전체 리스트 반환
-                fallback = f"📌 {category_name} (토픽 분류 대신 전체 기사)\n"
-                for a in articles:
-                    fallback += f"- {a['title']}: {a['url']}\n"
-                return fallback + "\n"
+def build_category_sections(cat_articles):
+    """카테고리별 기사 리스트 생성"""
+    report = ""
+    for cat_name, articles in cat_articles.items():
+        report += f"\n{cat_name}\n"
+        if articles:
+            for a in articles:
+                report += f"- {a['title']}: {a['url']}\n"
+        else:
+            report += "관련 기사를 찾을 수 없습니다.\n"
+    return report
 
 def send_telegram(text):
     """텔레그램 메시지 전송 (길면 자동 분할)"""
@@ -168,44 +143,54 @@ def send_telegram(text):
 
 # ===== 메인 실행 =====
 if __name__ == "__main__":
-    # 카테고리 정의 (검색어, 개수 등)
+    # 카테고리 정의
     categories = [
         ("🇺🇸 미국 주식", "S&P 500 OR NASDAQ OR Dow Jones OR Fed OR earnings OR stock market OR Wall Street OR AI stock OR artificial intelligence stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 25, "us-en"),
         ("🇰🇷 정치/시사", "정치 OR 국회 OR 대통령 OR 외교 OR 시사 OR 북한 OR 안보", 25, "kr-kr"),
         ("🇰🇷 한국 증시/경제", "코스피 OR 코스닥 OR 증권 OR 주식 OR 경제 OR 금리 OR AI 주식 OR 인공지능 주식 OR AI 반도체 OR 삼성전자 OR SK하이닉스", 25, "kr-kr"),
-        ("🌍 국제 뉴스", "world news OR geopolitics OR IMF OR UN OR summit OR NATO OR global economy", 25, "us-en")
+        ("🌍 국제 뉴스", "world news OR geopolitics OR IMF OR UN OR summit OR NATO OR global economy", 25, "us-en"),
+        ("🚨 국내 돌발 뉴스", "속보", 3, "kr-kr"),  # 국내 돌발 3건
+        ("🚨 해외 돌발 뉴스", "world breaking news", 2, "us-en")  # 해외 돌발 2건
     ]
 
-    # 각 카테고리별로 수집 (중복 제거는 카테고리 내에서만)
-    category_data = {}  # cat_name -> list of articles
-    global_seen_urls = set()
+    # 1단계: 카테고리별 기사 수집 + 중복 제거
+    cat_articles = {}
+    seen_urls = set()
 
     for cat_name, query, count, region in categories:
         print(f"Fetching {cat_name}...")
         try:
             articles = fetch_news(query, max_results=count, region=region, timelimit='d')
-            # 카테고리 내 중복 제거 + 글로벌 중복 제거
-            local_unique = []
+            unique = []
             for a in articles:
-                if a['url'] not in global_seen_urls:
-                    global_seen_urls.add(a['url'])
-                    local_unique.append(a)
-            category_data[cat_name] = local_unique
-            print(f"  {cat_name}: {len(articles)} fetched, {len(local_unique)} unique (global total: {len(global_seen_urls)})")
+                if a['url'] not in seen_urls:
+                    seen_urls.add(a['url'])
+                    unique.append(a)
+            cat_articles[cat_name] = unique
+            print(f"  {cat_name}: {len(articles)} fetched, {len(unique)} unique (total: {len(seen_urls)})")
         except Exception as e:
             print(f"  {cat_name} error: {e}")
-            category_data[cat_name] = []
+            cat_articles[cat_name] = []
         time.sleep(2)
 
-    # 리포트 생성
-    report = get_date_and_weather() + "\n\n📰 오늘의 뉴스 토픽 브리핑\n"
+    # 2단계: 전체 기사 리스트 생성 (빈도 분석용)
+    all_articles = []
+    for articles in cat_articles.values():
+        all_articles.extend(articles)
 
-    for cat_name, articles in category_data.items():
-        report += f"\n{cat_name}\n"
-        analyzed = analyze_category(cat_name, articles)
-        report += analyzed
+    # 3단계: 리포트 생성
+    report = get_date_and_weather() + "\n\n"
+    
+    # 오늘의 주요 이슈 (빈도 기반)
+    issue_section = build_issue_sections(all_articles, top_n=5)
+    if issue_section:
+        report += issue_section + "\n\n"
+    
+    # 카테고리별 상세 뉴스
+    report += "📰 카테고리별 뉴스\n"
+    report += build_category_sections(cat_articles)
 
-    # 전송
-    print(f"Report length: {len(report)}")
+    # 4단계: 텔레그램 전송
+    print(f"Report generated. Length: {len(report)}")
     send_telegram(report)
     print("Script finished.")
