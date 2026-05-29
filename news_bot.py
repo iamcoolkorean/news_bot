@@ -1,9 +1,10 @@
 import os
 import time
+import re
 import json
 import requests
 import yfinance as yf
-from datetime import datetime, timedelta
+from datetime import datetime
 from ddgs import DDGS
 from google import genai
 
@@ -49,7 +50,7 @@ def get_market_indicators():
     try:
         # KOSPI
         kospi = yf.Ticker("^KS11")
-        kospi_hist = kospi.history(period="2d")  # 오늘 + 어제
+        kospi_hist = kospi.history(period="2d")
         if len(kospi_hist) >= 2:
             prev_close = kospi_hist['Close'].iloc[-2]
             last_close = kospi_hist['Close'].iloc[-1]
@@ -110,12 +111,58 @@ def fetch_news(query, max_results, region='kr-kr', timelimit='d'):
         })
     return articles
 
+def is_english_title(title):
+    """제목이 영어인지 간단히 판별 (한글이 전혀 없으면 영어로 간주)"""
+    return not bool(re.search(r'[가-힣]', title))
+
+def translate_titles(articles):
+    """
+    영어 제목을 한국어로 번역 (Gemini 사용)
+    articles: [{'title': ..., 'url': ...}] 리스트
+    번역이 성공하면 'translated_title' 필드를 추가하고, 실패하면 원어 유지
+    """
+    # 영어 제목 인덱스 수집
+    eng_indices = [i for i, a in enumerate(articles) if is_english_title(a['title'])]
+    if not eng_indices:
+        return  # 번역할 것이 없음
+
+    # 번역할 제목 리스트
+    original_titles = [articles[i]['title'] for i in eng_indices]
+
+    prompt = (
+        "다음 영어 뉴스 제목들을 한국어로 번역해주세요.\n"
+        "각 제목을 순서대로 번역하고, 번역 결과만 한 줄씩 출력하세요.\n"
+        "다른 설명은 일절 추가하지 마세요.\n\n"
+        + "\n".join(original_titles)
+    )
+
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
+        translated = response.text.strip().split('\n')
+        # 번역 결과 매핑 (길이가 다를 수 있으니 최대한 매칭)
+        for idx, i in enumerate(eng_indices):
+            if idx < len(translated) and translated[idx].strip():
+                articles[i]['translated_title'] = translated[idx].strip()
+            else:
+                articles[i]['translated_title'] = articles[i]['title']  # 실패 시 원어
+    except Exception as e:
+        print(f"Translation error: {e}")
+        # 번역 실패 시 모든 영어 제목에 대해 원어 유지 (별도 처리 없음)
+
 def analyze_category(category_name, articles):
     """카테고리별 Gemini 토픽 분석 (맞춤형 역할 지시)"""
     if not articles:
         return f"📌 {category_name}\n관련 뉴스가 없습니다.\n"
 
-    titles = [f"{i+1}. {a['title']}" for i, a in enumerate(articles)]
+    titles = []
+    for i, a in enumerate(articles):
+        # 표시 제목: 번역본이 있으면 사용, 없으면 원본
+        display_title = a.get('translated_title', a['title'])
+        titles.append(f"{i+1}. {display_title}")
+
     titles_text = "\n".join(titles)
 
     # 카테고리별 역할 및 요구사항 설정
@@ -171,7 +218,9 @@ def analyze_category(category_name, articles):
                 result_str += f"📌 {topic_title}\n"
                 for i in valid_ids:
                     a = articles[i-1]
-                    result_str += f"- {a['title']}: {a['url']}\n"
+                    # 최종 출력 시에도 번역 제목 사용
+                    display_title = a.get('translated_title', a['title'])
+                    result_str += f"- {display_title}: {a['url']}\n"
                 result_str += "\n"
                 used_ids.update(valid_ids)
 
@@ -179,7 +228,8 @@ def analyze_category(category_name, articles):
             if unused:
                 result_str += "📌 기타 주요 뉴스\n"
                 for a in unused[:10]:
-                    result_str += f"- {a['title']}: {a['url']}\n"
+                    display_title = a.get('translated_title', a['title'])
+                    result_str += f"- {display_title}: {a['url']}\n"
                 result_str += "\n"
 
             return result_str
@@ -191,7 +241,8 @@ def analyze_category(category_name, articles):
             else:
                 fallback = f"📌 {category_name} (분석 실패 - 전체 기사)\n"
                 for a in articles:
-                    fallback += f"- {a['title']}: {a['url']}\n"
+                    display_title = a.get('translated_title', a['title'])
+                    fallback += f"- {display_title}: {a['url']}\n"
                 return fallback + "\n"
 
 def send_telegram(text):
@@ -221,12 +272,12 @@ if __name__ == "__main__":
 
     # 2. 카테고리 정의 (검색어 최적화)
     categories = [
-        ("🇺🇸 미국 주식", "S&P 500 OR NASDAQ OR Fed OR stock market OR Wall Street OR AI stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 50, "us-en"),
+        ("🇺🇸 미국 주식", "S&P 500 OR NASDAQ OR Dow Jones OR Fed OR earnings OR stock market OR Wall Street OR AI stock OR artificial intelligence stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 50, "us-en"),
         ("🇰🇷 정치/시사", "정치 OR 국회 OR 대통령 OR 외교 OR 시사 OR 북한 OR 안보", 50, "kr-kr"),
-        ("🇰🇷 한국 증시/경제", "삼성전자 OR SK하이닉스 OR 코스피 OR 코스닥 OR 실적 발표 OR 공시 OR 배당 OR 외국인 순매수 OR 기관 매매 OR 반도체 주가", 50, "kr-kr"),
+        ("🇰🇷 한국 증시/경제", "삼성전자 주가 OR SK하이닉스 주가 OR 코스피 상승 OR 코스닥 급등 OR 증시 전망 OR 실적 발표 OR 공시 OR 배당 OR 외국인 순매수 OR 기관 매매 OR AI 반도체 수주 OR HBM OR 반도체 주가", 50, "kr-kr"),
         ("🌍 국제 뉴스", "world news OR geopolitics OR IMF OR UN OR summit OR NATO OR global economy", 50, "us-en"),
         ("🚨 국내 돌발", "사건사고 OR 재난 OR 지진 OR 화재 OR 테러 OR 대규모 정전 OR 전염병 OR 경찰 긴급 OR 소방 당국", 5, "kr-kr"),
-          ("🚨 해외 돌발", "earthquake OR terror attack OR plane crash OR major explosion OR natural disaster OR pandemic OR coup", 5, "us-en")
+        ("🚨 해외 돌발", "earthquake OR terror attack OR plane crash OR major explosion OR natural disaster OR pandemic OR coup", 5, "us-en")
     ]
 
     cat_articles = {}
@@ -248,13 +299,21 @@ if __name__ == "__main__":
             cat_articles[cat_name] = []
         time.sleep(2)
 
-    # 3. 뉴스 토픽 리포트 생성
+    # 3. 전체 기사 번역 (영어 → 한국어)
+    all_articles = []
+    for articles in cat_articles.values():
+        all_articles.extend(articles)
+    print("Translating English titles...")
+    translate_titles(all_articles)
+    print("Translation completed.")
+
+    # 4. 뉴스 토픽 리포트 생성
     report = header + "📰 오늘의 뉴스 토픽 브리핑\n"
     for cat_name, articles in cat_articles.items():
         report += f"\n{cat_name}\n"
         report += analyze_category(cat_name, articles)
 
-    # 4. 전송
+    # 5. 전송
     print(f"Report length: {len(report)}")
     send_telegram(report)
     print("Script finished.")
