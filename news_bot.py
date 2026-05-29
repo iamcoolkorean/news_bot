@@ -11,8 +11,6 @@ from google import genai
 
 # --- 환경 변수 ---
 GEMINI_KEYS = [os.environ["GEMINI_API_KEY"]]
-
-# 서브 API 키 자동 등록 (GEMINI_API_KEY_2, GEMINI_API_KEY_3 ...)
 for i in range(2, 10):
     key = os.environ.get(f"GEMINI_API_KEY_{i}")
     if key:
@@ -21,12 +19,10 @@ for i in range(2, 10):
 TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 
-# 현재 사용 중인 키 인덱스
 current_key_idx = 0
 client = genai.Client(api_key=GEMINI_KEYS[current_key_idx])
 
 def switch_to_next_key():
-    """API 키를 다음 것으로 전환"""
     global current_key_idx, client
     if current_key_idx + 1 < len(GEMINI_KEYS):
         current_key_idx += 1
@@ -36,12 +32,8 @@ def switch_to_next_key():
     return False
 
 def call_gemini_with_retry(prompt, max_retries=3):
-    """
-    Gemini API 호출 + 429 오류 대응 + 키 전환
-    """
     global current_key_idx, client
     last_error = None
-
     for attempt in range(max_retries):
         try:
             response = client.models.generate_content(
@@ -52,21 +44,15 @@ def call_gemini_with_retry(prompt, max_retries=3):
         except Exception as e:
             last_error = str(e)
             print(f"Gemini call failed: {last_error}")
-
-            # 429 오류 (리소스 소진) 이거나 할당량 관련 오류
             if "429" in last_error or "RESOURCE_EXHAUSTED" in last_error or "quota" in last_error.lower():
-                # 1) 서브 키로 전환 시도
                 if switch_to_next_key():
-                    print("Retrying with new key immediately...")
                     time.sleep(1)
                     continue
-                # 2) 전환 실패 시 60초 대기 후 재시도
                 else:
                     if attempt < max_retries - 1:
                         print(f"All keys exhausted. Waiting 60 seconds... (attempt {attempt+1}/{max_retries})")
                         time.sleep(60)
-                    continue
-            # 다른 오류는 바로 재시도
+                        continue
             else:
                 if attempt < max_retries - 1:
                     print(f"Retrying... (attempt {attempt+1}/{max_retries})")
@@ -74,7 +60,7 @@ def call_gemini_with_retry(prompt, max_retries=3):
                     continue
     raise Exception(f"Gemini call failed after {max_retries} attempts: {last_error}")
 
-# --- 유틸리티 함수들 (날씨, 지표, 수집 등) ---
+# --- 유틸리티 함수들 ---
 def get_date_and_weather():
     today = datetime.now().strftime("%Y년 %m월 %d일")
     weather_info = "서울 날씨 정보를 가져올 수 없습니다."
@@ -170,17 +156,22 @@ def translate_titles(articles):
     except Exception as e:
         print(f"Translation error: {e}")
 
-def analyze_category(cat_name, articles):
+def analyze_category(category_name, articles, max_display=5):
+    """Gemini가 뽑은 토픽 중 최대 5개 기사까지만 출력"""
     if not articles:
-        return f"📌 {cat_name}\n관련 뉴스가 없습니다.\n"
+        return f"📌 {category_name}\n관련 뉴스가 없습니다.\n"
 
-    titles = [f"{i+1}. {a.get('translated_title', a['title'])}" for i, a in enumerate(articles)]
+    titles = []
+    for i, a in enumerate(articles):
+        display_title = a.get('translated_title', a['title'])
+        titles.append(f"{i+1}. {display_title}")
+
     titles_text = "\n".join(titles)
 
-    if "증시" in cat_name or "주식" in cat_name:
+    if "증시" in category_name or "주식" in category_name:
         role = "당신은 주식 투자자에게 오늘의 핵심 이슈를 전달하는 애널리스트입니다."
         requirement = "실제로 주가에 영향을 미칠 만한 구체적인 이벤트(실적, 수급, 공시, 계약, 지수 변동 등)를 5가지 찾아주세요."
-    elif "정치" in cat_name:
+    elif "정치" in category_name:
         role = "당신은 정치부 기자입니다."
         requirement = "오늘 정치권에서 가장 중요하게 다뤄진 이슈 5가지를 찾아주세요."
     else:
@@ -188,9 +179,10 @@ def analyze_category(cat_name, articles):
         requirement = "가장 많이 언급된 중요 주제 5개를 찾아주세요."
 
     prompt = f"""{role}
-아래는 '{cat_name}' 분야의 오늘 뉴스 제목 목록입니다.
+아래는 '{category_name}' 분야의 오늘 뉴스 제목 목록입니다.
 {requirement}
 각 토픽에는 해당하는 기사들의 **번호**를 모두 모아서, 반드시 아래 JSON 형식으로만 답변하세요.
+다른 설명은 절대 쓰지 마세요.
 
 [
   {{"topic": "토픽 제목 (구체적으로)", "article_ids": [1, 3, 5]}},
@@ -207,34 +199,51 @@ def analyze_category(cat_name, articles):
             if text.startswith("json"):
                 text = text[4:].strip()
         data = json.loads(text)
-
-        result_str = ""
-        used_ids = set()
-        for topic in data:
-            topic_title = topic.get("topic", "기타")
-            ids = [i for i in topic.get("article_ids", []) if 1 <= i <= len(articles)]
-            if not ids:
-                continue
-            result_str += f"📌 {topic_title}\n"
-            for i in ids:
-                a = articles[i-1]
-                result_str += f"- {a.get('translated_title', a['title'])}: {a['url']}\n"
-            result_str += "\n"
-            used_ids.update(ids)
-
-        unused = [a for i, a in enumerate(articles) if (i+1) not in used_ids]
-        if unused:
-            result_str += "📌 기타 주요 뉴스\n"
-            for a in unused[:10]:
-                result_str += f"- {a.get('translated_title', a['title'])}: {a['url']}\n"
-            result_str += "\n"
-        return result_str
     except Exception as e:
-        print(f"Analyze error for {cat_name}: {e}")
-        fallback = f"📌 {cat_name} (분석 실패 - 전체 기사)\n"
-        for a in articles:
-            fallback += f"- {a.get('translated_title', a['title'])}: {a['url']}\n"
+        print(f"Gemini analysis failed for {category_name}: {e}")
+        fallback = f"📌 {category_name} (분석 실패 - 주요 기사 5선)\n"
+        for a in articles[:max_display]:
+            title = a.get('translated_title', a['title'])
+            fallback += f"- {title}: {a['url']}\n"
         return fallback + "\n"
+
+    result_str = ""
+    displayed = 0
+    used_ids = set()
+
+    for topic in data:
+        topic_title = topic.get("topic", "기타")
+        ids = [i for i in topic.get("article_ids", []) if 1 <= i <= len(articles)]
+        if not ids:
+            continue
+
+        remaining = max_display - displayed
+        if remaining <= 0:
+            break
+
+        result_str += f"📌 {topic_title}\n"
+
+        for i in ids[:remaining]:
+            a = articles[i-1]
+            title = a.get('translated_title', a['title'])
+            result_str += f"- {title}: {a['url']}\n"
+            displayed += 1
+            used_ids.add(i)
+
+        result_str += "\n"
+        if displayed >= max_display:
+            break
+
+    if displayed == 0:
+        for a in articles[:max_display]:
+            title = a.get('translated_title', a['title'])
+            result_str += f"- {title}: {a['url']}\n"
+        result_str += "\n"
+
+    if len(articles) > max_display:
+        result_str += f"🔹 외 {len(articles) - max_display}건의 기사가 더 있습니다.\n\n"
+
+    return result_str
 
 def send_telegram(text):
     max_len = 3500
@@ -299,7 +308,7 @@ if __name__ == "__main__":
         all_articles.extend(arts)
     translate_titles(all_articles)
 
-    report = header + "📰 오늘의 뉴스 토픽 브리핑\n"
+    report = header + "📰 오늘의 뉴스 요약\n"
     for cat_name, arts in cat_articles.items():
         report += f"\n{cat_name}\n"
         report += analyze_category(cat_name, arts)
