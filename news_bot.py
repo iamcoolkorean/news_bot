@@ -112,22 +112,28 @@ def fetch_news(query, max_results, region='kr-kr', timelimit='d'):
         })
     return articles
 
-def fetch_google_news(query, max_results=30):
-    """구글 뉴스 RSS에서 한국어 뉴스 수집 (DDGS 보완)"""
-    # URL 인코딩이 필요하지만 query 자체가 간단한 경우 requests가 처리
-    url = f"https://news.google.com/rss/search?q={query}&hl=ko&gl=KR&ceid=KR:ko"
-    try:
-        feed = feedparser.parse(url)
-        articles = []
-        for entry in feed.entries[:max_results]:
-            articles.append({
-                "title": entry.title,
-                "url": entry.link
-            })
-        return articles
-    except Exception as e:
-        print(f"Google News error: {e}")
-        return []
+def fetch_google_news(keywords, max_results=50):
+    """
+    구글 뉴스 RSS에서 한국어 뉴스 수집.
+    keywords: 리스트 형태의 개별 키워드 (OR 대신 각각 호출)
+    """
+    articles = []
+    for kw in keywords:
+        try:
+            url = f"https://news.google.com/rss/search?q={kw}&hl=ko&gl=KR&ceid=KR:ko"
+            feed = feedparser.parse(url)
+            count = 0
+            for entry in feed.entries:
+                if count >= max_results // len(keywords):  # 키워드당 대략 균등 분배
+                    break
+                articles.append({
+                    "title": entry.title,
+                    "url": entry.link
+                })
+                count += 1
+        except Exception as e:
+            print(f"Google News error for '{kw}': {e}")
+    return articles
 
 def is_english_title(title):
     """제목이 영어인지 간단히 판별 (한글이 전혀 없으면 영어로 간주)"""
@@ -288,35 +294,43 @@ if __name__ == "__main__":
     # 1. 날짜, 날씨, 금융 지표
     header = get_date_and_weather() + "\n\n" + get_market_indicators() + "\n"
 
-    # 2. 카테고리 정의 (검색어 최적화 + 구글 뉴스 보완)
-    # 일반 뉴스 카테고리는 DDGS만 사용, 한국 증시는 구글 뉴스 RSS 추가 수집
+    # 2. 요일 감지 (주말/월요일은 뉴스가 적으므로 1주일치 수집)
+    today = datetime.now()
+    if today.weekday() in [5, 6, 0]:  # 토, 일, 월
+        default_timelimit = 'w'
+    else:
+        default_timelimit = 'd'
+
+    # 3. 카테고리 정의 (한국 증시만 구글 뉴스 RSS 추가)
+    #    - 검색어를 간소화하고, 검색량을 100으로 증가
     categories = [
-        ("🇺🇸 미국 주식", "S&P 500 OR NASDAQ OR Dow Jones OR Fed OR earnings OR stock market OR Wall Street OR AI stock OR artificial intelligence stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 50, "us-en", False),
-        ("🇰🇷 정치/시사", "정치 OR 국회 OR 대통령 OR 외교 OR 시사 OR 북한 OR 안보", 50, "kr-kr", False),
-        ("🇰🇷 한국 증시/경제", "코스피 OR 코스닥 OR 증시 OR 주식 시장 OR 증권 OR 시황 OR 전망 OR 이슈 OR 분석 OR 특징주 OR 실적 OR 공시 OR 외국인 OR 기관 OR AI 반도체 OR HBM OR 삼성전자 OR SK하이닉스", 50, "kr-kr", True),  # 구글 뉴스 보완
-        ("🌍 국제 뉴스", "world news OR geopolitics OR IMF OR UN OR summit OR NATO OR global economy", 50, "us-en", False),
-        ("🚨 국내 돌발", "사건사고 OR 재난 OR 지진 OR 화재 OR 테러 OR 대규모 정전 OR 전염병 OR 경찰 긴급 OR 소방 당국", 5, "kr-kr", False),
-        ("🚨 해외 돌발", "earthquake OR terror attack OR plane crash OR major explosion OR natural disaster OR pandemic OR coup", 5, "us-en", False)
+        ("🇺🇸 미국 주식", ["S&P 500 NASDAQ Dow Jones Fed earnings AI stock Magnificent Seven AAPL MSFT GOOGL AMZN NVDA TSLA META"], 100, "us-en", False),
+        ("🇰🇷 정치/시사", ["정치 국회 대통령 외교 시사 북한 안보"], 100, "kr-kr", False),
+        ("🇰🇷 한국 증시/경제", ["증시", "코스피", "코스닥", "주식", "증권", "실적", "공시", "외국인", "기관", "AI 반도체", "삼성전자", "SK하이닉스"], 100, "kr-kr", True),
+        ("🌍 국제 뉴스", ["world news geopolitics IMF UN summit NATO global economy"], 100, "us-en", False),
+        ("🚨 국내 돌발", ["사건사고 재난 지진 화재 테러 대규모 정전 전염병 경찰 긴급 소방 당국"], 10, "kr-kr", False),
+        ("🚨 해외 돌발", ["earthquake terror attack plane crash major explosion natural disaster pandemic coup"], 10, "us-en", False)
     ]
 
     cat_articles = {}
     global_seen = set()
 
-    for cat_name, query, count, region, use_google in categories:
+    for cat_name, keywords, count, region, use_google in categories:
         print(f"Fetching {cat_name} (max {count})...")
         articles = []
         try:
-            # 1) DDGS 수집
-            ddg_articles = fetch_news(query, max_results=count, region=region, timelimit='d')
+            # DDGS: 키워드 리스트를 OR로 연결
+            query_str = " OR ".join(keywords)
+            ddg_articles = fetch_news(query_str, max_results=count, region=region, timelimit=default_timelimit)
             articles.extend(ddg_articles)
             print(f"  DDG: {len(ddg_articles)} fetched")
         except Exception as e:
             print(f"  DDG error for {cat_name}: {e}")
 
-        # 2) 구글 뉴스 RSS 보완 (한국 증시/경제 카테고리만)
+        # 구글 뉴스 RSS (한국 증시/경제만)
         if use_google:
             try:
-                google_articles = fetch_google_news(query, max_results=30)
+                google_articles = fetch_google_news(keywords, max_results=50)
                 articles.extend(google_articles)
                 print(f"  Google News: {len(google_articles)} fetched")
             except Exception as e:
@@ -330,9 +344,9 @@ if __name__ == "__main__":
                 unique.append(a)
         cat_articles[cat_name] = unique
         print(f"  {cat_name}: total unique {len(unique)} (global total: {len(global_seen)})")
-        time.sleep(2)  # API 호출 간격
+        time.sleep(2)
 
-    # 3. 전체 기사 번역 (영어 → 한국어)
+    # 4. 전체 기사 번역 (영어 → 한국어)
     all_articles = []
     for articles in cat_articles.values():
         all_articles.extend(articles)
@@ -340,13 +354,13 @@ if __name__ == "__main__":
     translate_titles(all_articles)
     print("Translation completed.")
 
-    # 4. 뉴스 토픽 리포트 생성
+    # 5. 뉴스 토픽 리포트 생성
     report = header + "📰 오늘의 뉴스 토픽 브리핑\n"
     for cat_name, articles in cat_articles.items():
         report += f"\n{cat_name}\n"
         report += analyze_category(cat_name, articles)
 
-    # 5. 전송
+    # 6. 전송
     print(f"Report length: {len(report)}")
     send_telegram(report)
     print("Script finished.")
