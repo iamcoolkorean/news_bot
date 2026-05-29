@@ -13,7 +13,6 @@ TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 client = genai.Client(api_key=GEMINI_KEY)
 
 def fetch_news(query, max_results=3):
-    """DDG 뉴스 검색 + Jina Reader 본문 추출"""
     with DDGS() as ddgs:
         news = list(ddgs.news(query, max_results=max_results))
     contents = []
