@@ -1,5 +1,6 @@
 import os
 import time
+import inspect   # ← 추가: 함수의 인자 이름을 자동 감지
 import requests
 from ddgs import DDGS
 from google import genai
@@ -13,8 +14,13 @@ TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 client = genai.Client(api_key=GEMINI_KEY)
 
 def fetch_news(query, max_results=3):
+    """DDG 뉴스 검색 + Jina Reader 본문 추출"""
     with DDGS() as ddgs:
-        news = list(ddgs.news(query, max_results=max_results))
+        # 🔧 핵심 수정: ddgs.news()의 첫 번째 인자 이름을 자동으로 찾아 전달
+        sig = inspect.signature(ddgs.news)
+        first_param_name = list(sig.parameters.keys())[0]
+        news = list(ddgs.news(**{first_param_name: query, 'max_results': max_results}))
+
     contents = []
     for item in news:
         url = item.get("url")
@@ -22,7 +28,7 @@ def fetch_news(query, max_results=3):
             continue
         try:
             resp = requests.get(f"https://r.jina.ai/{url}", timeout=15)
-            content = resp.text[:2000]
+            content = resp.text[:2000]   # 토큰 절약을 위해 일부만 사용
         except:
             content = ""
         contents.append({
@@ -33,12 +39,15 @@ def fetch_news(query, max_results=3):
     return contents
 
 def summarize_category(category, articles):
+    """카테고리별 뉴스 요약"""
     if not articles:
         return f"📌 {category}\n오늘 주요 뉴스가 없습니다.\n"
+
     prompt = f"{category} 뉴스 요약:\n"
     for i, a in enumerate(articles):
         prompt += f"{i+1}. 제목: {a['title']}\n내용: {a['content']}\n\n"
     prompt += "\n위 기사들을 3~5줄로 간결하게 요약해주세요."
+
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash",
@@ -70,15 +79,15 @@ if __name__ == "__main__":
         print(f"Fetching {cat}...")
         try:
             articles = fetch_news(query, max_results=3)
-            print(f"{cat} articles count: {len(articles)}")  # 추가
+            print(f"{cat} articles count: {len(articles)}")
             summary = summarize_category(cat, articles)
         except Exception as e:
             summary = f"📌 {cat}\n뉴스 수집 중 오류: {e}\n"
         final_report += summary + "\n"
         time.sleep(2)
 
-    print("Final report length:", len(final_report))  # 추가
+    print("Final report length:", len(final_report))
     print(final_report)
-    print("Attempting to send via Telegram...")  # 추가
+    print("Attempting to send via Telegram...")
     send_telegram(final_report)
-    print("Script finished.")  # 추가
+    print("Script finished.")
