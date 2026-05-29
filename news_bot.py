@@ -3,7 +3,13 @@ import time
 import requests
 from ddgs import DDGS
 from google import genai
+import ddgs
+print("ddgs version:", ddgs.__version__ if hasattr(ddgs, '__version__') else "unknown")
 
+from ddgs import DDGS
+import inspect
+temp_ddgs = DDGS()
+print("news function signature:", inspect.signature(temp_ddgs.news))
 # --- 환경 변수 ---
 GEMINI_KEY = os.environ["GEMINI_API_KEY"]
 TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
