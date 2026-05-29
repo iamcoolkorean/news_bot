@@ -221,9 +221,9 @@ if __name__ == "__main__":
 
     # 2. 카테고리 정의 (검색어 최적화)
     categories = [
-        ("🇺🇸 미국 주식", "S&P 500 OR NASDAQ OR Dow Jones OR Fed OR earnings OR stock market OR Wall Street OR AI stock OR artificial intelligence stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 50, "us-en"),
+        ("🇺🇸 미국 주식", "S&P 500 OR NASDAQ OR Fed OR stock market OR Wall Street OR AI stock OR AI chip OR tech stocks OR Magnificent Seven OR AAPL OR MSFT OR GOOGL OR AMZN OR NVDA OR TSLA OR META", 50, "us-en"),
         ("🇰🇷 정치/시사", "정치 OR 국회 OR 대통령 OR 외교 OR 시사 OR 북한 OR 안보", 50, "kr-kr"),
-        ("🇰🇷 한국 증시/경제", "삼성전자 주가 OR SK하이닉스 주가 OR 코스피 상승 OR 코스닥 급등 OR 증시 전망 OR 실적 발표 OR 공시 OR 배당 OR 외국인 순매수 OR 기관 매매 OR AI 반도체 수주 OR HBM OR 반도체 주가", 50, "kr-kr"),
+        ("🇰🇷 한국 증시/경제", "삼성전자 OR SK하이닉스 OR 코스피 OR 코스닥 OR 실적 발표 OR 공시 OR 배당 OR 외국인 순매수 OR 기관 매매 OR 반도체 주가", 50, "kr-kr"),
         ("🌍 국제 뉴스", "world news OR geopolitics OR IMF OR UN OR summit OR NATO OR global economy", 50, "us-en"),
         ("🚨 국내 돌발", "사건사고 OR 재난 OR 지진 OR 화재 OR 테러 OR 대규모 정전 OR 전염병 OR 경찰 긴급 OR 소방 당국", 5, "kr-kr"),
           ("🚨 해외 돌발", "earthquake OR terror attack OR plane crash OR major explosion OR natural disaster OR pandemic OR coup", 5, "us-en")
