@@ -71,11 +71,15 @@ if __name__ == "__main__":
         print(f"Fetching {cat}...")
         try:
             articles = fetch_news(query, max_results=3)
+            print(f"{cat} articles count: {len(articles)}")  # 추가
             summary = summarize_category(cat, articles)
         except Exception as e:
             summary = f"📌 {cat}\n뉴스 수집 중 오류: {e}\n"
         final_report += summary + "\n"
         time.sleep(2)
 
+    print("Final report length:", len(final_report))  # 추가
     print(final_report)
+    print("Attempting to send via Telegram...")  # 추가
     send_telegram(final_report)
+    print("Script finished.")  # 추가
