@@ -1,3 +1,4 @@
 ddgs
 google-genai
 requests
+yfinance
