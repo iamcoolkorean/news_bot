@@ -1,7 +1,7 @@
 import os
 import time
 import re
-import json
+import urllib.parse
 import requests
 import yfinance as yf
 import feedparser
@@ -33,34 +33,37 @@ def switch_to_next_key():
         return True
     return False
 
-def call_gemini_with_retry(prompt, max_retries=3):
+def call_gemini_translate(titles):
+    """
+    최대 20개의 영어 제목을 한 번에 번역 (할당량 절약)
+    실패 시 빈 리스트 반환
+    """
     global current_key_idx, client
-    last_error = None
-    for attempt in range(max_retries):
+    if not titles:
+        return []
+    prompt = (
+        "다음 영어 뉴스 제목들을 한국어로 번역해주세요.\n"
+        "각 제목을 순서대로 번역하고, 번역 결과만 한 줄씩 출력하세요.\n"
+        "다른 설명은 일절 추가하지 마세요.\n\n" + "\n".join(titles)
+    )
+    for attempt in range(3):
         try:
             response = client.models.generate_content(
                 model="gemini-2.5-flash",
                 contents=prompt
             )
-            return response.text.strip()
+            return response.text.strip().split('\n')
         except Exception as e:
-            last_error = str(e)
-            print(f"Gemini call failed: {last_error}")
-            if "429" in last_error or "RESOURCE_EXHAUSTED" in last_error or "quota" in last_error.lower():
+            print(f"Gemini translation error: {e}")
+            if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
                 if switch_to_next_key():
                     time.sleep(1)
-                    continue
                 else:
-                    if attempt < max_retries - 1:
-                        print(f"All keys exhausted. Waiting 60 seconds... (attempt {attempt+1}/{max_retries})")
-                        time.sleep(60)
-                        continue
+                    print("All keys exhausted, waiting 60s...")
+                    time.sleep(60)
             else:
-                if attempt < max_retries - 1:
-                    print(f"Retrying... (attempt {attempt+1}/{max_retries})")
-                    time.sleep(5)
-                    continue
-    raise Exception(f"Gemini call failed after {max_retries} attempts: {last_error}")
+                time.sleep(5)
+    return []
 
 # --- 유틸리티 함수들 ---
 def get_date_and_weather():
@@ -85,202 +88,124 @@ def get_date_and_weather():
     return f"📅 {today}\n{weather_info}"
 
 def get_market_indicators():
+    def safe_yf(symbol):
+        try:
+            ticker = yf.Ticker(symbol)
+            hist = ticker.history(period="2d")
+            if len(hist) >= 2:
+                prev = hist['Close'].iloc[-2]
+                last = hist['Close'].iloc[-1]
+                change = ((last - prev) / prev) * 100
+                return f"{last:,.2f} ({change:+.2f}%)"
+            elif len(hist) == 1:
+                return f"{hist['Close'].iloc[-1]:,.2f}"
+            else:
+                return "정보 없음"
+        except:
+            return "정보 없음"
+
+    kospi_str = safe_yf("^KS11")
+    kosdaq_str = safe_yf("^KQ11")
+    sp500_str = safe_yf("^GSPC")
+    nasdaq_str = safe_yf("^IXIC")
+    dow_str = safe_yf("^DJI")
+
     try:
-        kospi = yf.Ticker("^KS11")
-        kospi_hist = kospi.history(period="2d")
-        kospi_str = "정보 없음"
-        if len(kospi_hist) >= 2:
-            prev_close = kospi_hist['Close'].iloc[-2]
-            last_close = kospi_hist['Close'].iloc[-1]
-            kospi_change = ((last_close - prev_close) / prev_close) * 100
-            kospi_str = f"{last_close:,.2f} ({kospi_change:+.2f}%)"
-        elif len(kospi_hist) == 1:
-            last_close = kospi_hist['Close'].iloc[-1]
-            kospi_str = f"{last_close:,.2f}"
-
-        kosdaq = yf.Ticker("^KQ11")
-        kosdaq_hist = kosdaq.history(period="2d")
-        kosdaq_str = "정보 없음"
-        if len(kosdaq_hist) >= 2:
-            prev_close = kosdaq_hist['Close'].iloc[-2]
-            last_close = kosdaq_hist['Close'].iloc[-1]
-            kosdaq_change = ((last_close - prev_close) / prev_close) * 100
-            kosdaq_str = f"{last_close:,.2f} ({kosdaq_change:+.2f}%)"
-        elif len(kosdaq_hist) == 1:
-            last_close = kosdaq_hist['Close'].iloc[-1]
-            kosdaq_str = f"{last_close:,.2f}"
-
         resp = requests.get("https://api.exchangerate-api.com/v4/latest/USD", timeout=5)
         usd_krw = resp.json()['rates']['KRW']
         krw_str = f"{usd_krw:,.2f}"
+    except:
+        krw_str = "정보 없음"
 
-        return (
-            "📊 주요 금융 지표\n"
-            f"- KOSPI: {kospi_str}\n"
-            f"- KOSDAQ: {kosdaq_str}\n"
-            f"- USD/KRW: {krw_str} 원"
-        )
+    return (
+        "📊 주요 금융 지표\n"
+        f"- KOSPI: {kospi_str}\n"
+        f"- KOSDAQ: {kosdaq_str}\n"
+        f"- USD/KRW: {krw_str} 원\n"
+        f"- S&P 500: {sp500_str}\n"
+        f"- NASDAQ: {nasdaq_str}\n"
+        f"- Dow Jones: {dow_str}"
+    )
+
+def get_trending_keywords():
+    """실시간 급상승 검색어 Top 5 (signal.bz)"""
+    try:
+        resp = requests.get("https://api.signal.bz/news/realtime", timeout=5)
+        if resp.status_code == 200:
+            data = resp.json()
+            return [item['keyword'] for item in data.get('result', [])[:5]]
     except Exception as e:
-        print(f"Market indicators error: {e}")
-        return "📊 주요 금융 지표 정보를 가져올 수 없습니다."
+        print(f"Trending keywords error: {e}")
+    return []
 
-def fetch_news_naver(query, max_results=50):
-    """네이버 검색 API로 뉴스 검색 (최신순)"""
-    articles = []
+def fetch_news_naver(query, max_results=10):
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
-        print(f"Naver API keys not set. Skipping query '{query}'.")
-        return articles
+        return []
     try:
         headers = {
             "X-Naver-Client-Id": NAVER_CLIENT_ID,
             "X-Naver-Client-Secret": NAVER_CLIENT_SECRET
         }
-        display = min(max_results, 100)
         params = {
             "query": query,
-            "display": display,
+            "display": min(max_results, 100),
             "start": 1,
             "sort": "date"
         }
         resp = requests.get("https://openapi.naver.com/v1/search/news.json", headers=headers, params=params, timeout=10)
         if resp.status_code == 200:
             data = resp.json()
+            articles = []
             for item in data.get("items", []):
                 link = item.get("originallink") or item.get("link")
                 title = re.sub(r'<.*?>', '', item["title"])
                 articles.append({"title": title, "url": link})
-        else:
-            print(f"Naver API error: {resp.status_code} {resp.text}")
+            return articles
     except Exception as e:
-        print(f"Naver API request failed for '{query}': {e}")
-    return articles
+        print(f"Naver API error for '{query}': {e}")
+    return []
 
 def fetch_news_google_keywords(keywords, max_results=30, region='global'):
-    """
-    구글 뉴스 RSS에서 여러 키워드로 검색.
-    region: 'kr' (한국), 'global' (영어)
-    """
     articles = []
+    per_kw = max_results // len(keywords) if keywords else 0
     for kw in keywords:
         try:
+            encoded_kw = urllib.parse.quote(kw)
             if region == 'kr':
-                url = f"https://news.google.com/rss/search?q={kw}&hl=ko&gl=KR&ceid=KR:ko"
+                url = f"https://news.google.com/rss/search?q={encoded_kw}&hl=ko&gl=KR&ceid=KR:ko"
             else:
-                # 영어 뉴스: US 기준으로 검색
-                url = f"https://news.google.com/rss/search?q={kw}&hl=en&gl=US&ceid=US:en"
+                url = f"https://news.google.com/rss/search?q={encoded_kw}&hl=en&gl=US&ceid=US:en"
             feed = feedparser.parse(url)
-            count = 0
-            for entry in feed.entries:
-                if count >= max_results // len(keywords):
-                    break
+            for entry in feed.entries[:per_kw]:
                 articles.append({"title": entry.title, "url": entry.link})
-                count += 1
         except Exception as e:
             print(f"Google News error for '{kw}': {e}")
     return articles
 
-def translate_titles(articles):
-    eng_indices = [i for i, a in enumerate(articles) if not re.search(r'[가-힣]', a['title'])]
-    if not eng_indices:
+def translate_selected_articles(article_lists):
+    """여러 리스트의 기사 중 영어 제목을 모아 한 번에 번역 후 각 리스트에 반영"""
+    all_eng = []
+    mapping = []  # (list_ref, index)
+    for lst in article_lists:
+        for i, a in enumerate(lst):
+            if not re.search(r'[가-힣]', a['title']):
+                all_eng.append(a['title'])
+                mapping.append((lst, i))
+    if not all_eng:
         return
-    original_titles = [articles[i]['title'] for i in eng_indices]
-    prompt = (
-        "다음 영어 뉴스 제목들을 한국어로 번역해주세요.\n"
-        "각 제목을 순서대로 번역하고, 번역 결과만 한 줄씩 출력하세요.\n"
-        "다른 설명은 일절 추가하지 마세요.\n\n" + "\n".join(original_titles)
-    )
-    try:
-        translated = call_gemini_with_retry(prompt).split('\n')
-        for idx, i in enumerate(eng_indices):
-            if idx < len(translated) and translated[idx].strip():
-                articles[i]['translated_title'] = translated[idx].strip()
-    except Exception as e:
-        print(f"Translation error: {e}")
+    translated = call_gemini_translate(all_eng)
+    for (lst, idx), tr_title in zip(mapping, translated):
+        if tr_title:
+            lst[idx]['translated_title'] = tr_title
 
-def analyze_category(category_name, articles, max_display=5):
+def format_articles(articles, max_display):
     if not articles:
-        return f"📌 {category_name}\n관련 뉴스가 없습니다.\n"
-
-    titles = []
-    for i, a in enumerate(articles):
-        display_title = a.get('translated_title', a['title'])
-        titles.append(f"{i+1}. {display_title}")
-
-    titles_text = "\n".join(titles)
-
-    if "증시" in category_name or "주식" in category_name:
-        role = "당신은 주식 투자자에게 오늘의 핵심 이슈를 전달하는 애널리스트입니다."
-        requirement = "실제로 주가에 영향을 미칠 만한 구체적인 이벤트(실적, 수급, 공시, 계약, 지수 변동 등)를 5가지 찾아주세요."
-    elif "정치" in category_name:
-        role = "당신은 정치부 기자입니다."
-        requirement = "오늘 정치권에서 가장 중요하게 다뤄진 이슈 5가지를 찾아주세요."
-    else:
-        role = "당신은 뉴스 분석가입니다."
-        requirement = "가장 많이 언급된 중요 주제 5개를 찾아주세요."
-
-    prompt = f"""{role}
-아래는 '{category_name}' 분야의 오늘 뉴스 제목 목록입니다.
-{requirement}
-각 토픽에는 해당하는 기사들의 **번호**를 모두 모아서, 반드시 아래 JSON 형식으로만 답변하세요.
-다른 설명은 절대 쓰지 마세요.
-
-[
-  {{"topic": "토픽 제목 (구체적으로)", "article_ids": [1, 3, 5]}},
-  ...
-]
-
-기사 목록:
-{titles_text}"""
-
-    try:
-        text = call_gemini_with_retry(prompt)
-        if text.startswith("```"):
-            text = text.split("```")[1].strip()
-            if text.startswith("json"):
-                text = text[4:].strip()
-        data = json.loads(text)
-    except Exception as e:
-        print(f"Gemini analysis failed for {category_name}: {e}")
-        fallback = f"📌 {category_name} (분석 실패 - 주요 기사 5선)\n"
-        for a in articles[:max_display]:
-            title = a.get('translated_title', a['title'])
-            fallback += f"- {title}: {a['url']}\n"
-        return fallback + "\n"
-
-    result_str = ""
-    displayed = 0
-
-    for topic in data:
-        topic_title = topic.get("topic", "기타")
-        ids = [i for i in topic.get("article_ids", []) if 1 <= i <= len(articles)]
-        if not ids:
-            continue
-
-        remaining = max_display - displayed
-        if remaining <= 0:
-            break
-
-        result_str += f"📌 {topic_title}\n"
-        for i in ids[:remaining]:
-            a = articles[i-1]
-            title = a.get('translated_title', a['title'])
-            result_str += f"- {title}: {a['url']}\n"
-            displayed += 1
-
-        result_str += "\n"
-        if displayed >= max_display:
-            break
-
-    if displayed == 0:
-        for a in articles[:max_display]:
-            title = a.get('translated_title', a['title'])
-            result_str += f"- {title}: {a['url']}\n"
-        result_str += "\n"
-
-    if len(articles) > max_display:
-        result_str += f"🔹 외 {len(articles) - max_display}건의 기사가 더 있습니다.\n\n"
-
-    return result_str
+        return "관련 뉴스가 없습니다.\n"
+    lines = []
+    for a in articles[:max_display]:
+        title = a.get('translated_title', a['title'])
+        lines.append(f"- {title}: {a['url']}")
+    return "\n".join(lines) + "\n"
 
 def send_telegram(text):
     max_len = 3500
@@ -294,105 +219,52 @@ def send_telegram(text):
 
 # ===== 메인 실행 =====
 if __name__ == "__main__":
-    header = get_date_and_weather() + "\n\n" + get_market_indicators() + "\n"
+    # 헤더
+    report = get_date_and_weather() + "\n\n" + get_market_indicators() + "\n\n"
 
-    cat_articles = {}
-    global_seen = set()
+    # 1. 실시간 검색어 Top 5 + 관련 뉴스 1건
+    trending = get_trending_keywords()
+    trend_articles = []  # 번역 대상에 포함시키기 위해 수집
+    if trending:
+        report += "🔥 실시간 검색어 Top 5 관련 뉴스\n"
+        for idx, keyword in enumerate(trending):
+            articles = fetch_news_naver(keyword, 1)
+            if articles:
+                trend_articles.append(articles[0])
+                # 영어일 가능성은 낮지만 번역을 위해 추가
+                title = articles[0]['title']
+                report += f"{idx+1}. {keyword} - {title}: {articles[0]['url']}\n"
+            else:
+                report += f"{idx+1}. {keyword} - 관련 뉴스 없음\n"
+        report += "\n"
 
-    # 1. 정치/시사 (네이버 API)
-    cat_name = "🇰🇷 정치/시사"
-    articles = fetch_news_naver("정치", 50)
-    print(f"{cat_name}: Naver API {len(articles)} fetched")
-    unique = []
-    for a in articles:
-        if a['url'] not in global_seen:
-            global_seen.add(a['url'])
-            unique.append(a)
-    cat_articles[cat_name] = unique
-    print(f"  {cat_name}: total unique {len(unique)}")
+    # 2. 정치 (3건)
+    politics = fetch_news_naver("정치", 10)[:3]
 
-    # 2. 한국 증시/경제 (네이버 API)
-    cat_name = "🇰🇷 한국 증시/경제"
-    articles = fetch_news_naver("증시", 50)
-    print(f"{cat_name}: Naver API {len(articles)} fetched")
-    unique = []
-    for a in articles:
-        if a['url'] not in global_seen:
-            global_seen.add(a['url'])
-            unique.append(a)
-    cat_articles[cat_name] = unique
-    print(f"  {cat_name}: total unique {len(unique)}")
+    # 3. 증시 (4건)
+    stocks = fetch_news_naver("증시", 10)[:4]
 
-    # 3. 국내 돌발 (네이버 API)
-    cat_name = "🚨 국내 돌발"
-    articles = fetch_news_naver("사건사고", 50)
-    print(f"{cat_name}: Naver API {len(articles)} fetched")
-    unique = []
-    for a in articles:
-        if a['url'] not in global_seen:
-            global_seen.add(a['url'])
-            unique.append(a)
-    cat_articles[cat_name] = unique
-    print(f"  {cat_name}: total unique {len(unique)}")
+    # 4. 미국 주식 (5건)
+    us_stocks = fetch_news_google_keywords(
+        ["stock market", "Federal Reserve", "S&P 500", "NASDAQ", "earnings", "tech stocks"],
+        max_results=30, region='global'
+    )[:5]
 
-    # 4. 미국 주식 (구글 뉴스 RSS - 영어)
-    cat_name = "🇺🇸 미국 주식"
-    articles = fetch_news_google_keywords(
-        ["stock market", "fed", "snp500", "nasdaq", "earnings", "ai stocks", "magnificent 7"],
-        max_results=50, region='global'
-    )
-    print(f"{cat_name}: Google News {len(articles)} fetched")
-    unique = []
-    for a in articles:
-        if a['url'] not in global_seen:
-            global_seen.add(a['url'])
-            unique.append(a)
-    cat_articles[cat_name] = unique
-    print(f"  {cat_name}: total unique {len(unique)}")
+    # 5. 국제 정세 (3건)
+    world = fetch_news_google_keywords(
+        ["world news", "geopolitics", "IMF", "United Nations", "NATO"],
+        max_results=15, region='global'
+    )[:3]
 
-    # 5. 국제 뉴스 (구글 뉴스 RSS - 영어)
-    cat_name = "🌍 국제 뉴스"
-    articles = fetch_news_google_keywords(
-        ["world news", "geopolitics", "global economy"],
-        max_results=50, region='global'
-    )
-    print(f"{cat_name}: Google News {len(articles)} fetched")
-    unique = []
-    for a in articles:
-        if a['url'] not in global_seen:
-            global_seen.add(a['url'])
-            unique.append(a)
-    cat_articles[cat_name] = unique
-    print(f"  {cat_name}: total unique {len(unique)}")
+    # 번역: 미국 주식, 국제 정세, 트렌드 뉴스(영어일 경우)를 한 번에
+    translate_selected_articles([us_stocks, world, trend_articles])
 
-    # 6. 해외 돌발 (구글 뉴스 RSS - 영어)
-    cat_name = "🚨 해외 돌발"
-    articles = fetch_news_google_keywords(
-        ["earthquake", "terror attack", "plane crash", "natural disaster", "pandemic"],
-        max_results=50, region='global'
-    )
-    print(f"{cat_name}: Google News {len(articles)} fetched")
-    unique = []
-    for a in articles:
-        if a['url'] not in global_seen:
-            global_seen.add(a['url'])
-            unique.append(a)
-    cat_articles[cat_name] = unique
-    print(f"  {cat_name}: total unique {len(unique)}")
+    # 각 섹션 포맷
+    report += "🇰🇷 정치\n" + format_articles(politics, 3)
+    report += "\n🇰🇷 증시\n" + format_articles(stocks, 4)
+    report += "\n🇺🇸 미국 주식\n" + format_articles(us_stocks, 5)
+    report += "\n🌍 국제 정세\n" + format_articles(world, 3)
 
-    # 번역
-    all_articles = []
-    for arts in cat_articles.values():
-        all_articles.extend(arts)
-    print(f"Total articles: {len(all_articles)}")
-    translate_titles(all_articles)
-
-    # 리포트 생성
-    report = header + "📰 오늘의 뉴스 요약\n"
-    for cat_name in ["🇰🇷 정치/시사", "🇰🇷 한국 증시/경제", "🇺🇸 미국 주식", "🌍 국제 뉴스", "🚨 국내 돌발", "🚨 해외 돌발"]:
-        arts = cat_articles.get(cat_name, [])
-        report += f"\n{cat_name}\n"
-        report += analyze_category(cat_name, arts)
-
+    print(f"Report length: {len(report)}")
     send_telegram(report)
     print("Script finished.")
