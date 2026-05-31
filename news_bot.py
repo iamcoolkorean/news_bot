@@ -6,8 +6,6 @@ import requests
 import yfinance as yf
 import feedparser
 from datetime import datetime
-from ddgs import DDGS
-from ddgs import DDGSException
 from google import genai
 
 # --- 환경 변수 ---
@@ -20,7 +18,6 @@ for i in range(2, 10):
 TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 
-# 네이버 API 키 (없으면 DDGS로 폴백)
 NAVER_CLIENT_ID = os.environ.get("NAVER_CLIENT_ID", "")
 NAVER_CLIENT_SECRET = os.environ.get("NAVER_CLIENT_SECRET", "")
 
@@ -131,13 +128,13 @@ def fetch_news_naver(query, max_results=50):
     """네이버 검색 API로 뉴스 검색 (최신순)"""
     articles = []
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
-        return articles  # 키 없으면 빈 리스트 반환 → DDGS 폴백
+        print(f"Naver API keys not set. Skipping query '{query}'.")
+        return articles
     try:
         headers = {
             "X-Naver-Client-Id": NAVER_CLIENT_ID,
             "X-Naver-Client-Secret": NAVER_CLIENT_SECRET
         }
-        # 한 번에 최대 100개까지 가능, 시작 위치 1, 정렬 date
         display = min(max_results, 100)
         params = {
             "query": query,
@@ -149,38 +146,37 @@ def fetch_news_naver(query, max_results=50):
         if resp.status_code == 200:
             data = resp.json()
             for item in data.get("items", []):
-                # 네이버 뉴스 링크 또는 원문 링크 사용
                 link = item.get("originallink") or item.get("link")
-                title = re.sub(r'<.*?>', '', item["title"])  # 검색어 강조 태그 제거
+                title = re.sub(r'<.*?>', '', item["title"])
                 articles.append({"title": title, "url": link})
         else:
             print(f"Naver API error: {resp.status_code} {resp.text}")
     except Exception as e:
-        print(f"Naver API request failed: {e}")
+        print(f"Naver API request failed for '{query}': {e}")
     return articles
 
-def fetch_news_ddg(query, max_results=50, region='kr-kr', timelimit='d'):
+def fetch_news_google_keywords(keywords, max_results=30, region='global'):
     """
-    DDGS 뉴스 검색 (예외 처리 포함)
-    결과가 없거나 오류 발생 시 빈 리스트 반환
+    구글 뉴스 RSS에서 여러 키워드로 검색.
+    region: 'kr' (한국), 'global' (영어)
     """
-    try:
-        with DDGS() as ddgs:
-            news = list(ddgs.news(query=query, max_results=max_results, region=region, timelimit=timelimit))
-        return [{"title": item.get("title", ""), "url": item.get("url", "")} for item in news if item.get("url")]
-    except (DDGSException, Exception) as e:
-        print(f"DDG error for query '{query}': {e}")
-        return []
-
-def fetch_news_google(query, max_results=30):
     articles = []
-    try:
-        url = f"https://news.google.com/rss/search?q={query}&hl=ko&gl=KR&ceid=KR:ko"
-        feed = feedparser.parse(url)
-        for entry in feed.entries[:max_results]:
-            articles.append({"title": entry.title, "url": entry.link})
-    except Exception as e:
-        print(f"Google News error for '{query}': {e}")
+    for kw in keywords:
+        try:
+            if region == 'kr':
+                url = f"https://news.google.com/rss/search?q={kw}&hl=ko&gl=KR&ceid=KR:ko"
+            else:
+                # 영어 뉴스: US 기준으로 검색
+                url = f"https://news.google.com/rss/search?q={kw}&hl=en&gl=US&ceid=US:en"
+            feed = feedparser.parse(url)
+            count = 0
+            for entry in feed.entries:
+                if count >= max_results // len(keywords):
+                    break
+                articles.append({"title": entry.title, "url": entry.link})
+                count += 1
+        except Exception as e:
+            print(f"Google News error for '{kw}': {e}")
     return articles
 
 def translate_titles(articles):
@@ -253,7 +249,6 @@ def analyze_category(category_name, articles, max_display=5):
 
     result_str = ""
     displayed = 0
-    used_ids = set()
 
     for topic in data:
         topic_title = topic.get("topic", "기타")
@@ -266,13 +261,11 @@ def analyze_category(category_name, articles, max_display=5):
             break
 
         result_str += f"📌 {topic_title}\n"
-
         for i in ids[:remaining]:
             a = articles[i-1]
             title = a.get('translated_title', a['title'])
             result_str += f"- {title}: {a['url']}\n"
             displayed += 1
-            used_ids.add(i)
 
         result_str += "\n"
         if displayed >= max_display:
@@ -302,27 +295,14 @@ def send_telegram(text):
 # ===== 메인 실행 =====
 if __name__ == "__main__":
     header = get_date_and_weather() + "\n\n" + get_market_indicators() + "\n"
-    today = datetime.now()
-    if today.weekday() in [5, 6, 0]:
-        default_timelimit = 'w'
-        header += "\n📌 주간 뉴스 모아보기 (최근 7일)\n"
-    else:
-        default_timelimit = 'd'
 
-    # 카테고리별 수집 전략 (네이버 우선, 없으면 DDGS/Google)
     cat_articles = {}
     global_seen = set()
 
-    # 1. 정치/시사 (네이버 → DDGS)
+    # 1. 정치/시사 (네이버 API)
     cat_name = "🇰🇷 정치/시사"
-    articles = []
-    naver_articles = fetch_news_naver("정치", 50)
-    if naver_articles:
-        articles = naver_articles
-        print(f"{cat_name}: Naver API {len(articles)} fetched")
-    else:
-        articles = fetch_news_ddg("정치", 50, region="kr-kr", timelimit=default_timelimit)
-        print(f"{cat_name}: DDG {len(articles)} fetched (fallback)")
+    articles = fetch_news_naver("정치", 50)
+    print(f"{cat_name}: Naver API {len(articles)} fetched")
     unique = []
     for a in articles:
         if a['url'] not in global_seen:
@@ -331,17 +311,10 @@ if __name__ == "__main__":
     cat_articles[cat_name] = unique
     print(f"  {cat_name}: total unique {len(unique)}")
 
-    # 2. 한국 증시/경제 (네이버 → DDGS+Google)
+    # 2. 한국 증시/경제 (네이버 API)
     cat_name = "🇰🇷 한국 증시/경제"
-    articles = []
-    naver_articles = fetch_news_naver("증시", 50)
-    if naver_articles:
-        articles = naver_articles
-        print(f"{cat_name}: Naver API {len(articles)} fetched")
-    else:
-        articles = fetch_news_ddg("증시", 50, region="kr-kr", timelimit=default_timelimit)
-        articles.extend(fetch_news_google("증시", 30))
-        print(f"{cat_name}: DDG+Google {len(articles)} fetched (fallback)")
+    articles = fetch_news_naver("증시", 50)
+    print(f"{cat_name}: Naver API {len(articles)} fetched")
     unique = []
     for a in articles:
         if a['url'] not in global_seen:
@@ -350,16 +323,10 @@ if __name__ == "__main__":
     cat_articles[cat_name] = unique
     print(f"  {cat_name}: total unique {len(unique)}")
 
-    # 3. 국내 돌발 (네이버 → DDGS)
+    # 3. 국내 돌발 (네이버 API)
     cat_name = "🚨 국내 돌발"
-    articles = []
-    naver_articles = fetch_news_naver("사건사고", 50)
-    if naver_articles:
-        articles = naver_articles
-        print(f"{cat_name}: Naver API {len(articles)} fetched")
-    else:
-        articles = fetch_news_ddg("사건사고", 50, region="kr-kr", timelimit=default_timelimit)
-        print(f"{cat_name}: DDG {len(articles)} fetched (fallback)")
+    articles = fetch_news_naver("사건사고", 50)
+    print(f"{cat_name}: Naver API {len(articles)} fetched")
     unique = []
     for a in articles:
         if a['url'] not in global_seen:
@@ -368,48 +335,60 @@ if __name__ == "__main__":
     cat_articles[cat_name] = unique
     print(f"  {cat_name}: total unique {len(unique)}")
 
-    # 4. 미국 주식 (DDGS)
+    # 4. 미국 주식 (구글 뉴스 RSS - 영어)
     cat_name = "🇺🇸 미국 주식"
-    articles = fetch_news_ddg("stock market", 50, region="us-en", timelimit=default_timelimit)
+    articles = fetch_news_google_keywords(
+        ["stock market", "Fed", "S&P 500", "NASDAQ", "earnings", "AI stocks", "Magnificent Seven"],
+        max_results=50, region='global'
+    )
+    print(f"{cat_name}: Google News {len(articles)} fetched")
     unique = []
     for a in articles:
         if a['url'] not in global_seen:
             global_seen.add(a['url'])
             unique.append(a)
     cat_articles[cat_name] = unique
-    print(f"{cat_name}: DDG {len(articles)} fetched, total unique {len(unique)}")
+    print(f"  {cat_name}: total unique {len(unique)}")
 
-    # 5. 국제 뉴스 (DDGS)
+    # 5. 국제 뉴스 (구글 뉴스 RSS - 영어)
     cat_name = "🌍 국제 뉴스"
-    articles = fetch_news_ddg("world", 50, region="us-en", timelimit=default_timelimit)
+    articles = fetch_news_google_keywords(
+        ["world news", "geopolitics", "IMF", "UN", "NATO", "global economy"],
+        max_results=50, region='global'
+    )
+    print(f"{cat_name}: Google News {len(articles)} fetched")
     unique = []
     for a in articles:
         if a['url'] not in global_seen:
             global_seen.add(a['url'])
             unique.append(a)
     cat_articles[cat_name] = unique
-    print(f"{cat_name}: DDG {len(articles)} fetched, total unique {len(unique)}")
+    print(f"  {cat_name}: total unique {len(unique)}")
 
-    # 6. 해외 돌발 (DDGS)
+    # 6. 해외 돌발 (구글 뉴스 RSS - 영어)
     cat_name = "🚨 해외 돌발"
-    articles = fetch_news_ddg("earthquake", 50, region="us-en", timelimit=default_timelimit)
+    articles = fetch_news_google_keywords(
+        ["earthquake", "terror attack", "plane crash", "natural disaster", "pandemic"],
+        max_results=50, region='global'
+    )
+    print(f"{cat_name}: Google News {len(articles)} fetched")
     unique = []
     for a in articles:
         if a['url'] not in global_seen:
             global_seen.add(a['url'])
             unique.append(a)
     cat_articles[cat_name] = unique
-    print(f"{cat_name}: DDG {len(articles)} fetched, total unique {len(unique)}")
+    print(f"  {cat_name}: total unique {len(unique)}")
 
     # 번역
     all_articles = []
     for arts in cat_articles.values():
         all_articles.extend(arts)
+    print(f"Total articles: {len(all_articles)}")
     translate_titles(all_articles)
 
-    # 분석 및 리포트
+    # 리포트 생성
     report = header + "📰 오늘의 뉴스 요약\n"
-    # 원하는 순서로 출력
     for cat_name in ["🇰🇷 정치/시사", "🇰🇷 한국 증시/경제", "🇺🇸 미국 주식", "🌍 국제 뉴스", "🚨 국내 돌발", "🚨 해외 돌발"]:
         arts = cat_articles.get(cat_name, [])
         report += f"\n{cat_name}\n"
