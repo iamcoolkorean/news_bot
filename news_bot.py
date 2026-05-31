@@ -7,6 +7,7 @@ import yfinance as yf
 import feedparser
 from datetime import datetime
 from ddgs import DDGS
+from ddgs import DDGSException
 from google import genai
 
 # --- 환경 변수 ---
@@ -159,9 +160,17 @@ def fetch_news_naver(query, max_results=50):
     return articles
 
 def fetch_news_ddg(query, max_results=50, region='kr-kr', timelimit='d'):
-    with DDGS() as ddgs:
-        news = list(ddgs.news(query=query, max_results=max_results, region=region, timelimit=timelimit))
-    return [{"title": item.get("title", ""), "url": item.get("url", "")} for item in news if item.get("url")]
+    """
+    DDGS 뉴스 검색 (예외 처리 포함)
+    결과가 없거나 오류 발생 시 빈 리스트 반환
+    """
+    try:
+        with DDGS() as ddgs:
+            news = list(ddgs.news(query=query, max_results=max_results, region=region, timelimit=timelimit))
+        return [{"title": item.get("title", ""), "url": item.get("url", "")} for item in news if item.get("url")]
+    except (DDGSException, Exception) as e:
+        print(f"DDG error for query '{query}': {e}")
+        return []
 
 def fetch_news_google(query, max_results=30):
     articles = []
