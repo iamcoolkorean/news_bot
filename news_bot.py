@@ -2,6 +2,7 @@ import os
 import time
 import re
 import json
+import html
 import urllib.parse
 import requests
 import yfinance as yf
@@ -35,10 +36,7 @@ def switch_to_next_key():
     return False
 
 def call_gemini_translate(titles):
-    """
-    최대 20개의 영어 제목을 한 번에 번역 (할당량 절약)
-    실패 시 빈 리스트 반환
-    """
+    """최대 20개의 영어 제목을 한 번에 번역"""
     global current_key_idx, client
     if not titles:
         return []
@@ -67,7 +65,7 @@ def call_gemini_translate(titles):
     return []
 
 def call_gemini_analyze(prompt):
-    """Gemini 분석 요청 (JSON 응답 파싱 포함, 실패 시 빈 리스트)"""
+    """Gemini 분석 요청 (JSON 응답 파싱)"""
     global current_key_idx, client
     for attempt in range(3):
         try:
@@ -166,7 +164,7 @@ def get_trending_keywords():
                 return keywords
     except Exception as e:
         print(f"Trending keywords error: {e}")
-    # 폴백: 고정 인기 키워드
+    # 폴백 키워드
     return ["정치", "경제", "사회", "세계", "IT"]
 
 def fetch_news_naver(query, max_results=10):
@@ -214,7 +212,7 @@ def fetch_news_google_keywords(keywords, max_results=30, region='global'):
     return articles
 
 def translate_selected_articles(article_lists):
-    """여러 리스트의 기사 중 영어 제목을 모아 한 번에 번역 후 각 리스트에 반영"""
+    """여러 리스트의 기사 중 영어 제목을 한 번에 번역"""
     all_eng = []
     mapping = []
     for lst in article_lists:
@@ -230,19 +228,18 @@ def translate_selected_articles(article_lists):
             lst[idx]['translated_title'] = tr_title
 
 def format_articles(articles, max_display):
-    """기사 리스트를 텔레그램 마크다운 링크로 포맷팅"""
+    """기사 리스트를 HTML 하이퍼링크로 포맷팅 (URL 숨김)"""
     if not articles:
         return "관련 뉴스가 없습니다.\n"
     lines = []
     for a in articles[:max_display]:
         title = a.get('translated_title', a['title'])
-        # 마크다운 특수문자 이스케이프
-        escaped_title = re.sub(r'([_*\[\]()~`>#+\-=|{}.!])', r'\\\1', title)
-        lines.append(f"- [{escaped_title}]({a['url']})")
+        escaped_title = html.escape(title)
+        lines.append(f"- <a href=\"{a['url']}\">{escaped_title}</a>")
     return "\n".join(lines) + "\n"
 
 def send_telegram(text):
-    """텔레그램 메시지 전송 (MarkdownV2 하이퍼링크 지원)"""
+    """텔레그램 메시지 전송 (HTML 파싱 모드)"""
     max_len = 3500
     chunks = [text[i:i+max_len] for i in range(0, len(text), max_len)] if len(text) > max_len else [text]
     for idx, chunk in enumerate(chunks):
@@ -252,12 +249,12 @@ def send_telegram(text):
         payload = {
             "chat_id": TELEGRAM_CHAT_ID,
             "text": chunk,
-            "parse_mode": "MarkdownV2"
+            "parse_mode": "HTML"
         }
         try:
             resp = requests.post(url, json=payload, timeout=10)
             if resp.status_code != 200:
-                # MarkdownV2 파싱 오류 시 일반 텍스트로 재시도
+                # HTML 파싱 오류 시 일반 텍스트로 재시도
                 payload.pop("parse_mode")
                 requests.post(url, json=payload, timeout=10)
         except Exception as e:
