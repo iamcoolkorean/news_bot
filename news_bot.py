@@ -338,7 +338,7 @@ if __name__ == "__main__":
     # 4. 미국 주식 (구글 뉴스 RSS - 영어)
     cat_name = "🇺🇸 미국 주식"
     articles = fetch_news_google_keywords(
-        ["stock market", "Fed", "S&P 500", "NASDAQ", "earnings", "AI stocks", "Magnificent Seven"],
+        ["stock market", "fed", "snp500", "nasdaq", "earnings", "ai stocks", "magnificent 7"],
         max_results=50, region='global'
     )
     print(f"{cat_name}: Google News {len(articles)} fetched")
@@ -353,7 +353,7 @@ if __name__ == "__main__":
     # 5. 국제 뉴스 (구글 뉴스 RSS - 영어)
     cat_name = "🌍 국제 뉴스"
     articles = fetch_news_google_keywords(
-        ["world news", "geopolitics", "IMF", "UN", "NATO", "global economy"],
+        ["world news", "geopolitics", "global economy"],
         max_results=50, region='global'
     )
     print(f"{cat_name}: Google News {len(articles)} fetched")
