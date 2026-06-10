@@ -84,73 +84,34 @@ def get_date_and_weather(show_weather=True):
     return f"📅 {today}\n{weather_info}"
 
 def get_market_indicators():
-    api_key = os.environ.get("ALPHA_VANTAGE_KEY", "")
-    if not api_key:
-        return "Alpha Vantage API 키가 없습니다."
-
-    def fetch_quote(symbol):
-        try:
-            url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={api_key}"
-            resp = requests.get(url, timeout=10).json()
-            data = resp.get("Global Quote", {})
-            price = data.get("05. price", "N/A")
-            change_pct = data.get("10. change percent", "0%")
-            if price != "N/A":
-                return f"{float(price):,.2f} ({change_pct})"
-            return "정보 없음"
-        except: return "정보 없음"
-
-    def fetch_fx():
-        try:
-            url = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=KRW&apikey={api_key}"
-            resp = requests.get(url, timeout=10).json()
-            rate = resp.get("Realtime Currency Exchange Rate", {}).get("5. Exchange Rate", "N/A")
-            return f"{float(rate):,.2f}" if rate != "N/A" else "정보 없음"
-        except: return "정보 없음"
-
-    # 분당 최대 5회 호출 제한을 지키기 위해 각 요청 후 12초 대기 (6심볼 × 1.2초 = 실제로는 충분)
-    symbols = {
-        "KOSPI": None,       # Alpha Vantage는 한국 지수 미지원 → yfinance 유지
-        "NASDAQ": "^IXIC",
-        "Google": "GOOGL",
-        "Apple": "AAPL",
-        "Microsoft": "MSFT",
-        "QQQM": "QQQM"
-    }
-    results = {}
-    # KOSPI만 yfinance로 가져오기 (Alpha Vantage는 한국 지수 미지원)
     def safe_yf(symbol):
         try:
             t = yf.Ticker(symbol)
-            h = t.history(period="5d")['Close'].dropna()
-            if len(h) >= 2:
-                prev, last = h.iloc[-2], h.iloc[-1]
+            h = t.history(period="5d")
+            valid = h['Close'].dropna()
+            if len(valid) >= 2:
+                prev = valid.iloc[-2]
+                last = valid.iloc[-1]
                 change = ((last - prev) / prev) * 100
                 return f"{last:,.2f} ({change:+.2f}%)"
-            elif len(h) == 1: return f"{h.iloc[-1]:,.2f}"
+            elif len(valid) == 1:
+                return f"{valid.iloc[-1]:,.2f}"
             return "정보 없음"
-        except: return "정보 없음"
-    kospi_str = safe_yf("^KS11")
+        except Exception as e:
+            print(f"yfinance error for {symbol}: {e}")
+            return "정보 없음"
 
-    # Alpha Vantage로 미국 지수 및 종목 가져오기
-    for name, sym in symbols.items():
-        if sym is None: continue
-        results[name] = fetch_quote(sym)
-        time.sleep(1)  # API 호출 간격 조절 (필요시 증가)
+    try: krw = f"{requests.get('https://api.exchangerate-api.com/v4/latest/USD', timeout=5).json()['rates']['KRW']:,.2f}"
+    except: krw = "정보 없음"
 
-    krw_str = fetch_fx()
-    time.sleep(1)
-
-    return (
-        "📊 주요 금융 지표\n"
-        f"- USD/KRW: {krw_str} 원\n"
-        f"- KOSPI: {kospi_str}\n"
-        f"- NASDAQ: {results.get('NASDAQ', '정보 없음')}\n"
-        f"- Google: {results.get('Google', '정보 없음')}\n"
-        f"- Apple: {results.get('Apple', '정보 없음')}\n"
-        f"- Microsoft: {results.get('Microsoft', '정보 없음')}\n"
-        f"- QQQM: {results.get('QQQM', '정보 없음')}"
-    )
+    return ("📊 주요 금융 지표\n"
+            f"- USD/KRW: {krw} 원\n"
+            f"- KOSPI: {safe_yf('^KS11')}\n"
+            f"- NASDAQ: {safe_yf('^IXIC')}\n"
+            f"- Google: {safe_yf('GOOGL')}\n"
+            f"- Apple: {safe_yf('AAPL')}\n"
+            f"- Microsoft: {safe_yf('MSFT')}\n"
+            f"- QQQM: {safe_yf('QQQM')}")
 
 def fetch_news_naver(query, max_results=30):
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET: return []
@@ -179,12 +140,18 @@ def fetch_news_google_keywords(keywords, max_results=30, region='global'):
     return articles
 
 def select_important_articles(articles, top_n, context=""):
-    if not articles: return []
-    prompt = (f"당신은 바쁜 전문가를 위한 뉴스 큐레이터입니다. 다음은 오늘의 {context} 뉴스 제목 목록입니다.\n"
-              f"이 중에서 **가장 중요하고 영향력 있는 기사 {top_n}개**를 선택해주세요.\n"
-              f"중요도는 시장에 미치는 영향, 사회적 파장, 정책적 중요성, 혹은 광범위한 대중의 관심을 기준으로 판단하세요.\n"
-              f"선택한 기사의 번호만 JSON 배열로 반환하세요. 예: [3, 7, 15]\n\n")
-    for i, a in enumerate(articles): prompt += f"{i+1}. {a['title']}\n"
+    """원래 상세 프롬프트로 중요도 평가 (기사 제목만 사용)"""
+    if not articles:
+        return []
+    prompt = (
+        f"당신은 바쁜 전문가를 위한 뉴스 큐레이터입니다. 다음은 오늘의 {context} 뉴스 제목 목록입니다.\n"
+        f"이 중에서 **가장 중요하고 영향력 있는 기사 {top_n}개**를 선택해주세요.\n"
+        f"중요도는 시장에 미치는 영향, 사회적 파장, 정책적 중요성, 혹은 광범위한 대중의 관심을 기준으로 판단하세요.\n"
+        f"선택한 기사의 번호만 JSON 배열로 반환하세요. 예: [3, 7, 15]\n\n"
+    )
+    for i, a in enumerate(articles):
+        prompt += f"{i+1}. {a['title']}\n"
+
     ids = call_gemini_analyze(prompt)
     if ids and isinstance(ids, list):
         return [articles[i-1] for i in ids if 1 <= i <= len(articles)][:top_n]
@@ -233,24 +200,23 @@ def send_telegram(text):
 
 # ===== 메인 =====
 if __name__ == "__main__":
-    # 오전(서울 7:50, UTC 22:50)에만 날씨 표시
     now_utc = datetime.utcnow().hour
-    show_weather = (now_utc >= 21 or now_utc <= 1)  # UTC 22:50 전후면 True, 12:10이면 False
+    show_weather = (now_utc >= 21 or now_utc <= 1)
 
     report = get_date_and_weather(show_weather) + "\n\n" + get_market_indicators() + "\n\n"
 
-    # 1. 국내 증시 (네이버 30개 → AI 7개 선별)
+    # 국내 증시 (네이버 30개 → AI 7개)
     domestic_raw = fetch_news_naver("증시", 30)
     domestic = select_important_articles(domestic_raw, 7, "국내 증시")
 
-    # 2. 해외 증시 (구글 30개 → AI 7개 선별)
+    # 해외 증시 (구글 30개 → AI 7개)
     us_raw = fetch_news_google_keywords(
         ["stock market", "Federal Reserve", "S&P 500", "NASDAQ", "earnings", "AI stocks", "tech stocks"],
         max_results=30, region='global'
     )
     us = select_important_articles(us_raw, 7, "해외 증시")
 
-    # 3. 정치/사회 (네이버 30+30 → AI 6개 선별)
+    # 정치/사회 (네이버 30+30 → AI 6개)
     politics_raw = fetch_news_naver("정치", 30)
     society_raw = fetch_news_naver("사회", 30)
     combined = politics_raw + society_raw
