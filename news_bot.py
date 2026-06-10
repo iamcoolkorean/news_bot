@@ -84,29 +84,73 @@ def get_date_and_weather(show_weather=True):
     return f"📅 {today}\n{weather_info}"
 
 def get_market_indicators():
-    def safe_yf(symbol):
+    api_key = os.environ.get("ALPHA_VANTAGE_KEY", "")
+    if not api_key:
+        return "Alpha Vantage API 키가 없습니다."
+
+    def fetch_quote(symbol):
         try:
-            t = yf.Ticker(symbol)
-            h = t.history(period="2d")
-            if len(h) >= 2:
-                prev, last = h['Close'].iloc[-2], h['Close'].iloc[-1]
-                change = ((last - prev) / prev) * 100
-                return f"{last:,.2f} ({change:+.2f}%)"
-            elif len(h) == 1: return f"{h['Close'].iloc[-1]:,.2f}"
+            url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={api_key}"
+            resp = requests.get(url, timeout=10).json()
+            data = resp.get("Global Quote", {})
+            price = data.get("05. price", "N/A")
+            change_pct = data.get("10. change percent", "0%")
+            if price != "N/A":
+                return f"{float(price):,.2f} ({change_pct})"
             return "정보 없음"
         except: return "정보 없음"
 
-    try: krw = f"{requests.get('https://api.exchangerate-api.com/v4/latest/USD', timeout=5).json()['rates']['KRW']:,.2f}"
-    except: krw = "정보 없음"
+    def fetch_fx():
+        try:
+            url = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=KRW&apikey={api_key}"
+            resp = requests.get(url, timeout=10).json()
+            rate = resp.get("Realtime Currency Exchange Rate", {}).get("5. Exchange Rate", "N/A")
+            return f"{float(rate):,.2f}" if rate != "N/A" else "정보 없음"
+        except: return "정보 없음"
 
-    return ("📊 주요 금융 지표\n"
-            f"- USD/KRW: {krw} 원\n"
-            f"- KOSPI: {safe_yf('^KS11')}\n"
-            f"- NASDAQ: {safe_yf('^IXIC')}\n"
-            f"- Google: {safe_yf('GOOGL')}\n"
-            f"- Apple: {safe_yf('AAPL')}\n"
-            f"- Microsoft: {safe_yf('MSFT')}\n"
-            f"- QQQM: {safe_yf('QQQM')}")
+    # 분당 최대 5회 호출 제한을 지키기 위해 각 요청 후 12초 대기 (6심볼 × 1.2초 = 실제로는 충분)
+    symbols = {
+        "KOSPI": None,       # Alpha Vantage는 한국 지수 미지원 → yfinance 유지
+        "NASDAQ": "^IXIC",
+        "Google": "GOOGL",
+        "Apple": "AAPL",
+        "Microsoft": "MSFT",
+        "QQQM": "QQQM"
+    }
+    results = {}
+    # KOSPI만 yfinance로 가져오기 (Alpha Vantage는 한국 지수 미지원)
+    def safe_yf(symbol):
+        try:
+            t = yf.Ticker(symbol)
+            h = t.history(period="5d")['Close'].dropna()
+            if len(h) >= 2:
+                prev, last = h.iloc[-2], h.iloc[-1]
+                change = ((last - prev) / prev) * 100
+                return f"{last:,.2f} ({change:+.2f}%)"
+            elif len(h) == 1: return f"{h.iloc[-1]:,.2f}"
+            return "정보 없음"
+        except: return "정보 없음"
+    kospi_str = safe_yf("^KS11")
+
+    # Alpha Vantage로 미국 지수 및 종목 가져오기
+    for name, sym in symbols.items():
+        if sym is None: continue
+        results[name] = fetch_quote(sym)
+        time.sleep(1)  # API 호출 간격 조절 (필요시 증가)
+
+    krw_str = fetch_fx()
+    time.sleep(1)
+
+    return (
+        "📊 주요 금융 지표\n"
+        f"- USD/KRW: {krw_str} 원\n"
+        f"- KOSPI: {kospi_str}\n"
+        f"- NASDAQ: {results.get('NASDAQ', '정보 없음')}\n"
+        f"- Google: {results.get('Google', '정보 없음')}\n"
+        f"- Apple: {results.get('Apple', '정보 없음')}\n"
+        f"- Microsoft: {results.get('Microsoft', '정보 없음')}\n"
+        f"- QQQM: {results.get('QQQM', '정보 없음')}"
+    )
 
 def fetch_news_naver(query, max_results=30):
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET: return []
