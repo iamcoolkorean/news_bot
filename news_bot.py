@@ -19,7 +19,6 @@ for i in range(2, 10):
 
 TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
-
 NAVER_CLIENT_ID = os.environ.get("NAVER_CLIENT_ID", "")
 NAVER_CLIENT_SECRET = os.environ.get("NAVER_CLIENT_SECRET", "")
 
@@ -36,158 +35,89 @@ def switch_to_next_key():
     return False
 
 def call_gemini_translate(titles):
+    if not titles: return []
+    prompt = "다음 영어 뉴스 제목들을 한국어로 번역해주세요.\n각 제목을 순서대로 번역하고, 번역 결과만 한 줄씩 출력하세요.\n\n" + "\n".join(titles)
     global current_key_idx, client
-    if not titles:
-        return []
-    prompt = (
-        "다음 영어 뉴스 제목들을 한국어로 번역해주세요.\n"
-        "각 제목을 순서대로 번역하고, 번역 결과만 한 줄씩 출력하세요.\n"
-        "다른 설명은 일절 추가하지 마세요.\n\n" + "\n".join(titles)
-    )
     for attempt in range(3):
         try:
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt
-            )
-            return response.text.strip().split('\n')
+            resp = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+            return resp.text.strip().split('\n')
         except Exception as e:
-            print(f"Gemini translation error: {e}")
             if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
-                if switch_to_next_key():
-                    time.sleep(1)
-                else:
-                    print("All keys exhausted, waiting 60s...")
-                    time.sleep(60)
-            else:
-                time.sleep(5)
+                if switch_to_next_key(): time.sleep(1)
+                else: time.sleep(60)
+            else: time.sleep(5)
     return []
 
 def call_gemini_analyze(prompt):
     global current_key_idx, client
     for attempt in range(3):
         try:
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt
-            )
-            text = response.text.strip()
-            if text.startswith("```"):
-                text = text.split("```")[1].strip()
-                if text.startswith("json"):
-                    text = text[4:].strip()
+            resp = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+            text = resp.text.strip()
+            if text.startswith("```"): text = text.split("```")[1].strip()
+            if text.startswith("json"): text = text[4:].strip()
             return json.loads(text)
         except Exception as e:
-            print(f"Gemini analyze error: {e}")
             if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
-                if switch_to_next_key():
-                    time.sleep(1)
-                else:
-                    print("All keys exhausted, waiting 60s...")
-                    time.sleep(60)
-            else:
-                time.sleep(5)
+                if switch_to_next_key(): time.sleep(1)
+                else: time.sleep(60)
+            else: time.sleep(5)
     return []
 
-# --- 유틸리티 함수들 ---
-def get_date_and_weather():
+# --- 유틸리티 ---
+def get_date_and_weather(show_weather=True):
     today = datetime.now().strftime("%Y년 %m월 %d일")
+    if not show_weather:
+        return f"📅 {today}"
     weather_info = "서울 날씨 정보를 가져올 수 없습니다."
     try:
         resp = requests.get("https://wttr.in/Seoul?format=j1", timeout=5)
         if resp.status_code == 200:
             data = resp.json()
-            current = data['current_condition'][0]
-            today_weather = data['weather'][0]
-            weather_info = (
-                f"서울 날씨: {current['weatherDesc'][0]['value']} | "
-                f"현재 {current['temp_C']}°C | "
-                f"최저 {today_weather['mintempC']}°C | "
-                f"최고 {today_weather['maxtempC']}°C | "
-                f"강수량 {today_weather['hourly'][0].get('precipMM', '0.0')}mm | "
-                f"습도 {current['humidity']}%"
-            )
-    except Exception as e:
-        print(f"Weather error: {e}")
+            cur = data['current_condition'][0]
+            tw = data['weather'][0]
+            weather_info = (f"서울 날씨: {cur['weatherDesc'][0]['value']} | 현재 {cur['temp_C']}°C | "
+                            f"최저 {tw['mintempC']}°C | 최고 {tw['maxtempC']}°C | "
+                            f"강수량 {tw['hourly'][0].get('precipMM','0.0')}mm | 습도 {cur['humidity']}%")
+    except Exception as e: print(f"Weather error: {e}")
     return f"📅 {today}\n{weather_info}"
 
 def get_market_indicators():
     def safe_yf(symbol):
         try:
-            ticker = yf.Ticker(symbol)
-            hist = ticker.history(period="2d")
-            if len(hist) >= 2:
-                prev = hist['Close'].iloc[-2]
-                last = hist['Close'].iloc[-1]
+            t = yf.Ticker(symbol)
+            h = t.history(period="2d")
+            if len(h) >= 2:
+                prev, last = h['Close'].iloc[-2], h['Close'].iloc[-1]
                 change = ((last - prev) / prev) * 100
                 return f"{last:,.2f} ({change:+.2f}%)"
-            elif len(hist) == 1:
-                return f"{hist['Close'].iloc[-1]:,.2f}"
-            else:
-                return "정보 없음"
-        except:
+            elif len(h) == 1: return f"{h['Close'].iloc[-1]:,.2f}"
             return "정보 없음"
+        except: return "정보 없음"
 
-    kospi_str = safe_yf("^KS11")
-    kosdaq_str = safe_yf("^KQ11")
-    sp500_str = safe_yf("^GSPC")
-    nasdaq_str = safe_yf("^IXIC")
-    dow_str = safe_yf("^DJI")
+    try: krw = f"{requests.get('https://api.exchangerate-api.com/v4/latest/USD', timeout=5).json()['rates']['KRW']:,.2f}"
+    except: krw = "정보 없음"
 
+    return ("📊 주요 금융 지표\n"
+            f"- USD/KRW: {krw} 원\n"
+            f"- KOSPI: {safe_yf('^KS11')}\n"
+            f"- NASDAQ: {safe_yf('^IXIC')}\n"
+            f"- Google: {safe_yf('GOOGL')}\n"
+            f"- Apple: {safe_yf('AAPL')}\n"
+            f"- Microsoft: {safe_yf('MSFT')}\n"
+            f"- QQQM: {safe_yf('QQQM')}")
+
+def fetch_news_naver(query, max_results=30):
+    if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET: return []
     try:
-        resp = requests.get("https://api.exchangerate-api.com/v4/latest/USD", timeout=5)
-        usd_krw = resp.json()['rates']['KRW']
-        krw_str = f"{usd_krw:,.2f}"
-    except:
-        krw_str = "정보 없음"
-
-    return (
-        "📊 주요 금융 지표\n"
-        f"- KOSPI: {kospi_str}\n"
-        f"- KOSDAQ: {kosdaq_str}\n"
-        f"- USD/KRW: {krw_str} 원\n"
-        f"- S&P 500: {sp500_str}\n"
-        f"- NASDAQ: {nasdaq_str}\n"
-        f"- Dow Jones: {dow_str}"
-    )
-
-def get_trending_keywords():
-    try:
-        resp = requests.get("https://api.signal.bz/news/realtime", headers={'User-Agent': 'Mozilla/5.0'}, timeout=10)
-        if resp.status_code == 200:
-            data = resp.json()
-            keywords = [item['keyword'] for item in data.get('result', [])[:5]]
-            if keywords:
-                return keywords
-    except Exception as e:
-        print(f"Trending keywords error: {e}")
-    return ["정치", "경제", "사회", "세계", "IT"]
-
-def fetch_news_naver(query, max_results=10):
-    if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
-        return []
-    try:
-        headers = {
-            "X-Naver-Client-Id": NAVER_CLIENT_ID,
-            "X-Naver-Client-Secret": NAVER_CLIENT_SECRET
-        }
-        params = {
-            "query": query,
-            "display": min(max_results, 100),
-            "start": 1,
-            "sort": "date"
-        }
+        headers = {"X-Naver-Client-Id": NAVER_CLIENT_ID, "X-Naver-Client-Secret": NAVER_CLIENT_SECRET}
+        params = {"query": query, "display": min(max_results, 100), "start": 1, "sort": "date"}
         resp = requests.get("https://openapi.naver.com/v1/search/news.json", headers=headers, params=params, timeout=10)
         if resp.status_code == 200:
-            data = resp.json()
-            articles = []
-            for item in data.get("items", []):
-                link = item.get("originallink") or item.get("link")
-                title = re.sub(r'<.*?>', '', item["title"])  # 태그 제거
-                articles.append({"title": title, "url": link})
-            return articles
-    except Exception as e:
-        print(f"Naver API error for '{query}': {e}")
+            return [{"title": re.sub(r'<.*?>', '', item['title']), "url": item.get('originallink') or item['link']}
+                    for item in resp.json().get("items", [])]
+    except Exception as e: print(f"Naver error '{query}': {e}")
     return []
 
 def fetch_news_google_keywords(keywords, max_results=30, region='global'):
@@ -195,150 +125,99 @@ def fetch_news_google_keywords(keywords, max_results=30, region='global'):
     per_kw = max_results // len(keywords) if keywords else 0
     for kw in keywords:
         try:
-            encoded_kw = urllib.parse.quote(kw)
-            if region == 'kr':
-                url = f"https://news.google.com/rss/search?q={encoded_kw}&hl=ko&gl=KR&ceid=KR:ko"
-            else:
-                url = f"https://news.google.com/rss/search?q={encoded_kw}&hl=en&gl=US&ceid=US:en"
+            encoded = urllib.parse.quote(kw)
+            url = (f"https://news.google.com/rss/search?q={encoded}&hl={'ko' if region=='kr' else 'en'}&"
+                   f"gl={'KR' if region=='kr' else 'US'}&ceid={'KR:ko' if region=='kr' else 'US:en'}")
             feed = feedparser.parse(url)
             for entry in feed.entries[:per_kw]:
                 articles.append({"title": entry.title, "url": entry.link})
-        except Exception as e:
-            print(f"Google News error for '{kw}': {e}")
+        except Exception as e: print(f"Google error '{kw}': {e}")
     return articles
 
+def select_important_articles(articles, top_n, context=""):
+    if not articles: return []
+    prompt = (f"당신은 바쁜 전문가를 위한 뉴스 큐레이터입니다. 다음은 오늘의 {context} 뉴스 제목 목록입니다.\n"
+              f"이 중에서 **가장 중요하고 영향력 있는 기사 {top_n}개**를 선택해주세요.\n"
+              f"중요도는 시장에 미치는 영향, 사회적 파장, 정책적 중요성, 혹은 광범위한 대중의 관심을 기준으로 판단하세요.\n"
+              f"선택한 기사의 번호만 JSON 배열로 반환하세요. 예: [3, 7, 15]\n\n")
+    for i, a in enumerate(articles): prompt += f"{i+1}. {a['title']}\n"
+    ids = call_gemini_analyze(prompt)
+    if ids and isinstance(ids, list):
+        return [articles[i-1] for i in ids if 1 <= i <= len(articles)][:top_n]
+    return articles[:top_n]
+
 def translate_selected_articles(article_lists):
-    all_eng = []
-    mapping = []
+    all_eng, mapping = [], []
     for lst in article_lists:
         for i, a in enumerate(lst):
             if not re.search(r'[가-힣]', a['title']):
                 all_eng.append(a['title'])
                 mapping.append((lst, i))
-    if not all_eng:
-        return
+    if not all_eng: return
     translated = call_gemini_translate(all_eng)
-    for (lst, idx), tr_title in zip(mapping, translated):
-        if tr_title:
-            lst[idx]['translated_title'] = tr_title
+    for (lst, idx), tr in zip(mapping, translated):
+        if tr: lst[idx]['translated_title'] = tr
 
 def format_articles(articles, max_display):
-    """기사 리스트를 HTML 하이퍼링크로 포맷팅 (URL 숨김)"""
-    if not articles:
-        return "관련 뉴스가 없습니다.\n"
+    if not articles: return "관련 뉴스가 없습니다.\n"
     lines = []
     for a in articles[:max_display]:
         title = a.get('translated_title', a['title'])
-        # 1. 기존 HTML 엔티티를 일반 텍스트로 변환
-        plain_title = html.unescape(title)
-        # 2. 안전한 HTML 이스케이프
-        safe_title = html.escape(plain_title, quote=True)
-        # 3. URL: &만 이스케이프
+        safe_title = html.escape(html.unescape(title), quote=True)
         safe_url = a['url'].replace("&", "&amp;")
         lines.append(f"- <a href=\"{safe_url}\">{safe_title}</a>")
     return "\n".join(lines) + "\n"
 
 def send_telegram(text):
-    """
-    텔레그램 메시지 전송 (HTML 파싱 모드)
-    - 절대 <a> 태그를 자르지 않도록 라인 단위 분할
-    """
-    max_len = 3800  # 3500보다 약간 넉넉하게
-    # 라인 단위로 분할하여 HTML 태그가 잘리지 않게 함
     lines = text.split('\n')
-    chunks = []
-    current_chunk = ""
+    chunks, cur = [], ""
     for line in lines:
-        # 현재 청크에 라인을 추가하면 max_len 초과하는지 확인
-        if len(current_chunk) + len(line) + 1 > max_len:
-            if current_chunk:
-                chunks.append(current_chunk)
-                current_chunk = line
-            else:
-                # 한 라인이 max_len보다 길면 어쩔 수 없이 그대로 추가 (매우 드묾)
-                chunks.append(line)
-        else:
-            current_chunk = (current_chunk + "\n" + line) if current_chunk else line
-    if current_chunk:
-        chunks.append(current_chunk)
+        if len(cur) + len(line) + 1 > 3800:
+            if cur: chunks.append(cur)
+            cur = line
+        else: cur = (cur + "\n" + line) if cur else line
+    if cur: chunks.append(cur)
 
     for idx, chunk in enumerate(chunks):
-        if len(chunks) > 1:
-            chunk = f"[{idx+1}/{len(chunks)}]\n{chunk}"
-        url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-        payload = {
-            "chat_id": TELEGRAM_CHAT_ID,
-            "text": chunk,
-            "parse_mode": "HTML"
-        }
-        resp = requests.post(url, json=payload, timeout=10)
+        if len(chunks) > 1: chunk = f"[{idx+1}/{len(chunks)}]\n{chunk}"
+        payload = {"chat_id": TELEGRAM_CHAT_ID, "text": chunk, "parse_mode": "HTML"}
+        resp = requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", json=payload, timeout=10)
         if resp.status_code != 200:
-            print(f"HTML mode failed: {resp.text}")
-            # 실패 시 안전하게 모든 HTML 태그를 제거하고 전송 (링크 없이 제목만)
-            plain_chunk = re.sub(r'<.*?>', '', chunk)
-            payload_plain = {
-                "chat_id": TELEGRAM_CHAT_ID,
-                "text": plain_chunk
-            }
-            requests.post(url, json=payload_plain, timeout=10)
-    print("All chunks sent successfully.")
+            plain = re.sub(r'<.*?>', '', chunk)
+            requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                          json={"chat_id": TELEGRAM_CHAT_ID, "text": plain}, timeout=10)
 
 # ===== 메인 =====
 if __name__ == "__main__":
-    report = get_date_and_weather() + "\n\n" + get_market_indicators() + "\n\n"
+    # 오전(서울 7:50, UTC 22:50)에만 날씨 표시
+    now_utc = datetime.utcnow().hour
+    show_weather = (now_utc >= 21 or now_utc <= 1)  # UTC 22:50 전후면 True, 12:10이면 False
 
-    # 실시간 검색어 + 관련 뉴스
-    trending = get_trending_keywords()
-    trend_articles = []
-    if trending:
-        report += "🔥 실시간 검색어 Top 5 관련 뉴스\n"
-        for idx, keyword in enumerate(trending):
-            articles = fetch_news_naver(keyword, 1)
-            if articles:
-                trend_articles.append(articles[0])
-                title = articles[0]['title']
-                report += f"{idx+1}. {keyword} - {title}: {articles[0]['url']}\n"
-            else:
-                report += f"{idx+1}. {keyword} - 관련 뉴스 없음\n"
-        report += "\n"
+    report = get_date_and_weather(show_weather) + "\n\n" + get_market_indicators() + "\n\n"
 
-    # 정치 (Gemini가 중요 기사 3개 선별)
-    politics_raw = fetch_news_naver("정치", 30)
-    if politics_raw:
-        titles_str = ""
-        for i, a in enumerate(politics_raw):
-            titles_str += f"{i+1}. {a['title']}\n"
-        prompt = f"""다음은 오늘 정치 뉴스 제목 목록입니다.
-이 중에서 **대한민국 국민에게 가장 중요하다고 생각되는 기사 3개**를 골라주세요.
-선택한 기사의 번호만 JSON 배열로 반환하세요. 예: [3, 7, 15]
+    # 1. 국내 증시 (네이버 30개 → AI 7개 선별)
+    domestic_raw = fetch_news_naver("증시", 30)
+    domestic = select_important_articles(domestic_raw, 7, "국내 증시")
 
-기사 목록:
-{titles_str}"""
-        selected_ids = call_gemini_analyze(prompt)
-        if selected_ids and isinstance(selected_ids, list):
-            politics = [politics_raw[i-1] for i in selected_ids if 1 <= i <= len(politics_raw)][:3]
-        else:
-            politics = politics_raw[:3]
-    else:
-        politics = []
-
-    stocks = fetch_news_naver("증시", 10)[:4]
-    us_stocks = fetch_news_google_keywords(
-        ["stock market", "Federal Reserve", "S&P 500", "NASDAQ", "earnings", "tech stocks"],
+    # 2. 해외 증시 (구글 30개 → AI 7개 선별)
+    us_raw = fetch_news_google_keywords(
+        ["stock market", "Federal Reserve", "S&P 500", "NASDAQ", "earnings", "AI stocks", "tech stocks"],
         max_results=30, region='global'
-    )[:5]
-    world = fetch_news_google_keywords(
-        ["world news", "geopolitics", "IMF", "United Nations", "NATO"],
-        max_results=15, region='global'
-    )[:3]
+    )
+    us = select_important_articles(us_raw, 7, "해외 증시")
 
-    translate_selected_articles([us_stocks, world, trend_articles])
+    # 3. 정치/사회 (네이버 30+30 → AI 6개 선별)
+    politics_raw = fetch_news_naver("정치", 30)
+    society_raw = fetch_news_naver("사회", 30)
+    combined = politics_raw + society_raw
+    dom_news = select_important_articles(combined, 6, "국내 정치/사회")
 
-    report += "🇰🇷 정치\n" + format_articles(politics, 3)
-    report += "\n🇰🇷 증시\n" + format_articles(stocks, 4)
-    report += "\n🇺🇸 미국 주식\n" + format_articles(us_stocks, 5)
-    report += "\n🌍 국제 정세\n" + format_articles(world, 3)
+    # 번역 (해외 증시)
+    translate_selected_articles([us])
 
-    print(f"Report length: {len(report)}")
+    # 리포트 조립
+    report += "🇰🇷 국내 증시\n" + format_articles(domestic, 7)
+    report += "\n🇺🇸 해외 증시\n" + format_articles(us, 7)
+    report += "\n📰 정치/사회\n" + format_articles(dom_news, 6)
+
     send_telegram(report)
-    print("Script finished.")
