@@ -2,18 +2,32 @@ name: Send News Report
 
 on:
   schedule:
-    - cron: '50 22 * * *'   # 서울 오전 7:50
+    - cron: '0 22 * * *'    # 서울 오전 7시 (UTC 22:00)
   workflow_dispatch:
 
 jobs:
   send:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          name: news-report
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
       - name: Send via Telegram
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python send_report.py
+
+      - name: Clean up report.txt after sending
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          rm report.txt
+          git add report.txt
+          git commit -m "Remove sent report [skip ci]" || echo "No changes to commit"
+          git push
