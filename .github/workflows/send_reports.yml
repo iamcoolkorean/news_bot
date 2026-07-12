@@ -1,0 +1,19 @@
+name: Send News Report
+
+on:
+  schedule:
+    - cron: '50 22 * * *'   # 서울 오전 7:50
+  workflow_dispatch:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: news-report
+      - name: 텔레그램 전송
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python send_report.py   # report.txt를 읽어 전송만 수행
