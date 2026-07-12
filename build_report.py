@@ -179,7 +179,7 @@ def format_articles(articles, max_display):
 # ===== 메인 실행 =====
 if __name__ == "__main__":
     now_utc = datetime.utcnow().hour
-    show_weather = (now_utc >= 21 or now_utc <= 1)
+    show_weather = (now_utc >= 20 or now_utc <= 1)   # 오전 6시(UTC 21시)는 날씨 포함
 
     report = get_date_and_weather(show_weather) + "\n\n" + get_market_indicators() + "\n\n"
 
@@ -208,7 +208,7 @@ if __name__ == "__main__":
     report += "\n🇺🇸 해외 증시\n" + format_articles(us, 7)
     report += "\n📰 정치/사회\n" + format_articles(dom_news, 6)
 
-    # 파일로 저장 (전송 대신)
+    # 파일로 저장
     with open("report.txt", "w", encoding="utf-8") as f:
         f.write(report)
     print("Report saved to report.txt")
