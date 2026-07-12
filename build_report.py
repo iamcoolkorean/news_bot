@@ -17,8 +17,6 @@ for i in range(2, 10):
     if key:
         GEMINI_KEYS.append(key)
 
-TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
-TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 NAVER_CLIENT_ID = os.environ.get("NAVER_CLIENT_ID", "")
 NAVER_CLIENT_SECRET = os.environ.get("NAVER_CLIENT_SECRET", "")
 
@@ -65,7 +63,7 @@ def call_gemini_analyze(prompt):
             else: time.sleep(5)
     return []
 
-# --- 유틸리티 ---
+# --- 유틸리티 함수들 ---
 def get_date_and_weather(show_weather=True):
     today = datetime.now().strftime("%Y년 %m월 %d일")
     if not show_weather:
@@ -140,7 +138,6 @@ def fetch_news_google_keywords(keywords, max_results=30, region='global'):
     return articles
 
 def select_important_articles(articles, top_n, context=""):
-    """원래 상세 프롬프트로 중요도 평가 (기사 제목만 사용)"""
     if not articles:
         return []
     prompt = (
@@ -179,55 +176,39 @@ def format_articles(articles, max_display):
         lines.append(f"- <a href=\"{safe_url}\">{safe_title}</a>")
     return "\n".join(lines) + "\n"
 
-def send_telegram(text):
-    lines = text.split('\n')
-    chunks, cur = [], ""
-    for line in lines:
-        if len(cur) + len(line) + 1 > 3800:
-            if cur: chunks.append(cur)
-            cur = line
-        else: cur = (cur + "\n" + line) if cur else line
-    if cur: chunks.append(cur)
-
-    for idx, chunk in enumerate(chunks):
-        if len(chunks) > 1: chunk = f"[{idx+1}/{len(chunks)}]\n{chunk}"
-        payload = {"chat_id": TELEGRAM_CHAT_ID, "text": chunk, "parse_mode": "HTML"}
-        resp = requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", json=payload, timeout=10)
-        if resp.status_code != 200:
-            plain = re.sub(r'<.*?>', '', chunk)
-            requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-                          json={"chat_id": TELEGRAM_CHAT_ID, "text": plain}, timeout=10)
-
-# ===== 메인 =====
+# ===== 메인 실행 =====
 if __name__ == "__main__":
     now_utc = datetime.utcnow().hour
     show_weather = (now_utc >= 21 or now_utc <= 1)
 
     report = get_date_and_weather(show_weather) + "\n\n" + get_market_indicators() + "\n\n"
 
-    # 국내 증시 (네이버 30개 → AI 7개)
+    # 국내 증시
     domestic_raw = fetch_news_naver("증시", 30)
     domestic = select_important_articles(domestic_raw, 7, "국내 증시")
 
-    # 해외 증시 (구글 30개 → AI 7개)
+    # 해외 증시
     us_raw = fetch_news_google_keywords(
         ["stock market", "Federal Reserve", "S&P 500", "NASDAQ", "earnings", "AI stocks", "tech stocks"],
         max_results=30, region='global'
     )
     us = select_important_articles(us_raw, 7, "해외 증시")
 
-    # 정치/사회 (네이버 30+30 → AI 6개)
+    # 정치/사회
     politics_raw = fetch_news_naver("정치", 30)
     society_raw = fetch_news_naver("사회", 30)
     combined = politics_raw + society_raw
     dom_news = select_important_articles(combined, 6, "국내 정치/사회")
 
-    # 번역 (해외 증시)
+    # 번역
     translate_selected_articles([us])
 
-    # 리포트 조립
+    # 최종 리포트 조합
     report += "🇰🇷 국내 증시\n" + format_articles(domestic, 7)
     report += "\n🇺🇸 해외 증시\n" + format_articles(us, 7)
     report += "\n📰 정치/사회\n" + format_articles(dom_news, 6)
 
-    send_telegram(report)
+    # 파일로 저장 (전송 대신)
+    with open("report.txt", "w", encoding="utf-8") as f:
+        f.write(report)
+    print("Report saved to report.txt")
