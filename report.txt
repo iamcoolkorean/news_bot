@@ -1,0 +1,37 @@
+📅 2026년 07월 16일
+서울 날씨: Partly cloudy | 현재 24°C | 최저 23°C | 최고 33°C | 강수량 0.0mm | 습도 94%
+
+📊 주요 금융 지표
+- USD/KRW: 1,488.31 원
+- KOSPI: 7,284.41 (+6.24%)
+- NASDAQ: 25,881.95 (-1.47%)
+- Google: 354.46 (-4.44%)
+- Apple: 333.26 (+1.76%)
+- Microsoft: 401.10 (+1.38%)
+- QQQM: 290.68 (-1.65%)
+
+🇰🇷 국내 증시
+- <a href="http://www.choicenews.co.kr/news/articleView.html?idxno=168334">TSMC &amp; 알파벳A 발 &#x27;AI불확실성&#x27; 확대...미국증시 &#x27;하락&#x27;</a>
+- <a href="https://www.moneystorm.kr/news/articleView.html?idxno=5125">[뉴욕증시 마감] AI 반도체 랠리 &#x27;숨 고르기&#x27;…나스닥 1.47% 급락, 거품 ...</a>
+- <a href="http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202607170091&amp;t=NN">SK하이닉스, 9% 밀린 다음날 14% &#x27;급락&#x27;…美반도체 와르르</a>
+- <a href="https://imnews.imbc.com/replay/2026/nwtoday/article/6838094_37012.html">&#x27;레버리지&#x27; 문턱 높인다 &quot;현금 3천만 원부터&quot;</a>
+- <a href="https://www.pinpointnews.co.kr/news/articleView.html?idxno=469184">반도체주 매도 폭탄에 뉴욕증시 와르르…AI 열풍 조정 신호?</a>
+- <a href="https://www.bloter.net/news/articleView.html?idxno=668313">美 대표 한국 ETF에 사상 최대 자금 유입…SK하이닉스 효과</a>
+- <a href="https://www.newsverse.kr/news/articleView.html?idxno=10954">[오늘의 경제뉴스] 삼전·닉스 노리는 中 창신메모리…애플 채택하면 판...</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxPa2czWllVWXctdF9qX29HMXdqUE9kYnlUVHNHZ1lvWHVlY0t1NWtpZWVfM3ZzZGFKakNsWnU5Sm10R0Y2alhnZk55R0V2TGp5QVVrcEtKckJhZHQ0cU1jczFrVzhwNzJqcTFQcWhCcGdudEZJYlBTNTVYWlVUdUwtcHFoVXpuR20wbEoybnNfbm5TMFNPWTVoY3JVQl9XMFp5UDM1NVpJUlRSRmhCVEVrRFp6VGQtbzk5SnE5ZkFVSkFmNTdSTnc?oc=5">투자자들, AI 거품 우려 떨치지 못하지만 선호 기술주는 포기 안 해</a>
+- <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxOQW11SkpyTTVNV2dMQTBaeXF0V2QzOU1kZFh5dTdybmotVjUzRlk4LU5yb1I5T1JydjdKaFJfZjBYSE5FZHFpUTJjY2E4OVVibFpCTWNoMTBZeWpxcHFfTzNMdjN6dl9VNG14N0xwVVk1TDhtOTVuVkpsYUkzTVlSV2l5ZkJtRXhlQ3ZMekViX2JnRWJDWElWRTdVYlByYVV5UnZUejRpNEFNMUFj0gGyAUFVX3lxTE96eGJXWVd6RW84cF9jd0ozODRDSkRielI1d29xMTBfY1BFSkJXNWtncjdLSDZLVmZubzIzTHQxdElBLVA1dmptRTBhSFFSUE9iRWUzSHp3ZkRUeHgzeENSejExbmYxc3ZHamxUQ001SmpUa3pJdzh1WnZlM2hmaFdUbkhRZ1RYc3U1WXVCaUJqcThmSlZKTzlmN0F5d1ljUlkwNjVpZVl5aVBwMkxqLWJoZGc?oc=5">전 연준 고문, 중국과의 관계에 대해 거짓말한 혐의로 3년 이상 징역형 선고받아</a>
+- <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxPejVocHU3MHFoUThMM0FoSk5ILWllYXdVa09OYmEtTjFoelpoVFl3T2kyYUR3UE85SnVLb01CbjV4TkJhMC0zajNCUHhza3c5RnJJaElFbnUyMV9YSmJ6VDUtWHFBUEdwSHd4eWUxMjNONzd2SS1zaENIdVJfWFFmX200YnV3Ym5YekpxVXBjVm91OWRXUy1xVTJHbkE4cHFOTDJF?oc=5">트레이더들, 인플레이션 둔화에 연준 7월 금리 인상 건너뛸 것으로 예상</a>
+- <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPWGU5QUxvUmRMUXgzYmxBbXIxRnM5aTE2Q014TV9HeVlIdVQ0RGV4aWx3a0RMQ2djdUdvSEwtX2diaDZ2QkhfaWE4WmFpb1pWTzlsajhWaTdqYWp4N0hnSjRRWGVIQU93VnA1czVqOGZYekhOMDNWMmZFSnVxTmxybHhxR2NLTVJDR3NxWVE5ZDFEUC11N2NvU0NXSTJrbTJXbXNsQjZsZklUb19vVy1wMi1mU1YxSGc?oc=5">월스트리트 하락 마감, 반도체 약세가 견조한 실적·경제 지표 효과 상쇄</a>
+- <a href="https://news.google.com/rss/articles/CBMi3gFBVV95cUxOVkNQY2dWRjVJNUN1YzRmZlZIYXRGaFZqd3dtak9lUF9OWnpWR0s4WUM5Rm1PSkpISTg1ZU9USy1lb0hrc0dBNHA5dDNyOTBUVnVhcEdfNU5Fc1lpOE91ZDFlMmpvUXFhQlJ6TVdxcjNTRzc3ekN5R2ZndHhtR3AtTUVzSlZYMlVsdWhuT2xiYmc4RFdQdnRBSTA0OE96Vmczd2ExUEJMYVAzc05Db3pheUcxTWUwb1A4M0NSSy14dHV4VnVGOFc4VTUtcUdKM0gzNThCeHZadXRxN0Uwcmc?oc=5">급락하는 AI 주식, 전 세계 증시 끌어내려</a>
+- <a href="https://news.google.com/rss/articles/CBMi7wFBVV95cUxOVmhjeGhoTTNBdldaRWRWR213YnlZOTlJZThZZDY2WDVCdFJTaThvU1lOWDVzT0QtcmQtNXJ2bXR1Y0dJUURmTEN3dVBYTEpXUVRLZFNsc0lWMmh2RVpObkVSWDB1dzRYRTVqYTVlZXkxOGlKWjdfVTJQcmdzbHVDMWI2NC12RFRqMnQ5RF9LaGs5allER2VnZ2N2RnhDbUdCYmhrYm5zbFhwaDJPeUNOdEVwNHZsTDU1TWtvZENtZnhMU0tFeU83blVTb19tb2dFU0FfSVZXY3ZUNF9mbUxIcEl5blFTc2sxMElfSGV3RQ?oc=5">&quot;AI 거품 리먼 사태 재림할 것&quot;… 한 비평가, 기술주·전체 시장 여파 경고</a>
+- <a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxPSnNHWWZlU3ppQVRKUGFNdzlPNGplbmhFWDF3aV9BTjNRMy10WTJIRXlsamlQcGR5dXN0emtjd1hzVi1BSDBHWDNYM1h6QVB5TnJKM3BOdHJ5SXgyX2dscmZWdXoxejE3QTYtUUpxYk0wY0JITEpDUXlJZ2N6eHNvTjRpLThiZHBVN0lyWlF2VlAtZEg5c042Q2ZUU182dEFuTW9CRUNiSVJvcXQ3bGtTRA?oc=5">미국 주식 선물 폭락, TSMC 실적에 AI 우려 재점화</a>
+
+📰 정치/사회
+- <a href="https://www.news1.kr/photos/8013196">김정은-왕후닝, 북중조약 65주년 맞아 회동</a>
+- <a href="https://www.news1.kr/economy/trend/6230979">종부세 &#x27;주택 수&#x27; 대신 &#x27;가액&#x27;으로…초고가 기준선은 30억~50억 거론</a>
+- <a href="https://imnews.imbc.com/replay/2026/nwtoday/article/6838101_37012.html">&#x27;통일교 뒷돈&#x27; 권성동 &#x27;징역 2년&#x27;‥의원직 상실</a>
+- <a href="https://www.pinpointnews.co.kr/news/articleView.html?idxno=469199">배달기사도 최저임금 받을까…노동부, 적용 대상 확대 검토 착수</a>
+- <a href="https://www.the-today.com/news/articleView.html?idxno=87679">사관학교 통합 속도 내는 정부…8월 공청회, 총동창회 설득 나선다</a>
+- <a href="https://imnews.imbc.com/replay/2026/nwtoday/article/6838102_37012.html">&#x27;18㎝ 흉기→커터칼&#x27;‥보고서에 &quot;테러 아니다&quot;</a>
