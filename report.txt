@@ -1,0 +1,37 @@
+📅 2026년 07월 28일
+서울 날씨: Cloudy | 현재 26°C | 최저 25°C | 최고 32°C | 강수량 0.0mm | 습도 100%
+
+📊 주요 금융 지표
+- USD/KRW: 1,467.33 원
+- KOSPI: 6,755.75 (-4.81%)
+- NASDAQ: 24,876.91 (-0.22%)
+- Google: 333.71 (+2.19%)
+- Apple: 340.08 (+0.94%)
+- Microsoft: 393.35 (+1.09%)
+- QQQM: 278.14 (-0.97%)
+
+🇰🇷 국내 증시
+- <a href="http://www.choicenews.co.kr/news/articleView.html?idxno=168938">美증시 나스닥100 &#x27;뚝&#x27;...샌디스크·마이크론·AMD·AI주 &#x27;추락&#x27;</a>
+- <a href="https://www.dailian.co.kr/news/view/1671861/?sc=Naver">‘삼전닉스’ 대형주 믿고 담았더니…‘블루칩 공식’ 깨졌다</a>
+- <a href="https://www.g-enews.com/view.php?ud=202607290638274250fbbec65dfb_1">코스피 10.8% 폭락…美 이익률 사상 최고 15.7% 착시</a>
+- <a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008679546&amp;plink=ORI&amp;cooper=NAVER">&quot;난장판 카지노&quot; 비판까지…&#x27;20% 투자 한도&#x27; 칼 뽑나</a>
+- <a href="https://biz.sbs.co.kr/article_hub/20000325215?division=NAVER">[조간브리핑] 中 메모리 굴기에 AI 거품론까지 덮쳤다…10% 폭락한 코스...</a>
+- <a href="https://www.tokenpost.kr/news/economy/382402">[특징주] SK하이닉스, 美 AI 반도체 투매 여파에 16% 급락</a>
+- <a href="https://www.hankyung.com/article/2026072800656">&#x27;물 한 방울&#x27;로 삼전닉스 자리 넘본다…中 &#x27;극강의 기술&#x27; 정체 [강경주의...</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxOTi00bWE4UHBnVFB6N3Y0UTNSdzdaWC02MnFYT0NXek9lemdRV0xUZTk1eXMxVXBHUnFTalhDcmlQVklUQmNEVWxPTXJmaVlidjNfb1FNSUhGbWFLX2tYMzQ0Q3F3UzNhWmpYcU41LWVwV2xMZXJtRDFGSUV4blZjajhFSnZYTldhN2JMUV9qQS1GOXJlZ0hBLWxFSnFGNjFBcEtGQw?oc=5">연방준비제도 회의, 금리 외에 더 큰 의미를 갖다</a>
+- <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNTTljYTNZQTJLV21kdmFqQmpWdDgyVkdHaWpubHFYSFhHOHZjSU5WdlFaMU5COUlERnhtaDhGd0g3R0pfM1l4ZFNnT3NPUDNlV1A2My0tSDNOM1Q3TVA1QWg4UnJzWlRiUkZodlFBWlFITEdETS1qZkZiUXFNbjhFY3NYRmxmNGN1b2FTZHc3Zm9xQUtjcVc4MlAzTG9iMWlxeE5kdDVmM09BRUNDY1BGSEx5SGU?oc=5">연준 회의 라이브: 연방준비제도, 금리 동결 예상되나 이란 전쟁으로 긴장 고조</a>
+- <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNeGVTWHZOYUxkR0pWNUNYX1pjUHZFT2xzSFF4bFREaW8zdjFhNkhUTDZWbmZFOUpORVlUM3Fxd2hYaDRVQ1RXWTJoWDUyZWVfMkVQZ0V5ci1BUlFmbVdsTDdOekplWjd3YmhzYkg4RjFTQ043c1NtcWJjM1huOXBSUGlfQ25kWmpKamRfMlpZbkQ0TXdQVldidEQ4WUU2Sml0dGlaTDFPeHRRN1Rf?oc=5">투자자들이 AI 주식에서 도피하면서 애플, 2번째 5조 달러 기업 등극</a>
+- <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOZ1lXWmEzYWx5UmFqM0paZHQ1YmlMT1dkWWhlRFBkS0lGVmpWU3N2NUV4SUgzU2VtajBPQ21TaFFOMHl1Z1V4cnpWWmRZV1pRbmdwS1pxWUdleE9GU2xScWpFWGJJaXlfb2lQYU9sWTFJZ19fS1VnOXZhWkJJUnAwUmZFQjZvRzl1SGItLWNqQkFUM000?oc=5">반도체주 순환매 가속화에 주식시장 요동</a>
+- <a href="https://news.google.com/rss/articles/CBMi0wFBVV95cUxPdWcyMXVZYm1uU214UnVmVUNzQ3U5Z0VpcnZYUWZuRUMtWHBXRF9JNWxCS09VVDFQTS1IRHpRQS1ONi11Q0I1ZlVNY0dMRzVqQVR0bDk4LXY4WDhPaHJLckJCNjlIWGpGNnJSTVMweGhyLU5WaTE2enJKSHdHcms3Z2dPSUxnd2hwZHNodHJvdmRCUTlnX0JIenE3bTZlVXJfR2VDN3FTejhnMDRZOXc4ekxqdFkzQjdwSEFPMm5sMkhOMDFMNXlNb3pXNkxPMjVydm0w?oc=5">다우, 530포인트 이상 상승해 4주 만에 최고치 기록, 반도체주 매도세 확대에 나스닥 하락</a>
+- <a href="https://news.google.com/rss/articles/CBMickFVX3lxTE45VWk0QW5DWTBhXzVzQTQ4MXNtMDR5NVRKZnFsLWhWLVRhbVB6N2ZDNUZxcndKVWd6WW5vaWNjTzBoUUlzUzlWZWE1SkVWV0R1RXRoMklLWjUxOUw3dm5ncW9PZmlKOFc5a2U3V3Y2UXh3UQ?oc=5">AI 지출 및 중국 반도체 우려에 기술주 폭락</a>
+- <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNcmVZT1owblRILUJnajMzUHdYa3Y3SmJwc0NrcFpJZXNTWkFSQlpjR191U1dkcHVha0lTUEpFa0stREtycWg5bmFMVTZERGN4R1ZSYkxKdzVWODBVcXFHX25TS3FpaVpZNlplaW9YTVh2Zm5jLVVrNy10RUNHcDJad05LU1FwNnV6WVNweTJVUi1WWEU?oc=5">AI 매도세 심화로 한국 증시 3개월 만에 최저치</a>
+
+📰 정치/사회
+- <a href="https://www.thefairnews.co.kr/news/articleView.html?idxno=83467">엔비디아 젠슨 황, 미 상무장관 회동…중국 AI 칩 수출 규제 논의</a>
+- <a href="https://www.newsfreezone.co.kr/news/articleView.html?idxno=701475">&#x27;연임 불가&#x27; 우원식, &#x27;국민 선택&#x27; 조정식…다시 불붙은 개헌 논쟁</a>
+- <a href="https://www.dnews.co.kr/uhtml/view.jsp?idxno=202607281358598370824">[혼돈의 노봉법] ② 경영권 침해·안전 딜레마 다 삼킨 노봉법…“보완...</a>
+- <a href="https://www.chosun.com/international/international_general/2026/07/29/LNCUPTOMR5C5BOA7WOLHRFKJCA/?utm_source=naver&amp;utm_medium=referral&amp;utm_campaign=naver-news">美, 英·佛에 ‘호르무즈 순찰단’ 제안…유럽 “휴전 먼저” 제동</a>
+- <a href="https://www.sedaily.com/article/20073013?ref=naver">與 ‘檢보완수사권 폐지’ 속도전…30일 본회의 처리 수순</a>
+- <a href="https://www.sedaily.com/article/20073063?ref=naver">일할 사람 40만 줄 때, 노인은 60만 늘었다[Pick코노미]</a>
