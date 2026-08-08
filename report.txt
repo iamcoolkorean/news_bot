@@ -1,0 +1,37 @@
+📅 2026년 08월 08일
+서울 날씨: Clear  | 현재 23°C | 최저 22°C | 최고 33°C | 강수량 0.0mm | 습도 65%
+
+📊 주요 금융 지표
+- USD/KRW: 1,411.63 원
+- KOSPI: 6,258.77 (-0.60%)
+- NASDAQ: 26,690.62 (+1.30%)
+- Google: 354.30 (-0.96%)
+- Apple: 313.33 (+0.29%)
+- Microsoft: 499.99 (+0.03%)
+- QQQM: 297.70 (+1.17%)
+
+🇰🇷 국내 증시
+- <a href="https://www.yna.co.kr/view/AKR20260808046200002?input=1195m">환율 1,600원 향하다 1,300원대 눈앞…변동성 금융위기 후 최고</a>
+- <a href="https://www.dt.co.kr/article/12077159?ref=naver">李대통령, 부동산 추가 공급 점검·증시 세제개편안 재검토 지시</a>
+- <a href="https://www.yna.co.kr/view/AKR20260807136500003?input=1195m">분기이익 200조 향하는 삼전닉스…중국 추격·이익배분 시험대</a>
+- <a href="https://www.news1.kr/finance/market-exr/6252963">금리 가늠자 7월 美물가지수 발표…소외주 온기, 반도체 방향성 탐색</a>
+- <a href="https://www.yna.co.kr/view/AKR20260807160100008?input=1195m">2분기 실적시즌 막바지…상장사 10곳 중 6곳꼴 기대치 웃돌아</a>
+- <a href="https://www.news1.kr/finance/general-finance/6253007">5대 은행 가계대출 목표 1조 초과…은행권 총량 관리 &#x27;비상&#x27;</a>
+- <a href="http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202608070554&amp;t=NN">&#x27;빚투 개미&#x27; 항복…코스닥 쓸어담은 외국인 [B급기자의 B급리포트]</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxPNzFnNVdYQlpTSUJSSXJHZ0swcWVIWnFmQ2lyQUd6Y3M2XzdjdTl6SWY0ZEIyWFluUFIwckhBc042VjVnUmFuc3N4Z1VIVkVpUFV1c3hSZGpFUXBzQ0U5eHJTM2o1a2V4RWlRSUtTRE9RUW44cll2QXByd09sa1lScTUtWUNybnRmRldWM1BGeHRZOG5FanVibm12bnBFZzNFX3JadHVCYnhKaDA3eW9IaV9GaGQyMUJrRXlhbktRNzhOWUQ5WVE?oc=5">오늘 증시: S&amp;P 500, 다우, 나스닥 모두 4월 이후 최고 주간 성적 기록, S&amp;P 500은 사상 최고치 마감</a>
+- <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxOWkV3WmFpUmlEQlBFQ2hBNzk2eUx2d3RSZjlTT044WXc3Rjl5Mm53SmJqdnZFTHRPVmF2VFlKTUdQZjQ2LXdTU01TS0c5VDJBWjFrNnQwVHc4QnVidzgtSVFiYzZlc19fcXlyUVEzMk1lWHdmUkg5c2VTT2JJbnQtNDh2NFlGQmtUMU1TM1NIOXpYU0lCVTYxNA?oc=5">연준, 9월 금리 인상 예상됐지만… 이젠 장담 못 해, 경제학자들 말한다</a>
+- <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxQc20xOTBqRG9tVV9IUnA4T1JoVHo1dUpfSV85UzZQdzFqeWZPZ0hFb3kzUVZDUTlUcS10b205dzIyWVRaWUpxUmJJa0EtR2tfQ0sxa0tsRl82SkFXMF9BRWFCSzJDSkRpb25EOW5Fd0hUUzdrMU4wMlRDZVNiQTVoazN4dHFpeUhfNjJaUkkyUnVtdWh4V2l0LXlVcWtzM1pqdmZHVnVCT3ZoT3o5?oc=5">고용 지표 후 시장은 연준 인상 확률 낮췄지만… 경제학자들은 여전히 긴축 필요성 강조</a>
+- <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxNZlhBejhhZWNUdDRiX05LWHFRaGJhX0ltazRRWTFPZWdvazNWX0U1WDg4NmpIb0swb1dsR21KTzg2MUc5Z21ORnJXdWFxX2xybjdsOG1lUnV4aWs3TWw3QmR5TUFfMDZ5Qkc5WVhxSWVXT2dUZDVneUxqRms3V1dBeDJvUzJtT1R4Z01NYlZNbXBBNnVBWWdF?oc=5">채권 시장, 위험 신호 보내… 투자자들은 주목해야</a>
+- <a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxOMHV6QkY1anVqMi1FVnVua1ZldlVkbHJROERfUFItOF8tOG9KT3cxOEJadlJ5emhRZHRHaGtPWlNOUXZ0Rm5uLTdpNjlTR3k2TFFhQkw1c0UyTVNtd2FfVE9laXRNZHhkRk55NkVJTEZfeUdBSk5RT0drcTZpSFZBZU9ZZlRwcnFRdUlVTURIQVRobHlVeDVoLUtWeGUzTlNPSzlEcTRuRDRKSmVyeFlGRGRQa0RTLTZ2?oc=5">트럼프, 대법원 판결 후 연준 이사 리사 쿡 해고 재시도</a>
+- <a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxNNW9sV3p5eTFad1JvRkhHUjY4bDRhNFZ6eE9lNHRvLUxCLU1Td3lLREJVMTZIeFZ0RlJnR0lpdjFLSkFMN0lLdG5Yc01LWUpsQjFlTUFBUVhKOFcyMVg2MHQzaXRkeHFrQTBsa2c2WXFIX1A1LTNkQWttV2owSWZTTFJSSGFGNXNXb213R2k1dy1QZW1WeGc?oc=5">버크셔 해서웨이, 새 CEO 체제 하에 현금 지출 시작</a>
+- <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxOVFRJRm9PNnRkeXhuOU9KZmlqaFhqZkVBWGVDMDJ0eGFsUWx0RGxPdnk3bW0tMnVjVElFMzN0Ym1IZzU5MlIxeHNLLTdnT19CZ2l4WmZWN1NtMHJvWVFlSURfMG9Pel9KNi03ZzRmNVJsOU5vcWhlT3JHVjg3d2ZldG9WYzEwX0t1RHk4N2d2VkhIWHJlY2VXSTJQYzVVQQ?oc=5">마이클 버리, 주요 AI 주식에 경종 울려</a>
+
+📰 정치/사회
+- <a href="https://www.news1.kr/nk/military/6252869">北, MDL에 &#x27;핵무장 국경&#x27; 만든다…남한 전역 타격권</a>
+- <a href="https://www.news1.kr/politics/president/6253122">李정부 부동산 공급대책 이르면 13일 발표…&#x27;신규 공급·속도&#x27; 총력 집중</a>
+- <a href="http://www.metroseoul.co.kr/article/20260808500030">與 8·17 전당대회 &#x27;초박빙&#x27;…&#x27;김민석&#x27;·&#x27;정청래&#x27; &#x27;0.86%포인트&#x27; 차</a>
+- <a href="https://www.mt.co.kr/world/2026/08/09/2026080713293746538">심화하는 북한-러시아 군사협력, 바라보는 중국 입장은?</a>
+- <a href="https://www.yna.co.kr/view/AKR20260808015700530?input=1195m">특정 개인·집단 향한 &#x27;혐오표현&#x27; 쓰면 지방공무원 최대 파면</a>
+- <a href="https://www.yna.co.kr/view/AKR20260807136500003?input=1195m">분기이익 200조 향하는 삼전닉스…중국 추격·이익배분 시험대</a>
