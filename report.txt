@@ -1,0 +1,37 @@
+📅 2026년 08월 13일
+서울 날씨: Partly Cloudy  | 현재 24°C | 최저 24°C | 최고 32°C | 강수량 0.0mm | 습도 74%
+
+📊 주요 금융 지표
+- USD/KRW: 1,416.77 원
+- KOSPI: 6,579.04 (+3.68%)
+- NASDAQ: 26,803.03 (+0.81%)
+- Google: 346.36 (+0.82%)
+- Apple: 305.26 (+1.00%)
+- Microsoft: 496.88 (+0.90%)
+- QQQM: 301.41 (+1.15%)
+
+🇰🇷 국내 증시
+- <a href="https://www.topstarnews.net/news/articleView.html?idxno=16163143">미국증시, 생산자물가 둔화에 S&amp;P500 신고가…SK하이닉스 7.29%↑</a>
+- <a href="https://imnews.imbc.com/replay/2026/nwtoday/article/6844664_37012.html">&#x27;반도체 투심&#x27; 회복에 SK하이닉스 장중 8% 급등</a>
+- <a href="https://www.kmib.co.kr/article/view.asp?arcid=9000003099&amp;cp=nv">삼전·닉스 긴장되네… “中 CXMT, DDR5 수율 90% 돌파”</a>
+- <a href="https://www.edaily.co.kr/news/newspath.asp?newsid=02784726645547320">&quot;삼전닉스 팔아 車 바꾸려 했는데&quot;…증시가 좌우하는 내수시장</a>
+- <a href="https://www.etoday.co.kr/news/view/2614431">뉴욕증시, 인플레이션 둔화·유가 하락에 상승...S&amp;P500 최고치 [종합]</a>
+- <a href="https://www.g-enews.com/view.php?ud=2026081323373946750c8c1c064d_1">&quot;中 시총 1위 변경&quot;… CXMT, 텐센트 제치고 최고 가치 기업 등극</a>
+- <a href="http://www.beyondpost.co.kr/view.php?ud=2026081405564239522aaae0046f_30">마이크론 4.2%, SK하이닉스 ADR 7.3%↑..SK하이닉스 ADR, 3일간 무려 21% 반...</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxNR2NNM1hicnFuakczck9zME1UVXVFV2hjLVFzbkJMY1NaT3JUcWlfcDN3Rko0RU1iSFEzS3VQaGJibEo5S05icjFXN09POFE0dGFYS3pjTlMxa0hKSnJ2SjdaVDJRZXNIR3h5dTZvTkgxalowRndaeUttbHc0OFZvbmJGcXJ3UnhxYVZrSGdfbmllVXYzMmRUQ2VrMUE2eGJwa1VDdEJCM01fVlp6b1U0?oc=5">연준, 물가 상승률 둔화 데이터에 다음 달 금리 동결 예상</a>
+- <a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxNeWtwQVlQR3hiNTh0S01lMU1GNkhjZDk4LV9OTHdqM1haZHVNWHJqVUdBUlpSamM4bW9oMDFZRG1zX1dXRWlUbEVhYXdvY2hSSWhXSzRSbVA5RG1Id2Uya1U0azhraTR4bFVhRk96dFZCd3VJYWdfYTNlTkZNYlMzWGJ1VWp5WE8wQnlIRXRGaUtVTi10cGF6WUMtbkFZdzkxblF3c2ZZRGx4bUM0am1fZUswak9MdjhPT2RSZWRsamRuWFVvckxwZEJVVzJlcXc?oc=5">오늘 증시: 완화된 물가 데이터에 S&amp;P 500 사상 최고치, 기술주 상승에 나스닥 급등, 다우도 소폭 상승; 국채 수익률, 유가 하락</a>
+- <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNSUxVN1RTX2dpeVp0WTFHYnc3dWZtMWRTOGR4aE9KQmF3QXpXZ0pYeDNfVWt1U0JlQ2dPWlhyTVlWMGZzQ2hoYXpJd0xNdW1CX1NUNUpWVmwyVXRYWi1RX25Jc3I4UFNqTElKalVVZWVKRUgybEFmQWRUOTNiUEJ6TXNQLXRJUThWWExLN1g5R2tGU3VBYlF0cEhtQUE1YThYa0o1RnVqVG5zcUtWbVE?oc=5">트럼프, 연준 압박 재개. 그의 지렛대는 무엇인가?</a>
+- <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE5DUzlzbWNYMzFfZkRPMFVrZWI1djM3MGpTdVl4TzZhNWZzSUo3TlVxdWMtU0xQUWhTemZKVVVMbGJZM3hld21tcFF5MkVWMXpubHNYeW5UMGN1Wk9sZG9VMmRULS1hSm81U050Zg?oc=5">AI 붐인가 거품인가? 타이밍이 관건이다</a>
+- <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNcU5KMkpoSDBRVG90Zk9VZXptN1hHWFp0NXNkUkJXemVPSGtxMnBFcXRCM3p2eU1WS1BqUzhhMmFTOWNiQk4ybDFzYWxzUHczUzZmbHNYWFQxQzBYYjJ0NTItTThMQVR0MEdoMmZNN3Z0bVN0YjhacHVMRHdCRm5OWEZHeVRKOHBqVGo3TV81WmdvOHVhSEg3bktjVnNFdUNTdTl2Zk13?oc=5">유럽 증시 호황 뒤에는 더 어두운 진실이 숨어있다</a>
+- <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQMTJ2NWVLV3NLbEx2WXZCQmpLUDRWNWxpSWcxMjNwbEQ0bWlJYVZGeFRMdWwxekVRTVpiV3RUcWNnNzI0Ty1HT0dTQkEzOE84V04xbkR0bVBxNF9oTzRURnFHQ2VNeHdTZnpZSjdyRVNITmM2Ti1IWi1vRFp5RHhXZDYwM0t5OHJj?oc=5">주식 시장 &#x27;부의 효과&#x27;가 조기 퇴직의 물결을 부추긴다</a>
+- <a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQV3NkdHVHMXFibHlyRmVoQnZkVC0wdmNWUDBBb1FxTkYzTldZdHdJYU14WHRueVZ1RENsVjhqSEd2OTM5TTdEcThOYmliZjIwRFBIMHdpUERNUTQwSVpPVFhRMnk1NlVqZjZPZVlGVjNLaURKMjI4OVVlR0dHZklkYl9ucXpZVmQxcEh1b25hUmdVUjUxQmxOSTh1Y1ZFWldzRlBzSXJGRWVlODFoRktpMw?oc=5">둔화된 근원 인플레이션, 연준 압박 완화</a>
+
+📰 정치/사회
+- <a href="https://www.dailian.co.kr/news/view/1678319/?sc=Naver">부동산·모병제·여성안전까지…李 수보회의 발언, &#x27;청년 민심&#x27; 겨냥했...</a>
+- <a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008704796&amp;plink=ORI&amp;cooper=NAVER">&quot;5·18은 소요&quot;…난장판 된 이진숙 토론회</a>
+- <a href="https://www.edaily.co.kr/news/newspath.asp?newsid=02715846645547320">&quot;반도체 추가세수, 단기 지출보다 미래에 투자해야&quot;</a>
+- <a href="https://www.segye.com/newsView/20260813525500?OutUrl=naver">李대통령 “내 임기 단축해서라도 분권형 개헌해야”</a>
+- <a href="https://realty.chosun.com/site/data/html_dir/2026/08/13/2026081302620.html">국토부 장관 교체설…&quot;주택 정책 실패 희생양&quot; vs &quot;김현미 길 피했다&quot;</a>
+- <a href="https://imnews.imbc.com/replay/2026/nwtoday/article/6844665_37012.html">&#x27;결혼 페널티&#x27; 없애고‥빌라·오피스텔 대출 지원</a>
