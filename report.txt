@@ -1,0 +1,37 @@
+📅 2026년 08월 25일
+서울 날씨: Partly Cloudy  | 현재 25°C | 최저 25°C | 최고 32°C | 강수량 0.0mm | 습도 83%
+
+📊 주요 금융 지표
+- USD/KRW: 1,383.12 원
+- KOSPI: 6,696.96 (-3.12%)
+- NASDAQ: 26,151.30 (+0.66%)
+- Google: 346.96 (-0.32%)
+- Apple: 309.90 (-0.14%)
+- Microsoft: 491.71 (+0.90%)
+- QQQM: 292.66 (+0.64%)
+
+🇰🇷 국내 증시
+- <a href="https://www.tokenpost.kr/news/policy/397748">불법 공매도 의심 94건, 중앙점검시스템서 적출</a>
+- <a href="https://www.ytn.co.kr/_ln/0104_202608260613135844">뉴욕 증시, 반도체주 반등·국채 금리 하락에 동반 상승 마감</a>
+- <a href="https://www.fnnews.com/news/202608251517255057">4번 연속 &#x27;어닝서프&#x27;에도 주가는 빠졌다…삼전닉스 떨게 한 엔비디아 [증...</a>
+- <a href="https://www.etoday.co.kr/news/view/2617991">엔비디아 실적 D-1…HBM 넘어 냉각·전력·로봇까지 ‘수혜주 찾기’</a>
+- <a href="https://www.dailian.co.kr/news/view/1682340/?sc=Naver">“韓 증시는 도박판이자 카지노...세계에서 가장 미친 주식시장” 등 [...</a>
+- <a href="https://www.news1.kr/finance/general-stock/6269238">&quot;중국 넘어 美·유럽 홀렸다&quot;…K뷰티株 신고가 &#x27;10조 대어&#x27;도 온다</a>
+- <a href="https://news.bizwatch.co.kr/article/market/2026/08/25/0028">증시호황에도 자금조달은 위축...유상증자·IPO 다 줄었다</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxNamljNUxaUDZzT2gzSXRWRHFKNHYyN185Y1c4cDYxQldlcUFSeDhxd2lSWlJ3dVJyckdXemlLVVc1OVNydnBwU2FVb1l0UnNyRHNKWmZXUWVHcUZVVWlIWkxTdjNyWjZqNi1ZMGxoaC1UbFdTYllLREpsY0FzZk5qTFhmTXdQT2Vj?oc=5">트럼프의 연방준비제도 장악 재시도, 설명</a>
+- <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxPNTVDMFZMTDZGMDAxNEtoSVNSU01oel8ybnRNblR5VXVWTUJNb0xBR2R2QVFCY3FkelBPSDdyUURZcEM0cl9SVV9jWVZSRjJVQWh1WExNanllMmM0U3ZqeGR0S2RFbUhaRTlMTFBWVlJGTl9XRWVnSWF2bVd2WWUzOWlJTl9mRnJfVklYd3ptUlBFbHNfZXZZRGZBVVMzaXVXczJGSDRHQVVxV0xwME5uZFRmdDdKanNNdF9aSGs5Z0RrbDA?oc=5">인플레이션 지속 하락 증거 없으면 미국 금리 곧 인상 필요하다고 연준 콜린스 발언</a>
+- <a href="https://news.google.com/rss/articles/CBMi_gFBVV95cUxQN0R4U2JEc0EyU3MyV3VrYnpvS3JNLW5yMFZrOVFwdzJILUpUS21FelBob2RXdVNnRGJ5aldJX3RVTVFQM1BJSUktRVRURVI5ekcwamxGZ2NvY04tOGkyYjlnM3ZnVW9tSmJURVo0ZjgyTU4wX1NfLXAzdU05d1BBTnF6bERSYTBWamNpR2djUDdaSlRuRVhUeHhZc2RFZFVrdHhOWG1rVXc1V0pfdUU4eWgtUmxBZU5ReE8xT3pIZkdqUEFBUzBKZm9nNHFWTlpVNmNiLTdTZkR6OC1TZzF1Z3BhNkcwTm1DWGpRRjBac1BqRHJJRWUtRnRHTS1EQQ?oc=5">세계 최강 금융기관 연준의 신뢰도 위기</a>
+- <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxPUDR4Xzk0Qlp6SXVpbmZLZlFIR2QyODRNaUNzSWdCRm1yN1pMUFlNeVExZFBwT2xkVmJVa19hZjRNTVNXZ0g2NWp2SWlmVlVBV0U4M24yTlBCT3liTDk4X2RHelA0OXZkZ3F6cWxfa1ZQTS1YTTZJVVNjaWI3bDBHNEVENmxGOExJRER6SkN1Vk45MnRsM3hnRnpPazZGU0pYV2Yxc3FKZVluZw?oc=5">S&amp;P 500 종목 거의 3분의 2가 이미 대규모 하락세</a>
+- <a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxQX3R5QjNWRy1aNU9kcXZoRjU5emFRXy1SR1h3QU5rUWM4bEJ6b2pIckdPNFg0RmlQVFpiRVp1Z29FV3NoRUd6UEM0T21NbjI4c3dCRG1RZWVzU2EwcXR2UU5wZHhJc3FiNjhkWDQ3ek81SDg0anRKQm9FY1E2YXphS05MSTRVOVFjUnlhOFRoenpvaWlCWHVqZWl1NTBlelhKbmFENnI2ZHlsZmhDUHA4LWhwRjJxY201?oc=5">2026년 8월 25일 증시: 다우 160포인트 상승, S&amp;P 500·나스닥도 강세; 엔비디아 실적·PCE 물가 앞두고 반도체주 급등; 국제 유가 배럴당 88달러 하회</a>
+- <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxPQWV3Z3ZvOUo2RzVfNVQ4a2JvcTRPcnhGRHM3UlZKQlM4NE0xTjZkdjBwRmpiYzlaTUU0MjZjejNzV0Q3ZHBTSzZkTnNFRW5oMXlSazNZUVY3MUNLVm5vWjV5UWZITzRhRXJIV2hIMDBQZkxPQmEzYk9najk4ZHdFenlMc1hHTWRqLTJoLXVn?oc=5">실적 업데이트: 딕스 스포팅 굿즈, &#x27;어려운 여건&#x27; 속 전망치 하향 후 주가 폭락</a>
+- <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPa182VERRNl9ULTg3MXh0Z004aGNnVW9HQW9TLTI3R01YZzRMeWZEMFhramsxeHVLNGE1ZXAwYTRZcWxMbGF5YTB5dkl6OHVyT2FrTks2ODRFdlNPSTNmUE1MM0ZhaF9LT1JRZEdVX1ZJU2NMNlZiQWlQZ0toUWk1WmVSbXdYTWJva3NxTG92LVJrczhfQzVnLTZ4aE1yYTAwVHVucFNQbHRxSDN6OGJZcjZNVHo?oc=5">엔비디아 주식, 실적 발표 후 2,800억 달러 주가 변동 예상 (옵션 시장 시사)</a>
+
+📰 정치/사회
+- <a href="https://www.medipana.com/news/articleView.html?idxno=416496">당연지정제 흔드는 의사들…&#x27;폐지 이후&#x27;까지 고민 시작</a>
+- <a href="https://www.newsis.com/view/NISX20260825_0003762334">슈퍼예산으로 성장·분배 개선할까…과거 성적표 보니</a>
+- <a href="https://www.kukinews.com/article/view/kuk202608250141">재개발·재건축 권한 이양 놓고…당정·서울시 충돌</a>
+- <a href="https://www.dailymedi.com/news/news_view.php?wr_id=939804">보건복지부 장관 교체설 부상…추이 촉각</a>
+- <a href="https://www.news1.kr/society/court-prosecution/6269296">&#x27;매관매직&#x27; 혐의 김건희 항소심 첫 공판…1심은 징역 7년</a>
+- <a href="https://news.tf.co.kr/read/ptoday/2357960.htm">장동혁, 당 장악 속 옛 친윤 움직임…한동훈 복당 변수 되나</a>
