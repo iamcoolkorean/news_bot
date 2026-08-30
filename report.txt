@@ -1,0 +1,37 @@
+📅 2026년 08월 30일
+서울 날씨: Heavy rain | 현재 22°C | 최저 22°C | 최고 25°C | 강수량 0.0mm | 습도 97%
+
+📊 주요 금융 지표
+- USD/KRW: 1,377.90 원
+- KOSPI: 6,788.88 (-1.79%)
+- NASDAQ: 26,402.42 (-0.52%)
+- Google: 346.59 (+1.74%)
+- Apple: 319.70 (+1.63%)
+- Microsoft: 513.53 (+1.68%)
+- QQQM: 295.00 (-0.65%)
+
+🇰🇷 국내 증시
+- <a href="https://www.newsis.com/view/NISX20260831_0003768688">[오늘의 증시]워시 &#x27;매파 발언&#x27;에 美반도체 급락…코스피 또 출렁이나</a>
+- <a href="https://biz.sbs.co.kr/article_hub/20000331610?division=NAVER">[증시전략] 9월 금리인상 재부각…고용보고서·브로드컴 실적 &#x27;촉각&#x27;</a>
+- <a href="https://www.tokenpost.kr/news/market/400831">120만 계좌 마진콜, 월가 레버리지 경고 키웠다</a>
+- <a href="https://www.ajunews.com/view/20260831071535495">[아주증시포커스] 단일종목 레버리지 거래 급감에도 정부, &#x27;긴급조치권...</a>
+- <a href="https://biz.sbs.co.kr/article_hub/20000331627?division=NAVER">[마켓 프리뷰] &#x27;엔비디아 온기&#x27; 막은 美 반도체 관세…코스피 &#x27;뚝&#x27;</a>
+- <a href="https://www.etoday.co.kr/news/view/2619746">[증시키워드] 반도체 조정 속 인프라·건설 급등…외인 매도에 삼전·SK...</a>
+- <a href="https://www.dailian.co.kr/news/view/1683779/?sc=Naver">연 9% 이자에 금리까지 올랐다…&#x27;빚투&#x27; 부담 더 커지나 [백투백 인상]</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxNWGxPMjg4Y296Qy02c3ZuT21hMTZHZmFwT25jbkYyR3ZmTEl2QVowV3BvczU2dXhZNFdZLVhHMFo1dFRHZXJrUTM5d1lRSFBDR0I3WWN4WXFCT1NKODFkYkhjWkZ1dVFvb185MTR6ZExVTHZzVHFrLVZtb3ltVEtFLQ?oc=5">AI 주식 랠리는 이제 시작일 뿐일까?</a>
+- <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxQNHp5RFVLYlloVHZYSUlJanNQYlFKTFYtQXBINUx0ckd2SWthVldmYmo4dWNfTGVSUEMtdzNuYjBzOXBlM2h6YktUSndONkdpT1hmelE4VFBBVkRfRkM0X01JMlVTVHliOXdTQnpHX2JhS2Y5bWZFOUVhU2hJNjRpNnFwOHVYNF83NjlsR3gybldjQjJP?oc=5">이란 긴장에 유가 상승, 미국 주식 선물 하락: 시장 마감</a>
+- <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPcTd5UUJ2NXhhSmlMMXQ4c2tPdk5TNW5nTURrdWVCaDV6SlJpWWt2LUNSeDJpT1Q3OEtjdU1xV2ZOZnRRemtZRElucXNDdXQ5bVVQNFNkOUZwOTBEMC1hS1NSTFotQW9XaTFpY0k5QUtETkZndUpscDQwbm1qR2lYMFJyOU1oVzdfUFVuV05NaFBqczdIbHlWVUd6dndaeFg4OGFKampkWDBzSTJsejEzVkJYY2NzaXM?oc=5">연준, 강력한 새 경제 세력에 직면하다</a>
+- <a href="https://news.google.com/rss/articles/CBMi8gFBVV95cUxNZmRTZXRPRlZQR3RlQXZJUUpObjFaNTQ2OWtadllPUV9nTkZyUEE1U2c5MV9wTlQwSnUzU1VzMDkxcTFMbTBLS1k2OU0tSkVfbEk3MWVpU2NXWm9tWWNFSFc5Y1dMVzhHVWEtYXBpS3Jibk1LV0pPRW55bzFIMlUxUy1pdFBYWmNYOWdsd1pIM0oyRy1aUDFKMVNNUC1KN1ZmRGNRdzlhVzJ3WGFKSG0xbTRuSVVaaG5HdTRLalhxNlVnM0lpbDlHd0hmYjFmc3RrWUx5V2MwOUZRbFBhcU1VWlo3SldRc3BHVl9wNU1IanZzQQ?oc=5">미 연준 케빈 워시, 고인플레이션 완화 없으면 &#x27;할 일 있을 것&#x27; 경고</a>
+- <a href="https://news.google.com/rss/articles/CBMizAFBVV95cUxPUXhaRFNoNjRkb3dQNU9BWUs2OVVGWV9Ob3U1S3VHQ21oRU9fbThqYU95WUlmRzF2Rl9ydmRrUTRJWFFnTDhrLUVQV0FabEwxaGcycWJndVNjUDFZYURGRHc5MG5pWjliWmVFUmpzbzZBNVdmWmpoZDBONHhSLW4yMFB1R25uS0ZjZzFydV9kNVN4U01mMHdJNnF5aEJPOFNHZ0VIZUkxa2kxTEFXaW5WMUJZOEQ5M0lsZXNTQlB6Nm5nYjVmVWRZLWFpQXQ?oc=5">연준 이사 리사 쿡, 트럼프 행정부의 &#x27;해임 고려&#x27; 서한에 응답</a>
+- <a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxONDZWdFBWb2tkMWdHak9SdVFUbkVVLUtmdldPYXVEVmR0MTlsd01HR1lieWR0TEJxRWhKWmh6MkMwVVRDVzg5M1VTOFZLOXVHa2lPcWxGSzJpSEd3d2VIN3hERGIxVzNYU0M4ME0tbDdDYXhManBkbkdhT3hTMXNuOXo0V2hoOHQ5bzdPVWV2bmxwWFVIdEhpdk9RbHNRbzdIUVV3WDNRN0VReFN5YzUtck55NkU3SlBvSUNFOWRzeTBpM2REMGc?oc=5">S&amp;P 500, 증시 전반 부진에도 상승세 지속... 무슨 일인가?</a>
+- <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNX3Yxbi1BZ2o0UlJoUlkxZFRrYlQ4LU5vZGFjWGdYdEs2YVZXZUE2ZFNuNkdEXzZvV1k5T1dfM1FBV1prdWJZSjJVOW1WUzlycXlVdmh6Qzd3ZFl4S2ZlUy1BYXdSWmdsVHZWQVFZa0x2aFd5aFJCWWpsTzNfYUt1a1NzS29xN3ByWU95TU1VbVUzQVZGQWlybWdB?oc=5">엔비디아 실적: 매출 70% 성장 전망에 주가 급등... &#x27;극심한&#x27; 메모리 비용은 마진 압박</a>
+
+📰 정치/사회
+- <a href="https://ysmbc.co.kr/NewsArticle/1534626">호남 기반 정치활동 용혜인..성평등가족부 장관 후보자 지명</a>
+- <a href="https://www.mediatoday.co.kr/news/articleView.html?idxno=336789">김용범 실장 유임에 조선 &quot;이게 국정 쇄신인가&quot;… 한겨레, 개각 긍정 평...</a>
+- <a href="https://biz.heraldcorp.com/article/10856728?ref=naver">안철수 “‘용혜인 기용’은 李정권 자폭 카드, 속히 철회하길”</a>
+- <a href="https://www.wikitree.co.kr/articles/1156077">대법관 재제청, 어느 쪽 택해도 부담…조희대 대법원장이 처한 난감한 ...</a>
+- <a href="https://www.jnilbo.com/news/articleView.html?idxno=90000060812">세제개편안 공개 한 달…강남·비강남, 극과 극 온도차</a>
+- <a href="https://www.tfmedia.co.kr/news/article.html?no=206852">李대통령 &quot;망국적 부동산 투기 반드시 타파…불공정·불합리 조세 시정...</a>
