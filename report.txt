@@ -1,0 +1,37 @@
+📅 2026년 09월 14일
+서울 날씨: Sunny | 현재 18°C | 최저 17°C | 최고 26°C | 강수량 0.0mm | 습도 55%
+
+📊 주요 금융 지표
+- USD/KRW: 1,342.63 원
+- KOSPI: 6,909.91 (-1.76%)
+- NASDAQ: 26,186.41 (-0.56%)
+- Google: 349.39 (+3.22%)
+- Apple: 333.08 (+0.24%)
+- Microsoft: 505.41 (+1.97%)
+- QQQM: 292.02 (-0.81%)
+
+🇰🇷 국내 증시
+- <a href="https://www.fntoday.co.kr/news/articleView.html?idxno=393002">AI 속도조절·고유가·금리 공포 삼중고… 코스피 3.2% 폭락, 6600선 후퇴</a>
+- <a href="https://www.jasm.co.kr/news/articleView.html?idxno=314860">[뉴욕 증시] 미국 국채금리·유가 상승·AI 속도조절론 &#x27;삼중고&#x27;…나스...</a>
+- <a href="https://news.jtbc.co.kr/article/NB12318349?influxDiv=NAVER">&#x27;AI 속도조절론&#x27; 속 미국 반도체주 급락…SK하닉 나스닥 상장주 7.6%↓</a>
+- <a href="https://biz.newdaily.co.kr/site/data/html/2026/09/15/2026091500031.html">[속보] 유가급등에 美 10년물 5% 돌파 … 삼전닉스 프리장 약세</a>
+- <a href="https://www.kbmaeil.com/article/20260915500026">美 금리 5% 돌파·반도체 급락…코스피, 나흘째 하락 기로</a>
+- <a href="https://www.sedaily.com/article/20090901?ref=naver">“AI 인류 멸망” 속도 조절론에 中 시간 벌 수도 [트럼프 스톡커]</a>
+- <a href="http://www.the-biz.co.kr/news/articleView.html?idxno=727855">중동 불안에 달러도 들썩… 원/달러, 네고 벽 앞 상승폭은 &#x27;제한&#x27;</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE91dmcwS01EcUI0YWxEZ3JjZFJKSXlPUXVVNE12b3NMd0FtX0p5ckVmRHhEdTNYMUpNSVVfT0ZqVjNkZUhkTWVrSGloV2dJY3JhYWw5bEtrZy0xd3NXTVdJbXR0RFllMEJCbWRyOHFkOXdpR0Fzb0E?oc=5">10년물 국채 수익률 5% 도달, 미국 경제 및 시장에 중대한 임계점</a>
+- <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE4teEhEV3lFNEY0RGNiYTR1LWZ2TFlya2dVeGZaS2JkSEhtWnBpQmRIU2FzT2YyY1V0TnNGMXZwYXlQZzlyWDRMY2Q0QVBnVUgybW5mRzEyazNjZl84WEFSai1nTnFtUGJDV2dhNWV2NS0?oc=5">AI 리더들의 산업 감속 촉구 후 기술주 폭락</a>
+- <a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxQYVB5TUc4VTc5MGdNMjVWcVYxUUszYjdXU3hrVnZXbVRCRm40Z3JBX3BhTElKaXVFQmU4SW82WWRwLVdxcGFTVVhPclllM25kSzR0MWdqUmU5YjQydl9MZDhLZ1MzQmF0b01UY3MxaWx0VkxOMjJUQzhmbHJPQjQzdXJMWkJ2OGs5R0ZQc2FjeVpEdjZkM2VqMC1aeGhXSm8?oc=5">월가 하락 마감, AI 속도 조절 요구에 반도체 기업들 타격</a>
+- <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxNTnlqS1c0ZUI3VGExTWl4c3VCbXVLUi1NMFZZNUNaMmdLYzR2RnRDZjFPbGhPVG83M2ZBSms4YTc0b04wMUtNTG9GWmJnM29BU1ZzOWpHTjVxWXhjNHd6TmhndFV0VWJEc2ZkVm45OWtTMEktQ2NBMEdsd3J0XzNTWE1SNXVUQ3hKWFQ1WUJKLVc1bjRVWlg5NnFyaw?oc=5">예상 밖 인플레이션 후 글로벌 은행들, 연준 금리 인상 요구에 결집</a>
+- <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxPaEVOMUNfTUZvb2hraDdJWDJDMTVJM21kSjJVV2lOdll4R09DQWZtcVZCZmIySE9QMW11dU1NMlUzazdRYmQzcUhTLURxcDhYeXQwbldmeGMyNGlpREJlMTQ2SXl0bEc1YWFUUzdWdnlkZTNYUjZLSnBwUkp6QXlTd18yVGlZYnJSTnktN0JpSU82amFfRk1uWXhwMA?oc=5">트럼프, 연준에 금리 인하 촉구... 시장은 워시의 인상에 베팅</a>
+- <a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPdWZSbjFBdjV2Wm83NHFwYzNNVTJHWnVvYkZmd010aWZERmFNU1F2T0JNeVhXdUNlZkRHU3dYVjJWTmVLNF8tbm8xYU5RQlFxQ0lZUmN1VkpMQVZ5OHgxZnJNVVdxeVpkeTBiR0Y5eVZPd2QxeVh5UWdyNk1QdVlWeXdiTEZocGs?oc=5">오늘 증시: 10년물 국채 수익률 5% 기록, AI 경고에 기술주 불안 — 실시간 업데이트</a>
+- <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNUzlweFhFUzk0UGhCUmpCVWVvQTFvLXZadDRvQ0YtaV96WHMxTlY4bE5CelRBOVZPWGVfdTBXT080ZXdxbXlWdFlmcWVjeDBnYlhFd3ZZZHNnQjdqYWE5SzVLckthZGVZelQybGRtZnJGaU5XeDRLd2hWWUNaYTNJRFE1MHVEU3I5NTN3NHQ5eTZOSnVQWVlQNzBTUk4zZHRCbGcyVG5POGJ2d2xUZUJkVnVTZnZjejYybXhuU2NzN1VYc3dNOVFaX3pNRXIwZw?oc=5">오늘 증시: 다우·S&amp;P 500·나스닥, AI 우려 및 유가 상승에 하락 마감...10년물 수익률 5% 도달 후 하락하며 저점 벗어나</a>
+
+📰 정치/사회
+- <a href="https://news.tf.co.kr/read/ptoday/2365815.htm">여야 정책위, 민생법안 32개 공동 추진…&quot;정치는 다퉈도 민생은 협력&quot;</a>
+- <a href="http://www.breaknews.com/1236579">[김승원 청문회] ① &lt;공시검증&gt; 한동훈 ‘오빠 게이트’…제넨셀 임상승...</a>
+- <a href="https://www.m-i.kr/news/articleView.html?idxno=1413890">AI 속도조절론에 반도체 급락... 나스닥 0.56%↓ [뉴욕증시]</a>
+- <a href="https://www.gokorea.kr/news/articleView.html?idxno=878395">나경원, 용혜인 사퇴 사건 통해 비례대표제 폐지 주장… 왜 지금이 적기...</a>
+- <a href="https://www.slist.kr/news/articleView.html?idxno=766192">최태원, &#x27;동거인 1000억 지출&#x27; 발언 불기소에 항고...&quot;50배 넘게 부풀려...</a>
+- <a href="https://www.discoverynews.kr/news/articleView.html?idxno=1101544">경기도 미등록 이주아동 최대 4843명 추정...의료·교육·진로 장벽 겹쳐</a>
