@@ -1,0 +1,37 @@
+📅 2026년 09월 27일
+서울 날씨: Overcast  | 현재 19°C | 최저 19°C | 최고 25°C | 강수량 0.0mm | 습도 74%
+
+📊 주요 금융 지표
+- USD/KRW: 1,357.05 원
+- KOSPI: 7,080.92 (+0.90%)
+- NASDAQ: 27,068.72 (+0.48%)
+- Google: 343.92 (+0.46%)
+- Apple: 341.07 (+1.53%)
+- Microsoft: 516.17 (+3.66%)
+- QQQM: 306.54 (+0.46%)
+
+🇰🇷 국내 증시
+- <a href="https://www.ajunews.com/view/20260928075852730">[마켓 프리뷰] 美 AI주 강세에도 금리 부담…코스피 7000선 공방 전망</a>
+- <a href="https://news.einfomax.co.kr/news/articleView.html?idxno=4436600">&quot;美 국채 금리 5%가 증시 한계선…조정 임박&quot;</a>
+- <a href="https://biz.newdaily.co.kr/site/data/html/2026/09/28/2026092800017.html">[속보] 삼전닉스 프리장 1% 약세 … 美 10년물 5.2%·유가 100달러 부담</a>
+- <a href="https://www.newsway.co.kr/news/view?ud=2026092807491205239">국내 최대 자본시장 IR행사 &#x27;코리아 프리미엄 위크&#x27; 오늘 개막</a>
+- <a href="https://www.edaily.co.kr/News/Read?newsId=01997526645584712&amp;mediaCodeNo=257&amp;utm_source=naver&amp;utm_medium=referral&amp;utm_campaign=news_syndication&amp;utm_content=original_article">연휴 끝 코스피 7000 시험대…美금리·유가·AI 소화할까[뉴스새벽배송...</a>
+- <a href="https://www.etoday.co.kr/news/view/2629638">[오늘의 투자전략] 금리 불안 vs 반도체 실적…코스피 7000선 공방</a>
+- <a href="https://www.edaily.co.kr/News/Read?newsId=01958166645584712&amp;mediaCodeNo=257&amp;utm_source=naver&amp;utm_medium=referral&amp;utm_campaign=news_syndication&amp;utm_content=original_article">&quot;금리 5% 넘는데 반도체만 달린다…마이크론 CEO 발언 주목&quot;</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxNVGEzeTM5UEZjTzRrYWs4T0hyTTAtRVpvWkJ3UFhUVUNxNF9fQTZBM0JHcHh2WFk4MlFQemNVM1RWMW9RQUh0ZUlEZlYwZ21obEJnRXVjOE5QM2ZFYVEtbHNVNmZ4bUdCRU9FaDRUa3Y3VGpsVHk2MzU1LVU2TmJSY3dGR05mdUhsQ2lnZGQzVndvR1dr?oc=5">이란 제안 거부로 유가 상승, 주식 선물 하락: 시장 요약</a>
+- <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOWWdCa1NORXRCLVVSYUZ3Rk9fWThoYk5Ddm9CRk5HTUMwdnIzVGNxS2F0WGI1YktWNVdaWFRPMGJoUFBDdkdvN0hGRENlcHpQWVBURDkwRGNxTUhaWktFazB2V3kwdmE5SnVGSW5IX0tIaS1jNDQ0QVgzcW5UbHhNVld0YmZxUDRUY1hHZjRYdjBLa0JtZXBr?oc=5">골드만삭스, 초고액 자산가 투자자의 80%가 주식 떠나 대체 자산으로 향하고 있으며 채권은 아니라고 밝혀</a>
+- <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOMGdRWGMwS19RQ1QwQVhydF9udFh2SkVwN2RYaXZMZGd6UzdGdXJOQ1JUMlFuLUw3VExKTm5XbldCLVBWVHpWSmNSWlQyN0tYUzVtRTg5Rlk3SnMxRklVWHVzbWJ4RFgtajBvVGM1cEhJcVZnTkhVNXNmWFVvZXZiRmt3?oc=5">연준, 중간 선거 앞두고 추가 금리 인상 전망에 직면</a>
+- <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxPUWp2cWtUeTRqUnMtdGU0NElzbE9lV2N5QllabnBYYlhyRVk5TnU4ckJhSUc3aVZmRmxadmVoRTBsM2xfSWdpR19JMlVLMlg4eG1SdDdaSXRvT1RKNE5kS3d6NjgwS2l3ZGxqSW5Tc2x3RFJQYm1nV3RTN3NpZVBPbzhjekxzdlp0djdiNHVFckt5UDFCY2Ixajc0bVhaSkNDUEJvYm9iUWprUkFINVpGWGdR?oc=5">미국 연준, 은행 감독 기준 상향 계획 중이라고 소식통 밝혀</a>
+- <a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxPR21RNks3NUh3SlB3bUU2VEs1ZHlfSUJLcGI2ZlE2MVB3ZjF3ci1vMEhuRWE4NDlmcnF2QmNsUGx1SEV0UWNERnBza05EMVEwYzBnQzd4Y3FkRGhLYmRERmVZRy13UE9ONmU1b2s1UmV5azQyRHpCSERKZzNpR1dRc0pSbWpFa0x0SkJqdHFkNy1TaXg0M3NvaVZWdDZ0bFhpTnM1OGdEdTZPU3RWTy1VVl85NmtrNVNwbHl30gHAAUFVX3lxTFBoeDluN1VzWVExYWFOTXVRcWxOV3M2ZzV6TmpseEo4bnRIUjlVN3ZhN09wbWpfM2EwOGxRWFBwUlN4WnB4WDFTNmpFdHQ3ajRfWDVwR1YyRDNYejF5aXVFXzY1eFJnYXE1eGViOFdjUUdhaVdSdWtRblVSLU1nX1lZNTlLT2RQRXNNWjhHVURlSGZzTGFPVHZjM1JhZW9QNi1QVjYzdjFzM0tUNHlPb0g1LUdMNzdUYnFwREJYWElzTw?oc=5">급등하는 국채 수익률, 케빈 워시와 연준에 새로운 문제 제기</a>
+- <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxPcWNISkdYaFRyRmhUUXdQRnJJNUU5aFlHeXh4OWR2VVBNZDZGVkgyTzBLUFltSmhZazhRMXp4UVRHV1pSNUVLSlhaZnVUbEZrQlhZeF9ZV3I5RG1JWTBjajRmbW5UdTBldzJFQU00SWN4dVFaRmxWVXVCOE9yQnVlNDNvNkt3SGJ5djc1YURPMDRpVkUxOC04?oc=5">AI 붐이 언제 꺼질지 아는 방법</a>
+- <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxNak5PNzM4SmJBY1V0dFBKV2JRM1QtRnlyMDQ1N21aVmNBX1JXbFNHZkFKaktScG9CWVFRT0xZYTdENTQtWlVtZTFUOHk4REJVbm41QWRxV3l0RVJTNlJYcDROMzlEVUdac0FpbHU1MHBMaXR1bXhMcWlQSlpaUWFCLTVCWVNKamU3VEVYcFBrclQwZGNNVUFtYTdQd0FSenRreTU1VFBPM0NTTGVCOUdoWDdBZURRbUpoUXJQMg?oc=5">골드만삭스, AI 주식 투자자들에게 냉엄한 현실 일깨워줘</a>
+
+📰 정치/사회
+- <a href="https://news.tf.co.kr/read/ptoday/2369930.htm">[단독] 李 대통령 &#x27;위기&#x27;에 친명 꿈틀?…혁신회의, 대대적 조직 정비 착...</a>
+- <a href="https://dealsite.co.kr/articles/169648">&quot;과세하면 국내 거래소 떠난다&quot;…투자자들 이탈 우려↑</a>
+- <a href="https://www.wikitree.co.kr/articles/1162339">“박정희가 육영수 피격 배후?”…영화 ‘암살자들’ 역사왜곡 논란</a>
+- <a href="https://www.dt.co.kr/article/12086036?ref=naver">AI 발전 못 따라가는 정부 정책…기업이 규칙 만드는 상황 도래</a>
+- <a href="https://www.sejungilbo.com/news/articleView.html?idxno=60290">[세리포트] &#x27;인사·정보유출·체납&#x27;까지…올해 국세청 국감에서 물어야...</a>
+- <a href="https://news.jtbc.co.kr/article/NB12320205?influxDiv=NAVER">16년 만에 &#x27;친일재산&#x27; 조사위 부활…해외 환수 또 물건너가나</a>
