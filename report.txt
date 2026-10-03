@@ -1,0 +1,37 @@
+📅 2026년 10월 03일
+서울 날씨: Sunny | 현재 16°C | 최저 16°C | 최고 24°C | 강수량 0.0mm | 습도 64%
+
+📊 주요 금융 지표
+- USD/KRW: 1,347.39 원
+- KOSPI: 7,003.74 (+0.46%)
+- NASDAQ: 27,190.86 (+1.19%)
+- Google: 343.50 (+1.56%)
+- Apple: 333.69 (+1.02%)
+- Microsoft: 517.53 (+0.92%)
+- QQQM: 308.69 (+1.02%)
+
+🇰🇷 국내 증시
+- <a href="https://www.hankyung.com/article/2026100206306">지루한 박스권 장세…삼성전자 3분기 실적에 쏠리는 눈 [주간전망]</a>
+- <a href="https://www.newsis.com/view/NISX20261003_0003813643">美국채금리 5.3% 시대…비트코인, 하방 다지며 연말 랠리 시험대[금리 쇼...</a>
+- <a href="http://www.joseilbo.com/news/news_read.php?uid=576818&amp;class=18&amp;grp=">&#x27;7월 폭락장&#x27;에 국민연금 직격탄…기금 182조원↓·수익률 12%p↓</a>
+- <a href="https://magazine.hankyung.com/business/article/202609305465b">&quot;한국 주식, 싸다고 좋은 게 아니다&quot;...&#x27;빅쇼트&#x27; 버리 제자 &#x27;일침&#x27;</a>
+- <a href="https://www.segye.com/newsView/20261003500119?OutUrl=naver">삼전·하이닉스 자사주 매입 10월 종료… 코스피 앞날은?</a>
+- <a href="http://www.kjdaily.com/article.php?aid=1791065291688202276">외국인 코스피 20조원 팔았다…SK하이닉스·삼성전자에 17조원 집중</a>
+- <a href="https://www.the-today.com/news/articleView.html?idxno=91168">[단독] 中 독점 깬 &#x27;상동 텅스텐&#x27;의 귀환…美 기업과 21년 장기 오프테이...</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE1JVkxRTDJXTzczbVFZVDBDb3NJTmZjRW1TdzVVeUFUbkFVV0RKMDdxSDVtb2ZOU2R1NzFqT2kwem9MOTRsbUdZTUZ2a3ctYXNRN2lWYXdycU10YVBIdVk3a2VVa3FrMjlUZjVHOUVDZ3BPTGFNOGZKQ9IBfkFVX3lxTE1GWVluaGw5M2xYLV9aZ0dYX19YSDJxNXlYcFdLakUwQ3FYSTFDQnJkNWlNUGFGSDRjZXcwWDR3NFllbXg5UzA1V1BWYlgwYlVaYTZFRHB0ZWRIeHp5akduM3RlMnR3TTFBR3RoZjh0SmtnSDVtM2s1OVZENVU2Zw?oc=5">부진한 고용 지표에 금요일 증시 상승, 엔비디아 주도로 나스닥 장중 최고치 경신</a>
+- <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTE1iVFo0X183d0hLTDdCZU9jamhyTFIxY3RIWmZYNWVfQlQ2TkVPbXRuMS1rM2hEUWtrOU8xRjBQWlV1MHMtRWFqWWVlSXIzOEtnRE9ua3l1NEpSaFFRcGZndTkwU2xUU2pLZ19ISjJ0alE5Mk50enlNZHYyb1c?oc=5">증시와 경제를 떠받치는 강력하지만 취약한 힘</a>
+- <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxNTWhnM3FLLUlFaE9XMmNYSVV3amVLUGtIU0d4a3E0OFFlcXQxaW5NLWFXZG4xUVVvTXZYUUZBalltRVJSYzJfOHJfVXlBdHIyaWNwWnhLV1NQVzZjRHFlWkExeFp1NGd0eE5lQi1OdjVvYzAwcEtxbHAzbkY5aVVCTw?oc=5">무서운 증시 양극화가 시작됐다. 다음 행보는?</a>
+- <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxPcFVuSmttSnB0ZWY4OXpfcm5CVE9Nai1Sa3FKQ1ZGWG1aTlQxSk1USDl0cTBDcnZTaEFKUlJyVVdPZGhDTjVaQk5aZU8yLVdUSjcyTkNibEtfMVpCbFNTUFdiUm9OUGxpZUpXTjI5X2J0Q2Z4NTYwZG9ILXdMZThZSGIweDhoQkd0TkZudVZMMUhBVVdab3ZrenctLWQ0UQ?oc=5">미 고용 증가세 둔화, 10월 연준 금리 동결 지지</a>
+- <a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE5kY2NFM3J0MFBvRjNNMHFiVVhGTWtBVXBCcEQ0Nk5tREQyY2pkbG1OOV96bVZkY005LTdFX3FLNmdwbEdLNXhXWjltNEZRTm9NMjlWdnJ6WFZIZ0hQZDdoQVhHUmVMa3F1SzVicEhGZnAxRFdzWlE?oc=5">연준 선호 인플레이션 지표, 8월 3.4%로 하락</a>
+- <a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxPY25fbkF3U3FzTGZISkVoSW1IeGNCbXhTYUZIVWRzRkpIZGpWZ3FxWjNkS3c3d19fS2cyLTZHcnpVTUt3elpTQTdhMkxVd2VRM0JQaHRVOGVkV2FFS1RDc0FPbFZfcHpwNXNRUHEtcUx3VENpeWxiOWI2Q1lOb19kVFliWFptNXM1Y21rcw?oc=5">연준 로건, 50bp 이상 금리 인상 촉구</a>
+- <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxNLWE0blFwNjQtYzV3UTJuODNjRmZQbTJydkY1SkVmZjd3bkFjVW5ET0JKS1U3aTEyb3N0MUN0RWNRUEdXX2YzSnpBMG9mbk9Ock8tNjZUMzdLRWRoN2lGMTlYY3BDVVdTeW5SdFlyNzVDbXBVSmJwWWdWTVcwSVFwaXgySHlleW56TS1ZN1k0S2ZlekxDemVmaWpnU3dWWHFQQlZfLXRvUEM2UGZVdjdJWThvRTd1djlsbWJuUkVFNUlpUQ?oc=5">월가 다음 주: 급등하는 채권 수익률·중간선거·실적, 미 증시 4분기 강세 시험대</a>
+
+📰 정치/사회
+- <a href="https://www.g-enews.com/view.php?ud=202610040801393028fbbec65dfb_1">미중 패권 다툼 속 통제 불능 인공지능 공포…배선트 &quot;비상 통보선 구축...</a>
+- <a href="https://www.etoday.co.kr/news/view/2632109">여야, 국감 체제 돌입…대법관 공백·검찰개혁 공방</a>
+- <a href="https://www.newsis.com/view/NISX20261002_0003812620">[기업 조사 전쟁②] 쿠팡 현장조사 거부에 공정위 &quot;과태료&quot;…쟁점은 &#x27;7일...</a>
+- <a href="https://www.yna.co.kr/view/AKR20261003046600004?input=1195m">인권위 &#x27;일베금지법&#x27; 제동…표현의 자유 vs 처벌해야 할 혐오</a>
+- <a href="https://www.g-enews.com/view.php?ud=2026100407470188729a1f309431_1">G7 비축유 배분 윤곽…美·유럽 9000만배럴</a>
+- <a href="https://www.g-enews.com/view.php?ud=20261004034535209920990b2dc5_1">러, 우크라 3단계 전력망 전멸 계획...&quot;겨울철 전력·수도 끊어 도시 마...</a>
