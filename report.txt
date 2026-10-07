@@ -1,0 +1,37 @@
+📅 2026년 10월 07일
+서울 날씨: Sunny | 현재 17°C | 최저 14°C | 최고 23°C | 강수량 0.0mm | 습도 52%
+
+📊 주요 금융 지표
+- USD/KRW: 1,338.92 원
+- KOSPI: 7,003.74 (+0.46%)
+- NASDAQ: 27,599.89 (+0.45%)
+- Google: 346.47 (+0.86%)
+- Apple: 332.89 (-0.24%)
+- Microsoft: 525.18 (+1.48%)
+- QQQM: 311.40 (+0.88%)
+
+🇰🇷 국내 증시
+- <a href="https://www.lcnews.co.kr/news/articleView.html?idxno=209308">[개장시황] 코스피, 77.14포인트(-1.11%) 내린 6864.25 출발</a>
+- <a href="https://www.ilovepc.co.kr/news/articleView.html?idxno=60878">[디지털포스트 모닝픽] 삼성전자, 내년 HBM4 공급가 2~3배 인상? … &quot;이달...</a>
+- <a href="https://www.news1.kr/finance/general-stock/6312262">&#x27;55조 자사주&#x27; 매입 끝나간다…&quot;삼전닉스, 실적·주주환원이 분수령&quot;</a>
+- <a href="https://theviewers.co.kr/View.aspx?No=4254314">[애널픽] 은행주 다시 금리의 시간...&quot;4분기 NIM 반등, 하나금융 최선호...</a>
+- <a href="https://www.businesspost.co.kr/BP?command=article_view&amp;num=448756">하나증권 &quot;AI 데이터센터 전력 확보 경쟁 재부각, 두산에너빌리티 한전...</a>
+- <a href="https://www.seoulfn.com/news/articleView.html?idxno=639487">[외환+] 무거워진 상단···원·달러 환율, 한달 만에 1330원대 진입</a>
+- <a href="https://www.sentv.co.kr/article/view/sentv202610070008">뉴욕증시, 실적 기대감에 상승…S&amp;P500·나스닥 사상 최고치</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxNeFljVEJxbzRPNEJyUGhwRm9wdUE0ZmlYbGVnaUlrSXEwNktCOWdkMEVVV29pV1duZ3BERFU1OHVGNjJRRUtFelRfWFd1dEVfOThrNWhoWGc5Yk10RW81aGZrNE5DQTdFekZpM2lfemNneHVETFNnVlktUkxwZWY2OG1iVlJrUTNHRWppb1dWZU8xeWZ5ajRTZmFmVG14Zw?oc=5">마이클 버리 &quot;주식 시장은 폭락의 첫 단계, 2단계까지 6~9개월 남았다&quot; 경고</a>
+- <a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxQeXUxU2F5X1UwSTZreDdOc3FaTDdsWVBreUNYY3U1WVlpZXVUNGM1UE8tLU50eUU1UTlzVHRPVlhOTlBmemF5ZTJGY3lNa2Njc1NwaFNkWG04OVdTbkUxVGd4d1E1WkFkVkpXdmFoVkEyUHFkX24tSUlMTkZaS3FUYy1pQzJfQ1Nldy10bDhwdEhoOHg5eHFpVDFMWDJ6bkcyT1F3R0tDaWhFSU4tb0RHeUVYNFVSUHJT?oc=5">보우먼 &quot;연준, 은행 감독 책임 전면 개편 계획&quot;</a>
+- <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFA4ZVZIQnAyNXMtT1dBejBuSXRIOEVmQ015cHRtYjBlSnlFSHNaMTdnTWtGbHBnOGhvMkZJNXp0ZU9wdUZFc21xXzkzb3hOUXJOWG1KOHkxV01Jd2c?oc=5">인플레이션 우려 지속, 연준 금리 결정 임박</a>
+- <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxOVjhEQ3pmSHJTOE5UWTlVUlNPendEZDIzcmdGWWNEcnY4TkFCODBudVByaThtVF9URjlrbW5oMi1zUVRaV2lFQmZ1U09pVXJFV3NRNnVPR3hUOEU2OWF3RWRjUXBiVXRTTWtRUV9aTUk0S3ZXS2NGQkhFSGM1STJQT1VCZHdoUUZFQk5CdjlHb0RSSHBEaHNSWg?oc=5">케빈 워시, 54대45로 연준 의장 확정… 연준 역사상 가장 분열된 투표. 2023년 이후 첫 금리 인상에도 그 분열이 여전히 중요한 이유</a>
+- <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPVW1TVHY0d2FiRUhSdU90OGRHRl9XS1Z6RlVjUzVjWE8yQTBPRUJOMTd5Ti1FN1FoTzZfZUVocjc1cUU3Sld3andDNDg2TkpMM3JEdldTNENRM0NubjNEN0txSHZnU0d6SndubGdJT3JRQms2ZC1ZUHFoXy0xcFNhVUVwcnltd3VFeUVjSUJjWGN1dXRMMWpuQXY0eHh4YWJ1dG1XT3Rheks5MkRVbm91ZDRMZUo?oc=5">&#x27;매그니피센트 7&#x27; 수익 부진: 이번 어닝 시즌, 다른 주식 시장이 기술 거물들을 앞지를 수 있는 방법</a>
+- <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxPeGlOSEpJcHJYTm80SVFHS3QwLVM0aTVBVjVYN2RWWFVCZDYzTHdRUENrZVp2dGVMaGFCWS1WdHNodmYxNWcyZllYWXpIYUpmZ0ZNOWJ1aC0xd3pVaExwWTRsdWhvLV91TkZHSy1MZTc0UzFEX3IwVmFXQUoxWE5kdzhtTDR1UmhpbXBXM2JSenJKMGV3?oc=5">마이크로소프트, AI의 &#x27;책임자&#x27;로 평가받아 매수 등급 상향</a>
+- <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxPd25OOGtLZGFQYm9wMjExWWRaWlhUTUdFQjJFTG5oLThEaFFWcUh2QThaeXd5NWVNeVhOQWZ1U1VGRGprN2xueDFqSVRHRWNMMTVLNjlrRHBGbV8wV0dScERTOXh1VzRaTlh4RkZBQTFPVGFGMnJvSkdmLUZLamllRmVHTWg?oc=5">S&amp;P 500, AI 주식들이 채권 시장 침체를 극복하며 사상 최고치 경신</a>
+
+📰 정치/사회
+- <a href="https://www.chosun.com/politics/assembly/2026/10/07/63YGZC5FY5EXDH3HGOVJLC7DPQ/?utm_source=naver&amp;utm_medium=referral&amp;utm_campaign=naver-news">김재섭 “정치 경찰의 표적수사, 응하지 않겠다...체포동의안 보내라”</a>
+- <a href="http://www.breaknews.com/1241377">국민의힘 장동혁·정점식 지도부, 국감·외교안보 총력 대응</a>
+- <a href="https://www.mt.co.kr/politics/2026/10/07/2026100707463897711">[단독] 연기금 공동의결권 행사 &#x27;족쇄&#x27; 푼다…與 &#x27;5%룰 완화&#x27; 법제화</a>
+- <a href="https://www.slist.kr/news/articleView.html?idxno=771585">&#x27;암살자(들)&#x27;, 박정희 고향 구미서 상영 중단...국힘·보수단체 집회 여...</a>
+- <a href="https://www.medigatenews.com/news/719747008">대한민국 소아 의료에 미래가 없다</a>
+- <a href="https://www.m-i.kr/news/articleView.html?idxno=2003267">병역특례 53년 만에 수술대…與 &quot;큰 틀 개편&quot;·野 &quot;이번 AG부터 폐지&quot;</a>
