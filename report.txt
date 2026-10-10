@@ -1,0 +1,37 @@
+📅 2026년 10월 10일
+서울 날씨: Smoky haze | 현재 19°C | 최저 16°C | 최고 26°C | 강수량 0.0mm | 습도 47%
+
+📊 주요 금융 지표
+- USD/KRW: 1,341.59 원
+- KOSPI: 6,625.93 (-2.62%)
+- NASDAQ: 27,366.17 (+0.64%)
+- Google: 348.29 (-0.63%)
+- Apple: 340.42 (+1.11%)
+- Microsoft: 522.61 (-1.35%)
+- QQQM: 307.85 (-1.31%)
+
+🇰🇷 국내 증시
+- <a href="http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202610100011&amp;t=NN">&quot;변동장, 일단 내 돈 지켜야죠&quot;…박스권에 지친 돈 일주일 새 &#x27;1.2조&#x27; 몰...</a>
+- <a href="https://www.mk.co.kr/article/12172657">삼전닉스 대신 방산·반도체 테마형으로…변화하는 레버리지 ETF 판도</a>
+- <a href="https://www.yna.co.kr/view/AKR20261008209500008?input=1195m">코스피 지지부진 속 코스닥 선전…&#x27;천스닥&#x27; 탈환은 글쎄</a>
+- <a href="https://news.einfomax.co.kr/news/articleView.html?idxno=4438528">[외환] 트럼프 유가 안정대책 발표 속 1,340원대 초반 거래</a>
+- <a href="https://www.youthdaily.co.kr/news/article.html?no=228159">박스권 국내 증시의 &#x27;피난처&#x27;…&#x27;파킹형 ETF&#x27;로 몰리는 뭉칫돈</a>
+- <a href="https://www.thepublic.kr/news/articleView.html?idxno=321625">AI 호황인데 왜 한국만 주춤?…메모리 편중에 외국인도 등 돌렸다</a>
+- <a href="https://www.seoulfn.com/news/articleView.html?idxno=639720">[뉴욕증시] 오픈AI 실적에 &#x27;울고 웃다&#x27; 기술주 반등···SW 강세·반도체...</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQUW9sbjktb0FQUGFKM3d1WVEtNGRrQWg0REotQUxPVEhlSlF3aTRCREJhN3dXZkUzWWkwUDkzOTNZT3JlNElKbE5rQkE1VEtWMWdaejBiaDJOSjVtd3lMVFE2RE1lamg5N0FNRkVoaVhZM0p3RTBxMHZZZEIwWkxnUFl5RVpZRUp6X2tIRE9NVXVYWlFzNnVadnJkNnE0a3dUUHBnV05R0gGrAUFVX3lxTFA2T0hYZGpud0VZUWp3Rk43QTZOSFZVbXVoWHJRYnRRWFZTaHZ1Qi12bGxVQVdHWEJER0huZ19RQ2M2T0xtSUhIcm10cFJRbElfQWd0UFRMQWpYeVVhYlJRLVlXajJNOVAyZXFpWmdUUHhjemVvcFFjVDlja3VYSEZzY0YySWVEdjhvdkM4RXdVZVJjS0QyN1lxekJZZGt4VV9kZmVIMVBsdlllNA?oc=5">연방준비제도(연준) 관계자들, 회의록에 따르면 올해 추가 금리 인상 필요할 것으로 예상</a>
+- <a href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxNNHpyTEJ5M0FCbzNkd0RHY1BUeDNyQkV3ZUlmREZnakRST1gtV3NTT0FaRDBoZjR0dmJGYjlQV3pwZEtKQkVmeDljUUVpWUFDV0xPVTZWU0loQWFxTTZPTWduTTBCdi1mUXpzdng5aXVCb3NVamZkXzRPeFNRbzdQWVUySUdyVVhJS2NqX0tWaVI3ZHl6WEEtRUxtdFNEbzhia09jUDlCWWpta3U5TEIxeHlncFRuVHc0eUpDQXU0dVl3MmJRZlRYYXVFMDBwYk9mVTJ2NklR?oc=5">뉴욕 연방준비제도, 일상생활용품 물가 상승은 관세 때문이라고 밝혀</a>
+- <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxQYjlOZTQ4TndWWU5vZlFJRXZmTWpHemhxVnlsWi1RVE1aalh6MEhhRTNzU1Vvc2lpb050STlEWFJ5OVE1a0tjWnZGZkxtbnpUVWZocHBOSTR3MnREUXBmbTJpN2pRb0s1LXByRkRjekxYdXVxaVFGdlNib0JQUnptYndHUkplMURQUG5mcnFkbzY2QV9mRE44Z2dnUTZVUGVTbFBsQXJieHR5NG9lR2NFZk43enU?oc=5">트럼프, 연방준비제도 이사 리사 쿡 해고 시도 확대</a>
+- <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxObkQ4Q2NqVEllSzAtNGdwR3puUjkxcXNsQTlsdXllaFNUbGpKTktaR1g2MzhsZEQtVUhFV0h1TU1WUWVwYTVWc2tPdzZ3MzFaVFo5VTBYTFl5UjZVTkdtVzVxLXlxOGhkenZabThMVUZrd0VPdDlMRzBLcHdRM2pEOWFzTl8zRWF5R3JQdlNnLTFBeFk?oc=5">S&amp;P 500 사상 최고치 뒤에 숨겨진 위험: 대부분 구성 종목의 저조한 성과, 유가 급등 및 미국 국채 금리 상승으로 시장 양극화 심화</a>
+- <a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxQalVpenVNVmktYUNRMXdNTWVCUWxpaVl0bmNIMFNhTm9EV2NjVFdSejM4X003YWZhbzJucWVoVEpkcks5eEkwSW83a1NzazltaFdROW5BQ2FuZGlsMlp1cGhfTDZXZHVXY2dGQWNjTHhUVGo2NlNRUXJlRXVJOUN3WWttakRXYVMwVFl4cjNlQ2lvYkNURVBXbU51bHVseUNmYk5LWF85Y2N0MmNVNG1haXBSbWZ6VktqUjZv?oc=5">금리 인상이 가장 잘나가던 기술주조차 가치를 깎아내리고 있다</a>
+- <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxPOG8tazVEa2hVcWdlYU1pZk53QzNMLU1lVWk4c2U0NFRvMk5IMnJYMWdTZERsSHhkYWo1dkRlczFWcGdwRHJfbFJzQ09kUEo1elE4YVRQZWp0Z3lVbU1MUjJIVV9lbFFHbUxPUlJhUER6NzgwdjVFTHM4UVhGZ3pNd3pR0gGHAUFVX3lxTE9nLWxxNlZwaWJicm9JSVBTT3lHeElLRDJ2QklRT2FkelA0eXZSNDlyRWh6dWlhNFloNzZfOUtid3dmcEJsTGNNcTE5VnhEbURXWWo0UGktcmhXNV8tS1lHYndTellPVm00RmFpeFVLTnBqNENtUUtBdHV2NVdPU0Jnb1A1NnpzSQ?oc=5">엔비디아, 오라클, 코어위브 등 AI 관련주, 오픈AI 매출 보고서 발표에 하락</a>
+- <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOOVJIRWMyVjcxeXo1b3l0RWRrcF8xd3BJTE9LR1QyT1VIZGJDbUxCTC12d1dNaU5Mcm5SQXJLZXBQN3pPN1Z6cHhTZWtFWTIyRkVHTGdlT3QzaFp3R29VYVRFeTZTUjlmcFdIU1VqMy1Ma0RfTHQ2ZnpuQm5MNzliTU9qSmdidnhPMEptNmZ3?oc=5">S&amp;P 500, 나스닥 100, 다우 주간 상승 마감… 투자자들 어닝 시즌 주시 (MSFT, NFLX, SPCX, ASTS 주목)</a>
+
+📰 정치/사회
+- <a href="https://www.viva100.com/article/20261008500879">[정치라떼] 조희대, 재제청 요구 거부…&quot;대통령이 기세 눌려&quot;</a>
+- <a href="http://www.rightknow.co.kr/news/articleView.html?idxno=34967">[초점] 추미애 경기지사 재산 37억…취임 직전 두 달 새 3억8천만원 늘어</a>
+- <a href="https://news.bbsi.co.kr/news/articleView.html?idxno=4111291">오세훈 서울시장 항소심 선고 앞두고 시정 긴장감 고조</a>
+- <a href="https://www.sisajournal.com/news/articleView.html?idxno=389413">태극마크 품격 저버린 금메달 환호…&#x27;병역특례 공정성&#x27; 촉발</a>
+- <a href="https://www.ajunews.com/view/20261010091412889">다음주 IMF, 韓 성장률 전망 수정치 발표…고용·가계대출도 주목</a>
+- <a href="https://medicalworldnews.co.kr/news/view.php?idx=1510977744">고독사 10명 중 6명이 중장년…고립 막을 전담체계는 ‘전무’</a>
