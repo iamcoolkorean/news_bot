@@ -1,0 +1,37 @@
+📅 2026년 10월 16일
+서울 날씨: Sunny | 현재 15°C | 최저 15°C | 최고 25°C | 강수량 0.0mm | 습도 72%
+
+📊 주요 금융 지표
+- USD/KRW: 1,342.74 원
+- KOSPI: 5,554.22 (-7.57%)
+- NASDAQ: 26,140.03 (-2.15%)
+- Google: 340.59 (-2.47%)
+- Apple: 343.46 (+0.43%)
+- Microsoft: 529.05 (-1.93%)
+- QQQM: 292.26 (-2.51%)
+
+🇰🇷 국내 증시
+- <a href="https://www.seoulfn.com/news/articleView.html?idxno=640317">[뉴욕증시] AI·유가 &#x27;겹악재&#x27;, 나스닥 2%대 급락···&#x27;속슬&#x27; 13%↓· 코어...</a>
+- <a href="https://economist.co.kr/article/view/ecn202610140028">블랙록도 짚은 ‘개혁의 지속적 실행’…‘코리아 프리미엄 위크’가 남...</a>
+- <a href="https://biz.sbs.co.kr/article_hub/20000340212?division=NAVER">&#x27;하루만에 7% 뚝&#x27; 코스피 6천선 붕괴…7월 폭락장 악몽 재현</a>
+- <a href="https://www.yna.co.kr/view/AKR20261016150700008?input=1195m">&#x27;빚투&#x27; 부메랑…코스피 급락에 한주간 3천억원 강제청산</a>
+- <a href="https://www.newsis.com/view/NISX20261016_0003829533">&quot;이번엔 몇 년 형인가요?&quot; 증시에 감금된 개미들, 대처법은[하락장 생존...</a>
+- <a href="https://www.newspim.com/news/view/20261016000905">[금리 리셋] ⑤ &#x27;10% 배당&#x27; 사모대출·커버드콜 ETF의 두 얼굴 - ㊤</a>
+- <a href="https://www.dailian.co.kr/news/view/1702530/?sc=Naver">AI &#x27;순환투자&#x27;, 선순환인가 폭탄 돌리기인가</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxNcWwtaE0zalpGS3dlQkJuT2lJSHdXdEVjbkItLUVDMlYzWHNjYnpQWGF3TlpnNDV5ME9DWG5YU0ZtbVVGdnZNRndsSkdOZHRzUU5iQjVhd20yY1h6WF9VUjMwVXdLQktSX0o3amgyZVpmeXJiY1gtRHVCbTNfV3VsQ2ZLcHU2ek9a?oc=5">유가 110달러 돌파(5월 이후 처음)에 기술주 1조 달러 증발.</a>
+- <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNSFNINkw0Y0FqZEJqNWZFdGVETlJ0UzJ2eUhZUmVJOEREZFFjY3NFYmJKNEdXS3ZtdkdMaXRNZ205YmlHcjRWbndLblhwZFp5Ymh6YjBrbkNjOU1jLUxEekZndTRYMUVmTzBSUW0tYnFkVHhwbHlTbWF3UjhZcEJVcmNKb3hRX2JuR3AxMGpfN0xoX3daSUxPWlhteHZzMzhs?oc=5">연준, 미국 저축자들에게 &quot;인플레이션, 2029년까지 통제 불능&quot; 경고.</a>
+- <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE9QZTZvWjd2ZFBidG9ueHBiNF9wWWpQX1hmWldndTVobU54ZmxMNzFEU3JnVzRoQ2NjaldNcVowLS1WLVJlWU9ONnlmY1k0MFJOdTc4VmFZUWNRX28?oc=5">인플레이션 지표, 연준 금리 결정 두고 논쟁 불러.</a>
+- <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxQeVNyb0lXX25TWjgySGUweEJsX2g3SkRBMUhheEhfZW9xbG92N3R1b3JqdHdYNFo4a2N3RjNjWjRRSWg5QWpsZVVWZlZlem9ndHVxTDdsS3JJMXc4ZmpiQW5wejJrQ1JGSmdGVFFManFvemhlWGRza1V2MDRqM3A5b0xfQlpMaFpOazRrSnhiQzFJWUZzVHlxOWtR?oc=5">나스닥 100, 반도체주 기피에 18개월 만의 최악 주간 기록 — AAPL, MSTR, UBER, SOXX 주목.</a>
+- <a href="https://news.google.com/rss/articles/CBMickFVX3lxTE05Smp5ZFZadGJvLXk5cHo5c1hBRnIwcmR1UldxOVlNRWZ0b19rLTEwT3hLRE1ZdHdWaHRoSFRMeUlsSVN3b2RvNVNRMllzTU5xZVBCd1JJcUNwWDRYTEpJeGowcHhmdmJuenduVUljM3BrUQ?oc=5">강력한 물가 보고서, 연준 금리 인상 전망 키우자 AI 주식 하락.</a>
+- <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxPbVU4NDdXMzNlTEw4bGcyUmZseFhMUnBFTVpsRkJDLVJxNjk2Qk5VVm8xWlFMTkY4blpKSFJmbmVBSVFTQS1MZ2tvcjJDbndMbG5HQkI5QjJFVlNlWmtXOEhTRVRLVDFxbjJ1S21NcWQ0eDhCT0NEdXVicG1FS3VWQzZIcXF2QQ?oc=5">엑슨모빌 주가, 사상 최고치 향해 질주. 잠정 실적은 희비 엇갈려.</a>
+- <a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE44QURFNXNKc2JOay1PenlxMHdlOGxDMzd5a2xiV1ZXWmtmT2FEWTJ0NVJPSVBOTGs2YnFXUFJQWWtPQ3phYnhIMXZheTRfc051QUczOU9Md1NFRFdhZlVnZ0R3Y1pvSGU0SlBHV1l5TFBydjdwS3c?oc=5">반도체주 투매에 투자자들, 안전 자산 찾아 다른 주식과 채권으로 이동.</a>
+
+📰 정치/사회
+- <a href="https://www.yna.co.kr/view/AKR20261016072300505?input=1195m">[금주의 관심인물] &#x27;靑 비서실장 발탁&#x27; 임광현·&#x27;초대 중수청장&#x27; 김지용...</a>
+- <a href="https://www.ilyosisa.co.kr/news/article.html?no=258362">&lt;김삼기의 시사펀치&gt; 막강 중수청, 새 권력이 돼선 안 된다</a>
+- <a href="https://www.newsverse.kr/news/articleView.html?idxno=11667">검찰개혁, 다음 시험대는 중수청의 수사 역량과 정치적 중립</a>
+- <a href="https://www.joongang.co.kr/article/25470507">중·러 육로 동시 확보한 北...대북제재 무력화 가속 우려</a>
+- <a href="https://www.dailyt.co.kr/newsView/dlt202610160025">물가상승률 주춤해도 생활비 부담은 증가세...왜?</a>
+- <a href="http://www.jbsori.com/news/articleView.html?idxno=18049">&#x27;임기 일치제&#x27; 순기능과 역기능, 잘 따져봐야 하는 이유</a>
