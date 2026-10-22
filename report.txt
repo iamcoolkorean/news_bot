@@ -1,0 +1,37 @@
+📅 2026년 10월 22일
+서울 날씨: Sunny | 현재 10°C | 최저 8°C | 최고 20°C | 강수량 0.0mm | 습도 46%
+
+📊 주요 금융 지표
+- USD/KRW: 1,326.14 원
+- KOSPI: 5,735.66 (+3.29%)
+- NASDAQ: 26,008.86 (-2.60%)
+- Google: 324.22 (-3.15%)
+- Apple: 348.22 (+1.23%)
+- Microsoft: 521.08 (-2.23%)
+- QQQM: 290.13 (-2.85%)
+
+🇰🇷 국내 증시
+- <a href="https://biz.newdaily.co.kr/site/data/html/2026/10/23/2026102300035.html">SK하이닉스, 솔리다임 美상장 전격 철회 … 주주 반발·금융당국 압박에...</a>
+- <a href="http://www.hansbiz.co.kr/news/articleView.html?idxno=875478">뉴욕증시, AI투자 불안에 &#x27;급락&#x27;...국제유가, &#x27;급등&#x27;</a>
+- <a href="http://www.newsroad.co.kr/news/articleView.html?idxno=66297">[증시전망대] 美 AI·반도체주 급락·유가 급등…코스피, 또 한 번 &#x27;충격...</a>
+- <a href="http://www.opinionnews.co.kr/news/articleView.html?idxno=146081">美 기술주 폭락, 코스피 톱 110 모두 &#x27;파란불&#x27;...삼성전자 4% ↓</a>
+- <a href="https://www.youthdaily.co.kr/news/article.html?no=228745">금융당국 중복상장 압박 속 솔리다임 IPO 중단…SK &quot;투자 검토 계속&quot;</a>
+- <a href="https://www.yna.co.kr/view/AKR20261023030400008?input=1195m">&quot;솔리다임 상장검토 중단, 반도체 투심 회복 기여할 듯&quot;</a>
+- <a href="http://www.opinionnews.co.kr/news/articleView.html?idxno=146082">[증시 포인트] 하락 출발 전망...당분간 관망 대응 필요</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxQLTZTSUdaMURJRTdQUjFOeTFSNGpIenNnODdDMWp6RU5FUVZqUmhmTUZ1WENUZnNraGVkUzV1amRXdG5RTDNfWEhaLUJhcjhCdDlVeEdsY2xmX0YzdU13dGRkUjI3Nzl4X3Zud0hoMGlackk1cnBBUGNXdmFjQjJGT0tDWlQ5VVF5OGZFUFYzUV8zNkw2Z0hVaUZweUdkckE?oc=5">연방준비제도, 310만 미국 주택 소유자와 모든 신용카드 소지 미국인에게 &#x27;섬뜩한&#x27; 경고 – 10월 28일 전 조치 필요.</a>
+- <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxOZUFYOUZFZXZ4UWJSN1J6RkRxM1lkdGJsUFZRZ2puQkFnRk9rczVQZF9iUS12amVsUl9ESnA4MmNlUmFuVnBVY3BoeVZoVWx1dmwtSWdCa2tGUUlXeXdWR0o0U2o5NHdUend5d2o3c1NoUlZTQUNyWFFEalBHY25QMVptcnFoRnZiSk1JVDFyb1VFYkg0NGRJaXhWemlUY3gxX3YxeVh0YkNMSHNQU21pWkc0OVQ?oc=5">연준, 10월에는 금리 동결하지만 12월에 다시 인상할 것, 거의 모든 경제학자들 전망.</a>
+- <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPQThhSGdLckY3MFRuaDNSQXFrSS1WWmQ1b29MNXN6a3ZJUDgtOWRPNEEybjdWeUdYal9RWm9XSk9Od2RZeV91dDAyZmtUTE9kN0R5Ul91bUFlRzVudG5TcmhfdFhuUURUbV85dHV6MWsyTTNURWRwZl9lVVJiOE9zTlNiT2xwVUROekxiWTRWQk_SAZYBQVVfeXFMTTc2a08zNV9CdTlVWGRzcWNIX0E3Qk9idS1GWDM5ejVhQ05Wa0Jvb2dhRUdKVUNQcHJsTklHWl84RjJQY2ZINk9HVEdzSmRhdWtYRzlxNFhjUW5scmlxZ1EwUHRDeVRqVHQ3TkpEOXVoSXRPRWlpeUpWcllkWFpuVGIyQXJ6ZGI3T28yRi1jTENIbGlRUVBB?oc=5">연준이 추가 금리 인상을 저울질하는 가운데 주택 시장에 경고등이 켜졌다.</a>
+- <a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxPdXJjNWgxTzlXaXBEejRVWmJFVFBISzd6QkFvSTZxX0x3UWllaFJaTVVlOXQtZDlQTV9XZVQ3eWhVckdpLUhJZTVJUl9PSXU3dmtoSWZfM2xSUDZ3SXFVNFN3LWRhREx2NDVmbjhhdlJuM1pETkZ1RGowUjRFaWFReWRoVXdYRVlsdm9pMmdHSFV0N01mN3RIWUhwVEp2eG5PQzdEWTBhZ3dXaFF0MTl5ZVNfblF6Y0VsUmk4Qk1B?oc=5">오늘 증시: S&amp;P 500, 나스닥 폭락, AI 투자 우려 속 기술주 급락, 메타 주가 곤두박질.</a>
+- <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxOcjc2Qnc1OUdYaTRkWFNLc1N4MGhZUEk0QWg5UXdkaDdyMF9qcjV2WUFPaW1JeU5oT3VZaTdPdHBpQUYxTy1fb3ctS3NUaWRuS0F3VlJaME9ZVXp2cFJIVEtIaXZUN01PaS1fRi0wQUtaN0VnMzdxMEh0cldyTHRFSVY2czE?oc=5">메타의 AI 지출 우려 재점화에 나스닥 급락, 국채 가격 급등.</a>
+- <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcEIzTWVKN3diY0E2eDBTMi03T19PODBTN3NySW5Uc3JYNGhZcE8xUjc5YUpUUGR0UFlla0xDOUd5OHdhelJ0aUhkSEdNd1dPanFiRmZ6OXduVlZVeXNFLW94V1RlcDNTRDVEdE5fZXBiVGthVE5ZMXprU19jUWdKeUVDcFFQN2VzT2xaakswdzBfMEtiX3JnNTV1QjVzVldzNWMzdzVFUzY?oc=5">유가 상승 속 AI 주식 급락, 전 세계 시장 끌어내려.</a>
+- <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPck9xSzY1akJJUU1IUlU5a21lU1AxNTl3SjJxR2hPM2NobjVNcDV1eDV5cDBwSEtLWG0zVUdLTW1id29Tcy1FUjc1NkVpdGQxNHdfQ0RFYTZnc2VvRFVyc0dxSWZpWVRnR2lVYTRadDZNdVNfbzdiZDFFWnZPOWVwdFF0VmhxRm1ic2Ywak1DVC1wMVFaN2czUnZXUHJrakZMT3dDOUtVaUVhblByV2NjLXJxNjlwSFBWdHF0U0g2VUtfVW5GbGJrQ0lVZGFtdExV?oc=5">AI 지출 우려로 기술주가 하락하면서 세계 6대 부호 목요일에 1,300억 달러 손실.</a>
+
+📰 정치/사회
+- <a href="https://www.mk.co.kr/article/12183774">오세훈 오늘 운명의 날…무죄든 유죄든 차기 권력구도 ‘요동’</a>
+- <a href="https://www.newstopkorea.com/news/articleView.html?idxno=48416">&#x27;10조 대어&#x27; 솔리다임 美상장 철회… 중복상장·AI고점론에 &#x27;백기&#x27;(상보...</a>
+- <a href="https://www.lawtv.kr/news/articleView.html?idxno=61231">김건희 추가 구속 갈림길... 대법, 27일 추가 영장 심문</a>
+- <a href="http://www.mbn.co.kr/pages/news/newsView.php?news_seq_no=5226628">&#x27;탄핵 사유&#x27; 언급하며 정면 돌파…이 대통령 &quot;중수청 지휘감독, 대통령...</a>
+- <a href="https://www.newspim.com/news/view/20261023000109">[뉴스분석] 남북 일촉즉발에 &#x27;사망설&#x27;까지 번지는데...김정은 어디 있나</a>
+- <a href="https://www.kwnews.co.kr/article/20261023500010">[속보] 인천 상업시설서 흉기 휘둘러 10명 살해하려 한 최충락 공소청 ...</a>
