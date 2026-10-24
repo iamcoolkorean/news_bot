@@ -1,0 +1,37 @@
+📅 2026년 10월 24일
+서울 날씨: Partly Cloudy  | 현재 12°C | 최저 12°C | 최고 23°C | 강수량 0.0mm | 습도 89%
+
+📊 주요 금융 지표
+- USD/KRW: 1,324.70 원
+- KOSPI: 5,550.30 (+0.30%)
+- NASDAQ: 25,955.34 (-0.21%)
+- Google: 320.21 (-1.24%)
+- Apple: 347.73 (-0.14%)
+- Microsoft: 524.51 (+0.66%)
+- QQQM: 290.06 (-0.02%)
+
+🇰🇷 국내 증시
+- <a href="https://www.gokorea.kr/news/articleView.html?idxno=882606">AI 기업 실적 발표와 연준 금리 동결 가능성, 투자자들의 이목 집중</a>
+- <a href="https://www.g-enews.com/view.php?ud=202610250728528621e250e8e188_1">”엔비디아 GPU 품귀는 젠슨 황이 만든 허상…AI 거품 터지게 둬야&quot;</a>
+- <a href="https://www.news1.kr/industry/general-industry/6330421">3분기 실적 발표 &#x27;슈퍼위크&#x27;…삼성·SK하닉 &#x27;주주환원&#x27; 보따리 푼다</a>
+- <a href="https://www.bzeronews.com/news/articleView.html?idxno=824303">[2026 국감] 새마을금고 &#x27;누적 순손실 3조6000억&#x27;…292곳 적기시정조치 ...</a>
+- <a href="https://www.dailian.co.kr/news/view/1705502/?sc=Naver">증발한 국민 노후자금 182조…국민연금 ‘리밸런싱 유예’ 적절했나</a>
+- <a href="https://www.globale.co.kr/news/articleView.html?idxno=41208">10대 그룹 시총 1,100조 증발···SK하이닉스 AI 급락 직격탄</a>
+- <a href="https://www.edaily.co.kr/News/Read?newsId=01111926645616528&amp;mediaCodeNo=257&amp;utm_source=naver&amp;utm_medium=referral&amp;utm_campaign=news_syndication&amp;utm_content=original_article">1320원대로 내려온 환율, FOMC·고유가에 하락세 꺾이나[주간외환전망]</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxOcVJoZ1lwbW55OENBSXEtTVVBNWpaUTJfVWozbW1aVV9oRGdXZXo1MnQ2bEJOVTlfbXY2X0x3WmpBQi00VTIza2hNNy1PZ0FlMjdGMjlHYmRBeG4xN2NCc1NiQlNRbkt6dW5XM2ZjQ1BQUkhtSlNkSEJQaGpGbHBCV1d6TXJ4dV82RWlsdXpmVQ?oc=5">연준 전망: 12월 금리 인상 앞두고 일시 동결</a>
+- <a href="https://news.google.com/rss/articles/CBMiygFBVV95cUxOZlFWWHJZVmpuZkFFV2QwZW4zN1I3MXFzdDNfZjMxdUdSdkpPejZSQldLM2NHN2pINFhsYTFkNWJrNnB0emZLNzZUd1l1b1Q1REdtRHBTR2N1VlVpVzR1ZnlhVlRxRl8xQjdtWURlcG5RdjB2c2xuTVVURDJVV1NGZXg2bXNuVGwtMEpDR3BkalNZMmRpZjZVY3RlX1RXOTlhZEJUemRyeml2d0Zldm1HUTlVdG5tU0xDbUxUQkhzQUhYNFdlZ3lWOWF3?oc=5">연준의 최신 10월 인플레이션 전망 발표, 월가에 비관적인 소식</a>
+- <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNWDhMcEtDZmhoQnJMSVBVUzFaWVBqeUczRlRZekhZc1RpYWU0ajVLWlNscVRjQ2UzSS1ZVFRsd3BsazVuR2FtVG5PQVQwRW8zY1FhVzlJeE9SVWEtS1VnZzZROWR0dXdNTVQ1X2pMTDZkdjBleGE0akJRSVpKTXRaWTdfTUJhaktpOFRlaHY5UHdtLUZMOE5HMXR2YkpGODBDU1RoaHFlcGFzeEpJMnc?oc=5">뱅크오브아메리카, 미 연준 2026년 금리 두 번 추가 인상 전망</a>
+- <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQUF80b0hRS1hYN3NIRHhRTXcxQ3gyeHN0UHB5QzdkdnZFRVdqNVdHU1BxTUxBamcyY3ZMUWx2ZHJfRXZ3QlVXUjNUOFcta0FzNjdyZUk3S0s1YldtZThyZ3FXSjhlV2o1OWlrcy1yRXZ3cGNVVWFRS2pkVmZUb3VYY3ZNTUJrdw?oc=5">나스닥 750포인트 이상 급락, 대규모 AI 투자가 성과 없을까 투자자 우려</a>
+- <a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxQQVllYUJGN3ZlUlBmalFoOHpVTG9UVV9Eb1owUlBzWGRQeDlHeWU5UlRKT2FTS0FaQ3l5eW0zTV9pa3gwOFlyM3JGZHBoakNVb0RMNVhEelBWRkJSNWVWRjNvMlYwalRLUEQ2Sml0dXRZTU5wZGN2V0Q1ckZBNmNlYnluTnU2eG1BMWfSAY8BQVVfeXFMTVBhQUVkdTRhMnlwSmlpS2VrV09rUFA0c3lSZkI2Vmg5SFRGam5UVVpNcFRwMnNlUmJaVlJqVXZ5cHZkLTFtcTlsOFp2RDZkY294QXdmR2VndnJtZ29tdS03WW5aWXgxU21MVUV6VnFfelpvOFByMUdTRTVaamtoZHdOZ3JtZm5oMEFvQkZoN00?oc=5">머스크 &quot;테슬라와 스페이스X, 합병 논의 위한 특별 위원회 구성&quot;</a>
+- <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPdy1qR2xLV0pnTElaT0xKS1k3Mk1SWFpfbmtpWlZJTWhxcHV4OTZrTHdpcDRFSXFEejR6NGhBWkNTRTk5YWRrNlE2UEVnaFNHVVBJSTNnNlF6U2t0RVdFQ1hlSXc5MXpJNjVHR3JITTQ3ZUhaWW4zcHpuaHAwRzdvZ1BfR2RhTGFOcjc2SWV5OHpxN2FEa1lFU2RhWmtpaXlIbE1rU2ZDUUljV09YLXlVOHlna0lpZw?oc=5">최고 경제학자 &quot;주식·채권 시장 불안정 속 AI 강세론의 &#x27;핵심 경제적 결함&#x27;&quot;</a>
+- <a href="https://news.google.com/rss/articles/CBMidkFVX3lxTFBNc0s0YTFvMUVGOTZsQTBGQ2xGQkNJNmZrZVlXOXpMTTV4VDFZQnF5LTBOVHpXMVI1cmI4QmhFNTVudnpRVDVUbldkZEZmeXl3MHI4aU1UaXVvbHNEdHhvbmNweVQ5TWdjaWRPQWpZLXJIYk5RTlHSAXtBVV95cUxPN0Q0eEc2UXVTTmwxcTZsY05HeEdKN0U1dDc1S1YxWmxZOXJlSm1NVVZDU3MxcXFKNlduX3NxckhxZ1puVlE1d09SZk4zSGhVcG9xNFhBb1d6Skd4NlZSdDZ5Y1I2NkxEXzJuUmxUMThNX3haWnlIeUZQQ0k?oc=5">유가 상승·전반적 매도세에 다우 600포인트 이상 폭락</a>
+
+📰 정치/사회
+- <a href="https://www.dailian.co.kr/news/view/1705750/?sc=Naver">김정은, 신압록강대교 건너 中 단둥 방문…북·중 경체밀착 시대 열리나</a>
+- <a href="https://www.gokorea.kr/news/articleView.html?idxno=882606">AI 기업 실적 발표와 연준 금리 동결 가능성, 투자자들의 이목 집중</a>
+- <a href="https://biz.heraldcorp.com/article/10913665?ref=naver">“주택 종부세율 올리면 임차인에 稅부담 전가 가능성”…국회 재경위...</a>
+- <a href="https://www.newsis.com/view/NISX20261024_0003839727">호남 반도체 ‘2030년 시간표’…노동특례·인허가, 29일 당정 시험대</a>
+- <a href="https://www.globale.co.kr/news/articleView.html?idxno=41209">고물가·주거난·연금 불안···유럽 전역 분노의 거리 행진</a>
+- <a href="https://www.gokorea.kr/news/articleView.html?idxno=882610">&quot;지정학적 리스크 속 에너지 공급망 위기, 한국의 생존 전략은?&quot;</a>
