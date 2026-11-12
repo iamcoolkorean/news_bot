@@ -1,0 +1,36 @@
+📅 2026년 11월 12일
+
+📊 주요 금융 지표
+- USD/KRW: 1,336.60 원
+- KOSPI: 5,385.75 (+2.80%)
+- NASDAQ: 25,466.19 (+1.60%)
+- Google: 287.38 (-0.27%)
+- Apple: 348.51 (-0.62%)
+- Microsoft: 533.16 (-2.20%)
+- QQQM: 277.87 (-0.59%)
+
+🇰🇷 국내 증시
+- <a href="https://www.ppss.kr/news/articleView.html?idxno=320547">엔비디아, 젠슨 황 CEO 해임설에 시간외 8.6% 급락...시총 3위로 하락</a>
+- <a href="https://www.namdonews.com/news/articleView.html?idxno=929038">[뉴스분석]불륜 의혹에 세계 경제계 촉각…젠슨 황은 누구길래</a>
+- <a href="https://www.newsquest.co.kr/news/articleView.html?idxno=304858">미래에셋증권, 3분기 4056억 순손실…스페이스X 평가손실에 적자전환</a>
+- <a href="https://www.hankookilbo.com/news/article/A2026111209340005700?did=NA">앤트로픽 상장 대박 조짐… &#x27;역대 최대&#x27; 스페이스X 넘을 듯</a>
+- <a href="https://www.pennmike.com/news/articleView.html?idxno=131651">&quot;주가 올리겠다더니 규제부터 쌓는다&quot;…기업가치 제고의 함정</a>
+- <a href="https://www.newsis.com/view/NISX20261112_0003865196">&#x27;젠슨 황&#x27; 퇴진 위기에 AI 펀더멘털도 흔들리나…삼전·닉스 주가 향방...</a>
+- <a href="https://www.newsquest.co.kr/news/articleView.html?idxno=304848">&quot;부동산 PF 충당금 3000억 직격탄…메리츠금융지주, 3분기 어닝쇼크에 &#x27;...</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxNOWNqWFdDMHlSeUN3RHluTERFZlVwaVpqZ0ZEUzlURUkyeng1SjRQaG84V3ZnVURxdy1LdEp5RlpJeG5zQ25qQ1BXV05wU0lFRks2XzIyX1ZiS2tPVlZXbFVsTVFfUnpEUDVDeU9UczQ0aVZRYU85WkI0N0tGd1d6QTY1cw?oc=5">연준, 금리 인상 불가피…속도 놓고 관계자들 &#x27;분열&#x27;.</a>
+- <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxPM0lSR0FINzZ0S3ZhdnRQcDh4ZkRBVnZUY05NMHFhZ0JsdmNQaE02NEY2M2l0WXM4RHVBbXBCRWdXM21ndjlRLW9jWVFXQWxoVzMtcjhwMU80dE56dlVERFVwZ0NiblNPM0Q3cGx3SDFBc0NFcGNvNHlsR1lGQVFoQzJVUWs?oc=5">연준 고위 관계자, 2022년 이후 최대 금리 인상 고려.</a>
+- <a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE5VWk50RzlXYlZaV1pUOVFBLXNSUjFaOVhYSUpvQ25CVm5UWE1EMkE3bjRYSWNqVVRKUC16T3pId3BLLTQzcW9KRTJOUHVseDZJT3JwQ195cnZjX0IyODU3MHZNeVBtYVd3V2dxMlR5ZEphWnhBeERj?oc=5">S&amp;P 500, 높은 인플레 데이터에 금리 인상 공포 확산…엔비디아 매도세에 하락.</a>
+- <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxPODFpb01oaGZGanh5Njc3RFlNOTFqaTlIY3A1THoydTdUVmtrSEdaU0h3UzkzX3RMdVE4aTZzS3dsRW5CVTBqN3VPYlR4NExyeGd5aXNVVVZKemlkUmNvMWZUemVhTGtYMzQwMms5b3R1cUxNM0tVVUxlM3NyajJZNWZMaURIR3hzQU9YU0xpejZfTXl4dkdNcmh3S2djT3VxODBPLWZEbmJTWExINFhWWHcwaWRQczdOWjdiOWpISXk?oc=5">나스닥 선물 하락…&#x27;이사회가 황 CEO 해임 가능성&#x27; 보도에 엔비디아 시간 외 8% 폭락.</a>
+- <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxOdUJtNENyWm80blVZMUNHNFh2MXpxTmdMSnhmTzF5a0t0NUxWNjJFZ09ZejRoay04MzMwallkZ1hBV0ZRSGVoRG80V0xIcURMcnhyc2Y4VUM5VW9CX2RtcFdDTzBITF9FbnFMWG9SWVNVT2xXM0M3YVo3cUxPVmF4ag?oc=5">코어위브, 매출 예상치 상회 및 가이던스 상향으로 AI 둔화 우려 완화.</a>
+- <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxPaTZzT256WkU3aE4zUnA1UXBqX05FOENKeXI4MFZtUDQtc28zeDBLWEE2UGdydUU0OXI0LVotdWEwUVBJeDB0bVh6Z1BrN0dQbHFRa0RwZ2xEdDlBaS12T3ZSQXlzcHNSTHAxN2FBUjFXTTlaTmRUWWVJdFZmaXBDZTJteWlWQ2d0MDYzRHRyLWV3Y0xiMU5ndjRMdlBOaDR0T25uVVFNZS12ZDhjWkRMRzBDc2EzN2RyR0dvTnZqWlgxZw?oc=5">코어위브 실적, AI 거품 우려 완화…클라우드 주식 랠리 촉발, 엔비디아 상승 견인.</a>
+- <a href="https://news.google.com/rss/articles/CBMic0FVX3lxTFBkdEhEMll4Ul9ReXVZbVpySnZEQlloeTIzTVd6Y1dmZXVJdlpBZTNfaU1DQlJ1d3hqekpyQlNocWpRbVJqeTRmQkZZZHlKUC1SQXFlSjFsY1NRUXU4dmxTdGthZUtHWDcwams3OHh6NHU2MHc?oc=5">시장 &#x27;경계 태세&#x27; 돌입에 투자자들, 방어주로 눈 돌려.</a>
+
+📰 정치/사회
+- <a href="http://www.hansbiz.co.kr/news/articleView.html?idxno=882550">[초격차 모멘텀①] 규제론에도 건재한 AI…삼성전자 &#x27;역대급&#x27; 이제 시작</a>
+- <a href="http://weekly.chosun.com/news/articleView.html?idxno=57026">청와대 생방송서 &quot;대통령 죄 없애려 특검&quot;…허은아 진땀 뺀 이유</a>
+- <a href="https://www.joongangenews.com/news/articleView.html?idxno=563296">美 민주, 공화 텃밭까지 접수… 상원 56석 확보 눈앞</a>
+- <a href="http://www.economytalk.kr/news/articleView.html?idxno=425273">[2026년 노동] 청년 고용 감소 48개월 연속 &#x27;형벌&#x27;…&quot;과연 청년 일자리 ...</a>
+- <a href="https://www.ikbc.co.kr/article/view/kbc202611120034">李대통령, 충청권 메가프로젝트 착공식 참석…삼성 반도체 투자 지원</a>
+- <a href="https://www.busan.com/view/busan/view.php?code=2026111210423058297">1~9월 국세수입 95조원 증가…나라살림 적자 8년만에 최소</a>
