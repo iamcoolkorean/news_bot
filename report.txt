@@ -1,0 +1,37 @@
+📅 2026년 11월 14일
+서울 날씨: Light rain | 현재 10°C | 최저 10°C | 최고 11°C | 강수량 0.0mm | 습도 92%
+
+📊 주요 금융 지표
+- USD/KRW: 1,336.18 원
+- KOSPI: 5,342.73 (-0.61%)
+- NASDAQ: 25,136.27 (-0.91%)
+- Google: 298.70 (+1.79%)
+- Apple: 354.88 (-0.14%)
+- Microsoft: 523.00 (+0.36%)
+- QQQM: 283.39 (-0.30%)
+
+🇰🇷 국내 증시
+- <a href="https://news.mtn.co.kr/article/2026111312584249852">이영훈 이사 &quot;국내 증시 수급 망가져…AI 우려 진정돼야 반등&quot; [경제일타...</a>
+- <a href="https://www.sedaily.com/article/20114282?ref=naver">엔비디아 쇼크에 채굴기업 휘청…비트코인 매도 압력 커지나 [도예리의...</a>
+- <a href="https://www.yna.co.kr/view/AKR20261114023400011?input=1195m">[주요 신문 사설](14일 조간)</a>
+- <a href="https://www.thescoop.co.kr/news/articleView.html?idxno=312292">젠슨 황 불륜 스캔들에 출렁…삼전닉스 &#x27;아슬아슬한 버티기&#x27; [주간 증시...</a>
+- <a href="https://www.cbci.co.kr/news/articleView.html?idxno=626787">코스피 하락…삼성전자·현대차 강세 삼성전기 약세, 엔비디아 경영 불...</a>
+- <a href="https://imnews.imbc.com/news/2026/econo/article/6865612_36932.html">서학개미, &#x27;젠슨 황 스캔들&#x27; 엔비디아 1천억 원 순매수</a>
+- <a href="https://www.newsis.com/view/NISX20261114_0003867971">젠슨 황 스캔들 터진 뒤 &#x27;휘청&#x27;…엔비디아 일주일 새 13% 급락</a>
+
+🇺🇸 해외 증시
+- <a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxOOG9vVjRkb0hxUE1ybFptSEtacTBMTjBOOFBETTU3TkJ1YlVvbkoxN1BnR3hmRDZHZzdZZURNY0pwZTFCb1pzRXFaQzJMZnB0ZGxXRF9SODZxOXZ0SktNUDBNX1BFOUcxaDlPcGlIeGM1M2Z6VkN3V1g3YnN3QmFHQlJYaFRtLTA?oc=5">Stock Market Today: Nvidia Slides Again as Investors Brace for More Fallout; Nasdaq Slumps— Live Updates - WSJ</a>
+- <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOQldwVEkzYWhuMUlsWFRfRmhIZlZ0Mmh2ODNMa3RNdWoxYnNkNTIzaWlyalJsZTNCU25BeGdyV05LcUpWUlZLSFNDd2ZNLTNBMm11bzNlOEN3SFBMczlYN3c1aDVYQmotN21uRkJBQ2d6c1JkUlNyLWNSX3l4MFVBQ09GaGJVbHBHNk5LV3EzYVBVdjBs?oc=5">Altria Group (MO) Stock May Still Be Cheap On A 166% Run - Yahoo Finance</a>
+- <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxPSXczOFh0YUdPX2RyZFY4dFg3REhfamdlSmxJbFQ1eV91UVVJQk0yNDFUOHNRUjh1dUxOZzFJa3RaSzJBTHZZSTBkU1pObEt6bkt1bzRxaWdnWkZyUUpiMndaMzJ5NmVDdHlpS1BJeENjb1hlOTNYbUgySWFCRGM4a2xicXBqWTFkWjRCX2pNOEotVW13UlFOT0Vtc2pJQQ?oc=5">CEO Transition Might Change The Case For Investing In GEA Group Stock (XTRA:G1A) - Yahoo Finance</a>
+- <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNUnhObF9vcWxydnRua1J4T2hsVjhTOExiYjFWYUJhTmxGazE1ZS1zTzVBN3JuUTkwaHVKM3h0bm95ZXU4NlBLQkFmbkk1cnlYVTBlc1F4Rk9VaVV4cnhtd1Y1QnVETzNjbkZvM3FObVc5Y182VjVjc1B4SXBIbjAwSUp3WUZlVXpqOHpFbkkxT2pqbGhKQWxEMw?oc=5">Will ETF Buying Change Meta Stock Narrative - Yahoo Finance</a>
+- <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPWkZiVk1uU2k5a1RQRGUxdFBJMEcxSVhtWEJfR0s3Q3E3T185OXRrZHRZMDVsQlhTdVpIbVlfQnNPem4zbGlTMDR6elFDRlM3RzhETUhCVzlTTDJvWmtfQzctcUFhRXZsVmxpVjBQUXpXTkRUTThQNVJwQV9YX19qaTZGVGswRGF1N2d0dktsZW5DVHlFWVNENmtQaERZYm5ZTmREdm8tMzVjX3ZCQUdqbTFCbWktdw?oc=5">Federal Reserve to Forgo Rate Decision at October 2027 Meeting - WSJ</a>
+- <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxOd1luSGcydUl6NE15cEcydlNhSnRuNjNjVHdMQldrQjRYcXpLZ3FfbnNrWndndDNTaUowRWJ6NDg0dUdaN084LW00YU4tNEhPTXh6Ymx3WVFpZk5MQTgwVFpMX1o4cFdXT2lCQi1xSzlncG9mUkpDa0xTUF9BY2E3cXVnS2fSAYoBQVVfeXFMTmZFcVNQMElxVkdHNTFNMVBOYTg0SGVKNm5ISHM5N3pGUUxKSE5Za2ZuMmZNb3RnY0FpVWxNbWtIdXFIdm0wOWVIa3FXWVJJaVhhTHBzOVpJbzVnY2VGZk04WE5aRHVBdjdkRlVpSm1VQXo1ckRPRTV4aDNjNGJNeGlhSXZ4ZEhIa1dR?oc=5">AI risks are the biggest threat to the financial system, Fed survey finds - CNBC</a>
+- <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxNOWNqWFdDMHlSeUN3RHluTERFZlVwaVpqZ0ZEUzlURUkyeng1SjRQaG84V3ZnVURxdy1LdEp5RlpJeG5zQ25qQ1BXV05wU0lFRks2XzIyX1ZiS2tPVlZXbFVsTVFfUnpEUDVDeU9UczQ0aVZRYU85WkI0N0tGd1d6QTY1cw?oc=5">The Fed Has to Raise Rates. How Fast to Go Has Officials Divided. - The New York Times</a>
+
+📰 정치/사회
+- <a href="https://www.ngonews.kr/news/articleView.html?idxno=243105">[김상민의 세상을 보는 눈] 인재 제대로 못쓰는 정권은 4류도 못 돼</a>
+- <a href="https://www.newsworks.co.kr/news/articleView.html?idxno=903098">사상 첫 미·중·러 3자 회담 가능성…동북아 안보 지각변동 오나</a>
+- <a href="https://www.edaily.co.kr/News/Read?newsId=02486246645645720&amp;mediaCodeNo=257&amp;utm_source=naver&amp;utm_medium=referral&amp;utm_campaign=news_syndication&amp;utm_content=original_article">[이종일의 의원탐구]⑨김보식 &quot;부평지하상가·캠프마켓 활성화할 것&quot;</a>
+- <a href="https://www.donga.com/news/Economy/article/all/20261113/135021369/1">가난한 나라가 부자 나라보다 애를 덜 낳는 시대가 왔다[딥다이브]</a>
+- <a href="https://www.ikbc.co.kr/article/view/kbc202611140012">박지원 &quot;김민석-정청래 싸움, 대통령 지지율 &#x27;뚝&#x27;...죽이 되든 밥이 되든...</a>
+- <a href="https://www.sisajournal.com/news/articleView.html?idxno=393650">[윤영관 특별 기고] 격변의 시대, 한미 동맹의 가치를 다시 생각한다</a>
